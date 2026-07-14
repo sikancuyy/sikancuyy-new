@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahmat Haikal | Portofolio Profesional</title>
+    <meta name="description" content="Portofolio Rahmat Haikal - Network Engineer, Cloud & IoT Enthusiast, Digital Technology Innovator.">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="asset/favicon.jpg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="light-mode">
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header / Navbar -->
+    <header class="header">
+        <nav class="navbar glass">
+            <a href="#" class="logo">RH<span>.</span></a>
+            <div class="nav-links">
+                <a href="#hero" class="active">Beranda</a>
+                <a href="#about">Tentang</a>
+                <a href="#experience">Pengalaman</a>
+                <a href="#skills">Keahlian</a>
+                <a href="#projects">Proyek</a>
+                <a href="#contact">Kontak</a>
+            </div>
+            <div class="nav-actions">
+                <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content" data-aos="fade-up">
+                <h3>Halo, Saya</h3>
+                <h1>Rahmat Haikal</h1>
+                <h2 class="typing-text">Saya seorang <span id="typed-output"></span><span class="cursor">|</span></h2>
+                <p>Mahasiswa Teknologi Rekayasa Jaringan Telekomunikasi | Cloud & IoT Enthusiast | Inovator Teknologi Digital</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn btn-primary">Tentang Saya</a>
+                    <a href="asset/cv_rahmathaikal.pdf" class="btn btn-secondary" download>Unduh CV <i class="fas fa-download"></i></a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rahmat-haikal-b351b4372?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://t.me/rahmathaikal05" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.instagram.com/rahmathaikal.05?igsh=NDZrYXR5aHl3OTlw" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="zoom-in" data-aos-delay="200">
+                <div class="img-container glass">
+                    <img src="asset/favicon.jpg" alt="Rahmat Haikal" id="profile-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Vision Section -->
+        <section id="about" class="section">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Tentang <span>Saya</span></h2>
+                <p>Ringkasan Profesional & Visi</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text glass" data-aos="fade-right">
+                    <h3>Ringkasan Profesional</h3>
+                    <p>Saya adalah mahasiswa Sarjana Terapan Teknologi Rekayasa Jaringan Telekomunikasi di Politeknik Negeri Lhokseumawe. Memiliki minat besar pada bidang jaringan komputer, telekomunikasi, cloud computing, Internet of Things (IoT), serta transformasi digital.</p>
+                    <p>Saya telah memperoleh pengalaman dalam instalasi jaringan fiber optic, administrasi jaringan, troubleshooting, cloud computing, hingga pengembangan solusi berbasis IoT. Selain itu, saya tersertifikasi <strong>Cisco CCNA: Introduction to Networks</strong>.</p>
+                    <div class="personal-info">
+                        <div><i class="fas fa-map-marker-alt"></i> Aceh Utara, Indonesia</div>
+                        <div><i class="fas fa-envelope"></i> rahmathaikal227@gmail.com</div>
+                        <div><i class="fas fa-phone"></i> +62 822 6703 4994</div>
+                    </div>
+                </div>
+                <div class="about-vision glass" data-aos="fade-left" data-aos-delay="100">
+                    <h3>Visi</h3>
+                    <p class="vision-text">"Menjadi seorang profesional di bidang Teknologi Informasi dan Telekomunikasi yang mampu mengembangkan solusi digital inovatif untuk mendukung transformasi teknologi di Indonesia."</p>
+                    
+                    <h3 class="mt-4">Minat</h3>
+                    <div class="interests-tags">
+                        <span>Network Engineering</span>
+                        <span>Cloud Computing</span>
+                        <span>Fiber Optic</span>
+                        <span>IoT</span>
+                        <span>Linux Server</span>
+                        <span>Cyber Security</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Experience Timeline -->
+        <section id="experience" class="section bg-alt">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Perjalanan & <span>Pengalaman</span></h2>
+                <p>Pendidikan dan Jejak Karier Profesional</p>
+            </div>
+            <div class="timeline-container">
+                <!-- Education -->
+                <div class="timeline-column" data-aos="fade-right">
+                    <h3 class="timeline-title"><i class="fas fa-graduation-cap"></i> Pendidikan</h3>
+                    <div class="timeline glass">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">2024 - Sekarang</div>
+                            <h4>Sarjana Terapan Teknologi Rekayasa Jaringan Telekomunikasi</h4>
+                            <h5>Politeknik Negeri Lhokseumawe</h5>
+                            <p>Fokus: Computer Network, Routing & Switching, Fiber Optic, IoT, Cloud Computing.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">2021 - 2024</div>
+                            <h4>Teknik Komputer dan Jaringan</h4>
+                            <h5>SMK Negeri 1 Gandapura</h5>
+                            <p>Juara kelas 6 semester berturut-turut. Juara Harapan I LKS Provinsi Aceh Bidang Cloud Computing.</p>
+                            <img src="asset/images/smk-profile.jpg" alt="SMK Negeri 1 Gandapura" class="timeline-img">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Experience -->
+                <div class="timeline-column" data-aos="fade-left">
+                    <h3 class="timeline-title"><i class="fas fa-briefcase"></i> Pengalaman Profesional</h3>
+                    <div class="timeline glass">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Mei 2024 - Mei 2025</div>
+                            <h4>Agency Master</h4>
+                            <h5>IndiHome by Telkomsel</h5>
+                            <p>Promosi layanan, administrasi pelanggan, troubleshooting, dan koordinasi pemasangan layanan.</p>
+                            <img src="asset/images/promotor-indihome.jpg" alt="IndiHome by Telkomsel" class="timeline-img">
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Jul 2023 - Okt 2023</div>
+                            <h4>Network Engineer Intern</h4>
+                            <h5>PT Putra Bahagia (ICONNET PLN)</h5>
+                            <p>Instalasi Fiber Optic, maintenance jaringan, dan perbaikan gangguan jaringan.</p>
+                            <img src="asset/images/iconet.jpg" alt="ICONNET PLN" class="timeline-img">
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Des 2022 - Mar 2023</div>
+                            <h4>Intern</h4>
+                            <h5>PT Telkom Akses</h5>
+                            <p>Penyelesaian gangguan pelanggan dan pendampingan teknisi lapangan.</p>
+                            <img src="asset/images/magang-telkom.jpg" alt="PT Telkom Akses" class="timeline-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organization, Certifications & Awards -->
+        <section id="achievements" class="section">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Penghargaan & <span>Sertifikasi</span></h2>
+                <p>Organisasi, Penghargaan, dan Kredensial Profesional</p>
+            </div>
+            
+            <div class="achievements-grid">
+                <!-- Certifications -->
+                <div class="card glass cert-card" data-aos="zoom-in">
+                    <div class="card-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Cisco Certified - CCNA</h3>
+                    <img src="asset/images/CCNA.jpg" alt="CCNA" class="card-img">
+                    
+                    <h4>Introduction to Networks</h4>
+                    <p class="date">Diterbitkan: 29 Juni 2026 | Verified Digital Credential</p>
+                    <p>Kompetensi: Network Fundamentals, Routing & Switching, IPv4/IPv6, Cisco IOS, Basic Network Security.</p>
+                    <a href="https://www.credly.com/badges/0ef7a9f0-294d-4afe-b3f7-6b819ad5fbf2/public_url" target="_blank" class="btn btn-primary" style="margin-top: 15px; font-size: 0.9rem; padding: 8px 20px;">Lihat Kredensial <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <!-- Award 1 -->
+                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Pendanaan PKM-RE Nasional</h3>
+                    <img src="asset/images/lolos-pendanaan.jpeg" alt="lolos-pendanaan" class="card-img">
+                    <p class="date">Tahun: 2026</p>
+                    <p>Program Kreativitas Mahasiswa – Riset Eksakta tingkat Nasional.</p>
+                </div>
+
+                <!-- Award 2 -->
+                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="card-icon"><i class="fas fa-medal"></i></div>
+                    <h3>Duta Ragam Nusantara</h3>
+                    <img src="asset/images/penghargaan-duta.jpg" alt="Penghargaan Duta" class="card-img">
+                    <p class="date">Tahun: 2025 | Provinsi Aceh</p>
+                </div>
+
+                <!-- Award 3 -->
+                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Juara Harapan I LKS</h3>
+                    <img src="asset/images/sertifikat-lks.jpeg" alt="LKS Cloud Computing" class="card-img">
+                    <h4>Bidang Cloud Computing</h4>
+                    <p class="date">Tahun: 2023 | Provinsi Aceh</p>
+                </div>
+
+                <!-- Organization 1 -->
+                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Sekretaris Umum</h3>
+                     <img src="asset/images/sekum.png" alt="Sekretaris Umum" class="card-img">
+                    <h4>UKM POLYROBOCOM</h4>
+                    <p class="date">Tahun: 2025 - Sekarang</p>
+                </div>
+
+                <!-- Organization 2 -->
+                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Wakil Ketua OSIS</h3>
+                    <img src="asset/images/wakil-osis.jpg" alt="Wakil Ketua OSIS" class="card-img">
+                    <h4>SMKN 1 Gandapura</h4>
+                    <p class="date">Tahun: 2022 - 2023</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section bg-alt">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Keahlian <span>Teknis & Soft Skill</span></h2>
+                <p>Kompetensi Utama Saya</p>
+            </div>
+            
+            <div class="skills-container">
+                <!-- Tech Skills -->
+                <div class="skills-box glass" data-aos="fade-right">
+                    <h3>Keahlian Teknis</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Networking (Routing, Switching, CCNA)</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Fiber Optic & Wireless</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Cloud Computing & Linux Server</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Network Monitoring (Prometheus, Grafana)</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="skills-box glass" data-aos="fade-left">
+                    <h3>Soft Skill</h3>
+                    <div class="soft-skills-grid">
+                        <span class="skill-tag">Leadership</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Team Collaboration</span>
+                        <span class="skill-tag">Public Speaking</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                        <span class="skill-tag">Time Management</span>
+                        <span class="skill-tag">Adaptability</span>
+                        <span class="skill-tag">Fast Learner</span>
+                    </div>
+                    
+                    <h3 class="mt-4">Penelitian (PKM-RE)</h3>
+                    <p class="research-desc"><strong>Topik:</strong> Pengaruh Variasi Scrape Interval dan Threshold Alertmanager terhadap Kinerja Alerting Sistem Monitoring Jaringan MikroTik RouterOS.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Proyek <span>Unggulan</span></h2>
+                <p>Karya dan Inovasi Terbaru Saya</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass" data-aos="fade-up">
+                    <div class="project-img" style="display: flex; justify-content: center; align-items: center; background: #eee;">
+                        <i class="fas fa-globe" style="font-size: 5rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Website Project Polyrobocom</h3>
+                        <p>Website resmi untuk organisasi mahasiswa UKM POLYROBOCOM.</p>
+                        <a href="https://polyrobocom.is-great.org/" target="_blank" class="btn btn-primary w-100" style="margin-top: 15px;">Kunjungi Website <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-img" style="display: flex; justify-content: center; align-items: center; background: #eee;">
+                        <i class="fas fa-calendar-check" style="font-size: 5rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sistem Absensi Online PRC</h3>
+                        <p>Platform absensi online terintegrasi untuk manajemen kehadiran anggota POLYROBOCOM.</p>
+                        <a href="https://absensiprc2026.is-great.org/dashboard.php" target="_blank" class="btn btn-primary w-100" style="margin-top: 15px;">Kunjungi Dashboard <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-alt">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Hubungi <span>Saya</span></h2>
+                <p>Mari Diskusikan Peluang dan Kolaborasi</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info glass" data-aos="fade-up">
+                    <h3>Informasi Kontak</h3>
+                    <p>Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang untuk menjadi bagian dari visi Anda.</p>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:rahmathaikal227@gmail.com">rahmathaikal227@gmail.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Telepon / WhatsApp</h4>
+                            <p><a href="https://wa.me/6282267034994" target="_blank">+62 822 6703 4994</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-telegram"></i></div>
+                        <div>
+                            <h4>Telegram</h4>
+                            <p><a href="https://t.me/rahmathaikal05" target="_blank">@rahmathaikal05</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-globe"></i></div>
+                        <div>
+                            <h4>Website</h4>
+                            <p><a href="https://sikancuyy.my.id" target="_blank">sikancuyy.my.id</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>"Learning, Building, and Contributing Through Technology."</p>
+            <div class="social-links footer-socials">
+                <a href="https://www.linkedin.com/in/rahmat-haikal-b351b4372?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://t.me/rahmathaikal05" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="https://www.instagram.com/rahmathaikal.05?igsh=NDZrYXR5aHl3OTlw" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Rahmat Haikal. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6282267034994" class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll To Top -->
+    <button id="scroll-top" aria-label="Scroll to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/typing.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
