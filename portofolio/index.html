@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rahmat Haikal | Portofolio Profesional</title>
     <meta name="description" content="Portofolio Rahmat Haikal - Network Engineer, Cloud & IoT Enthusiast, Digital Technology Innovator.">
     
@@ -14,9 +15,6 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -36,7 +34,7 @@
     <header class="header">
         <nav class="navbar glass">
             <a href="#" class="logo">RH<span>.</span></a>
-            <div class="nav-links">
+            <div class="nav-links desktop-nav">
                 <a href="#hero" class="active">Beranda</a>
                 <a href="#about">Tentang</a>
                 <a href="#experience">Pengalaman</a>
@@ -55,10 +53,30 @@
         </nav>
     </header>
 
+    <!-- Mobile Navigation Modal -->
+    <div class="nav-links-overlay" id="nav-overlay"></div>
+    <div class="nav-links-container" id="mobile-nav-container">
+        <div class="mobile-nav-header glass">
+            <div class="mobile-nav-logo">
+                <img src="asset/favicon.jpg" alt="Logo" style="width:24px; height:24px; border-radius:50%; object-fit:cover;">
+                <span>RAHMAT HAIKAL</span>
+            </div>
+            <button id="close-menu" class="close-menu" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="nav-links mobile-nav-links">
+            <a href="#hero" class="active">Beranda</a>
+            <a href="#about">Tentang</a>
+            <a href="#experience">Pengalaman</a>
+            <a href="#skills">Keahlian</a>
+            <a href="#projects">Proyek</a>
+            <a href="#contact">Kontak</a>
+        </div>
+    </div>
+
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
-            <div class="hero-content" data-aos="fade-up">
+            <div class="hero-content">
                 <h3>Halo, Saya</h3>
                 <h1>Rahmat Haikal</h1>
                 <h2 class="typing-text">Saya seorang <span id="typed-output"></span><span class="cursor">|</span></h2>
@@ -73,7 +91,7 @@
                     <a href="https://www.instagram.com/rahmathaikal.05?igsh=NDZrYXR5aHl3OTlw" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="hero-image" data-aos="zoom-in" data-aos-delay="200">
+            <div class="hero-image">
                 <div class="img-container glass">
                     <img src="asset/favicon.jpg" alt="Rahmat Haikal" id="profile-img">
                 </div>
@@ -82,12 +100,12 @@
 
         <!-- About & Vision Section -->
         <section id="about" class="section">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Tentang <span>Saya</span></h2>
                 <p>Ringkasan Profesional & Visi</p>
             </div>
             <div class="about-grid">
-                <div class="about-text glass" data-aos="fade-right">
+                <div class="about-text glass">
                     <h3>Ringkasan Profesional</h3>
                     <p>Saya adalah mahasiswa Sarjana Terapan Teknologi Rekayasa Jaringan Telekomunikasi di Politeknik Negeri Lhokseumawe. Memiliki minat besar pada bidang jaringan komputer, telekomunikasi, cloud computing, Internet of Things (IoT), serta transformasi digital.</p>
                     <p>Saya telah memperoleh pengalaman dalam instalasi jaringan fiber optic, administrasi jaringan, troubleshooting, cloud computing, hingga pengembangan solusi berbasis IoT. Selain itu, saya tersertifikasi <strong>Cisco CCNA: Introduction to Networks</strong>.</p>
@@ -97,7 +115,7 @@
                         <div><i class="fas fa-phone"></i> +62 822 6703 4994</div>
                     </div>
                 </div>
-                <div class="about-vision glass" data-aos="fade-left" data-aos-delay="100">
+                <div class="about-vision glass">
                     <h3>Visi</h3>
                     <p class="vision-text">"Menjadi seorang profesional di bidang Teknologi Informasi dan Telekomunikasi yang mampu mengembangkan solusi digital inovatif untuk mendukung transformasi teknologi di Indonesia."</p>
                     
@@ -116,13 +134,13 @@
 
         <!-- Education & Experience Timeline -->
         <section id="experience" class="section bg-alt">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Perjalanan & <span>Pengalaman</span></h2>
                 <p>Pendidikan dan Jejak Karier Profesional</p>
             </div>
             <div class="timeline-container">
                 <!-- Education -->
-                <div class="timeline-column" data-aos="fade-right">
+                <div class="timeline-column">
                     <h3 class="timeline-title"><i class="fas fa-graduation-cap"></i> Pendidikan</h3>
                     <div class="timeline glass">
                         <div class="timeline-item">
@@ -144,7 +162,7 @@
                 </div>
 
                 <!-- Professional Experience -->
-                <div class="timeline-column" data-aos="fade-left">
+                <div class="timeline-column">
                     <h3 class="timeline-title"><i class="fas fa-briefcase"></i> Pengalaman Profesional</h3>
                     <div class="timeline glass">
                         <div class="timeline-item">
@@ -178,14 +196,14 @@
 
         <!-- Organization, Certifications & Awards -->
         <section id="achievements" class="section">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Penghargaan & <span>Sertifikasi</span></h2>
                 <p>Organisasi, Penghargaan, dan Kredensial Profesional</p>
             </div>
             
             <div class="achievements-grid">
                 <!-- Certifications -->
-                <div class="card glass cert-card" data-aos="zoom-in">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-certificate"></i></div>
                     <h3>Cisco Certified - CCNA</h3>
                     <img src="asset/images/CCNA.jpg" alt="CCNA" class="card-img">
@@ -197,7 +215,7 @@
                 </div>
 
                 <!-- Award 1 -->
-                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-flask"></i></div>
                     <h3>Pendanaan PKM-RE Nasional</h3>
                     <img src="asset/images/lolos-pendanaan.jpeg" alt="lolos-pendanaan" class="card-img">
@@ -206,7 +224,7 @@
                 </div>
 
                 <!-- Award 2 -->
-                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="150">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-medal"></i></div>
                     <h3>Duta Ragam Nusantara</h3>
                     <img src="asset/images/penghargaan-duta.jpg" alt="Penghargaan Duta" class="card-img">
@@ -214,7 +232,7 @@
                 </div>
 
                 <!-- Award 3 -->
-                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-trophy"></i></div>
                     <h3>Juara Harapan I LKS</h3>
                     <img src="asset/images/sertifikat-lks.jpeg" alt="LKS Cloud Computing" class="card-img">
@@ -223,7 +241,7 @@
                 </div>
 
                 <!-- Organization 1 -->
-                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="250">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-user-tie"></i></div>
                     <h3>Sekretaris Umum</h3>
                      <img src="asset/images/sekum.png" alt="Sekretaris Umum" class="card-img">
@@ -232,7 +250,7 @@
                 </div>
 
                 <!-- Organization 2 -->
-                <div class="card glass cert-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card glass cert-card">
                     <div class="card-icon"><i class="fas fa-users"></i></div>
                     <h3>Wakil Ketua OSIS</h3>
                     <img src="asset/images/wakil-osis.jpg" alt="Wakil Ketua OSIS" class="card-img">
@@ -244,14 +262,14 @@
 
         <!-- Skills Section -->
         <section id="skills" class="section bg-alt">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Keahlian <span>Teknis & Soft Skill</span></h2>
                 <p>Kompetensi Utama Saya</p>
             </div>
             
             <div class="skills-container">
                 <!-- Tech Skills -->
-                <div class="skills-box glass" data-aos="fade-right">
+                <div class="skills-box glass">
                     <h3>Keahlian Teknis</h3>
                     
                     <div class="skill-item">
@@ -288,7 +306,7 @@
                 </div>
 
                 <!-- Soft Skills -->
-                <div class="skills-box glass" data-aos="fade-left">
+                <div class="skills-box glass">
                     <h3>Soft Skill</h3>
                     <div class="soft-skills-grid">
                         <span class="skill-tag">Leadership</span>
@@ -308,14 +326,14 @@
         </section>
 
         <section id="projects" class="section">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Proyek <span>Unggulan</span></h2>
                 <p>Karya dan Inovasi Terbaru Saya</p>
             </div>
 
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card glass" data-aos="fade-up">
+                <div class="project-card glass">
                     <div class="project-img" style="display: flex; justify-content: center; align-items: center; background: #eee;">
                         <i class="fas fa-globe" style="font-size: 5rem; color: var(--primary);"></i>
                     </div>
@@ -327,7 +345,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card glass" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card glass">
                     <div class="project-img" style="display: flex; justify-content: center; align-items: center; background: #eee;">
                         <i class="fas fa-calendar-check" style="font-size: 5rem; color: var(--primary);"></i>
                     </div>
@@ -343,13 +361,13 @@
 
         <!-- Contact Section -->
         <section id="contact" class="section bg-alt">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2>Hubungi <span>Saya</span></h2>
                 <p>Mari Diskusikan Peluang dan Kolaborasi</p>
             </div>
             
             <div class="contact-container">
-                <div class="contact-info glass" data-aos="fade-up">
+                <div class="contact-info glass">
                     <h3>Informasi Kontak</h3>
                     <p>Saya selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang untuk menjadi bagian dari visi Anda.</p>
                     
@@ -412,8 +430,16 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <div class="modal-wrapper">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modal-img" alt="Profile Zoom">
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/typing.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/darkmode.js"></script>

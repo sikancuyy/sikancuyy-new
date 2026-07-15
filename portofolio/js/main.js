@@ -8,37 +8,47 @@ window.addEventListener('load', () => {
     }, 500); // 0.5s for CSS fade-out transition
 });
 
-// Initialize AOS Animation
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
-        });
-    }
-
     // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+    const navContainer = document.getElementById('mobile-nav-container');
+    const navOverlay = document.getElementById('nav-overlay');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const links = document.querySelectorAll('.nav-links a');
     
+    function toggleMenu() {
+        if (navContainer) {
+            navContainer.classList.toggle('active');
+            if (navOverlay) navOverlay.classList.toggle('active');
+        } else {
+            // Fallback for old structure if somehow used
+            const navLinks = document.querySelector('.nav-links');
+            if(navLinks) navLinks.classList.toggle('active');
+        }
+    }
+
     if(hamburger) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
+        hamburger.addEventListener('click', toggleMenu);
+    }
+    
+    if(closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', toggleMenu);
+    }
+    
+    if(navOverlay) {
+        navOverlay.addEventListener('click', toggleMenu);
     }
 
     // Close menu when link clicked
-    const links = document.querySelectorAll('.nav-links a');
     links.forEach(link => {
         link.addEventListener('click', () => {
-            if(navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                hamburger.querySelector('i').classList.add('fa-bars');
-                hamburger.querySelector('i').classList.remove('fa-times');
+            if(navContainer && navContainer.classList.contains('active')) {
+                toggleMenu();
+            } else {
+                const navLinks = document.querySelector('.nav-links');
+                if(navLinks && navLinks.classList.contains('active')) {
+                     navLinks.classList.remove('active');
+                }
             }
         });
     });
@@ -93,4 +103,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+});
+
+
+// Image Modal Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+    const closeModal = document.querySelector('.close-modal');
+    const allImages = document.querySelectorAll('img:not(#modal-img)');
+
+    if (modal && modalImg) {
+        allImages.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+            });
+        });
+
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target.classList.contains('modal-wrapper')) {
+                modal.style.display = 'none';
+            }
+        });
+    }
 });
