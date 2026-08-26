@@ -12,25 +12,25 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 const DATA = {
   jadwal: {
     senin: [
-      { mk: "Prakt. Antena dan Propagasi", dosen: "Ipan Suandi, S.T., M.T. (ISD)", ruang: "L10 – Lab. HF & Propagasi", gedung: "L10", jam: "07:30", sel: "10:00" },
-      { mk: "Jaringan Komputer Lanjut", dosen: "Muhammad Syahroni, S.T., M.T. (MSY)", ruang: "R16 – Gedung III T. Elektro Lt. 2", gedung: "R16", jam: "10:20", sel: "12:00" },
+      { mk: "Prakt. Antena dan Propagasi", dosen: "Ipan Suandi, S.T., M.T.", ruang: "L10 – Lab. HF & Propagasi", gedung: "L10", jam: "07:30", sel: "10:00" },
+      { mk: "Jaringan Komputer Lanjut", dosen: "Muhammad Syahroni, S.T., M.T.", ruang: "R16 – Gedung III T. Elektro Lt. 2", gedung: "R16", jam: "10:20", sel: "12:00" },
     ],
     selasa: [
-      { mk: "Praktikum Jaringan Komputer Lanjut", dosen: "Muhammad Syahroni, S.T., M.T. (MSY)", ruang: "L13 – Lab. Jar. Komputer", gedung: "L13", jam: "07:30", sel: "10:00" },
-      { mk: "Prakt. Sistem Komunikasi Satelit dan Radar", dosen: "Rachmawati, S.T., M.Eng. (RCM)", ruang: "L10 – Lab. HF & Propagasi", gedung: "L10", jam: "10:20", sel: "12:50" },
-      { mk: "Teknik Instalasi Fiber Optik", dosen: "Anita Fauziah, S.ST., M.T. (ANF)", ruang: "R15 – Gedung III T. Elektro Lt. 2", gedung: "R15", jam: "13:30", sel: "15:10" },
+      { mk: "Praktikum Jaringan Komputer Lanjut", dosen: "Muhammad Syahroni, S.T., M.T.", ruang: "L13 – Lab. Jar. Komputer", gedung: "L13", jam: "07:30", sel: "10:00" },
+      { mk: "Prakt. Sistem Komunikasi Satelit dan Radar", dosen: "Rachmawati, S.T., M.Eng.", ruang: "L10 – Lab. HF & Propagasi", gedung: "L10", jam: "10:20", sel: "12:50" },
+      { mk: "Teknik Instalasi Fiber Optik", dosen: "Anita Fauziah, SST., M.T.", ruang: "R15 – Gedung III T. Elektro Lt. 2", gedung: "R15", jam: "13:30", sel: "15:10" },
     ],
     rabu: [
-      { mk: "Prakt. Teknik Instalasi Fiber Optik", dosen: "Anita Fauziah, S.ST., M.T. (ANF)", ruang: "L23 – Lab. Transmisi", gedung: "L23", jam: "07:30", sel: "10:00" },
-      { mk: "Antena dan Propagasi", dosen: "Ipan Suandi, S.T., M.T. (ISD)", ruang: "R17 – Gedung III T. Elektro Lt. 2", gedung: "R17", jam: "10:20", sel: "12:50" },
+      { mk: "Prakt. Teknik Instalasi Fiber Optik", dosen: "Anita Fauziah, SST., M.T.", ruang: "L23 – Lab. Transmisi", gedung: "L23", jam: "07:30", sel: "10:00" },
+      { mk: "Antena dan Propagasi", dosen: "Ipan Suandi, S.T., M.T.", ruang: "R17 – Gedung III T. Elektro Lt. 2", gedung: "R17", jam: "10:20", sel: "12:50" },
     ],
     kamis: [
-      { mk: "Prakt. Sistem Komunikasi Seluler", dosen: "Yassir, S.T., M.Eng.Sc. (YS)", ruang: "L11 – Lab. Jaringan Telekomunikasi", gedung: "L11", jam: "07:30", sel: "10:00" },
-      { mk: "Sistem Komunikasi Satelit dan Radar", dosen: "Rachmawati, S.T., M.Eng. (RCM)", ruang: "R17 – Gedung III T. Elektro Lt. 2", gedung: "R17", jam: "10:20", sel: "12:50" },
+      { mk: "Prakt. Sistem Komunikasi Seluler", dosen: "Yassir, S.T., M.Eng.Sc.", ruang: "L11 – Lab. Jaringan Telekomunikasi", gedung: "L11", jam: "07:30", sel: "10:00" },
+      { mk: "Sistem Komunikasi Satelit dan Radar", dosen: "Rachmawati, S.T., M.Eng.", ruang: "R17 – Gedung III T. Elektro Lt. 2", gedung: "R17", jam: "10:20", sel: "12:50" },
     ],
     jumat: [
-      { mk: "Sistem Komunikasi Seluler", dosen: "Yassir, S.T., M.Eng.Sc. (YS)", ruang: "R18 – Gedung III T. Elektro Lt. 2", gedung: "R18", jam: "07:30", sel: "10:00" },
-      { mk: "Metodologi Penelitian", dosen: "NEL", ruang: "R18 – Gedung III T. Elektro Lt. 2", gedung: "R18", jam: "10:20", sel: "12:00" },
+      { mk: "Sistem Komunikasi Seluler", dosen: "Yassir, S.T., M.Eng.Sc.", ruang: "R18 – Gedung III T. Elektro Lt. 2", gedung: "R18", jam: "07:30", sel: "10:00" },
+      { mk: "Metodologi Penelitian", dosen: "Dr. Nelly Safitri, SST., M.Eng.Sc.", ruang: "R18 – Gedung III T. Elektro Lt. 2", gedung: "R18", jam: "10:20", sel: "12:00" },
     ],
   },
   kelompok: {
@@ -66,10 +66,11 @@ const DATA = {
     },
   },
   piket: [
-    { name: "Kelompok Piket I", members: [{ id: "2024203020001", name: "Ilal Ilhamdi" }, { id: "2024203020022", name: "Muhammad Halfi Al Barizi" }, { id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020020", name: "Nesya Zikriya" }] },
-    { name: "Kelompok Piket II", members: [{ id: "2024203020009", name: "Firlita Afianti" }, { id: "2024203020013", name: "Afriansyah Sinamo" }, { id: "2024203020011", name: "Durratul Hikmah" }, { id: "2024203020028", name: "Aqil Ocean Difra" }] },
-    { name: "Kelompok Piket III", members: [{ id: "2024203020006", name: "Suheil Maulana" }, { id: "2024203020019", name: "Khairul Fajar Sidiq" }, { id: "2024203020036", name: "Nazar Al Farabi" }, { id: "2024203020016", name: "Renka Laura" }] },
-    { name: "Kelompok Piket IV", members: [{ id: "2024203020031", name: "Syawal Fitriyadi" }, { id: "2024203020025", name: "Farhan Alfarsiyi" }, { id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020008", name: "Rahmat Haikal" }, { id: "2024203020029", name: "Muhammad Rais" }] },
+    { name: "Kelompok 1", members: [{ id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020016", name: "Renka Laura" }, { id: "2024203020009", name: "Firlita Afianti" }, { id: "2024203020013", name: "Afriansyah Sinamo" }] },
+    { name: "Kelompok 2", members: [{ id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020036", name: "Nazar Al Farabi" }, { id: "2024203020008", name: "Rahmat Haikal" }, { id: "2024203020022", name: "Muhammad Halfi Al Barizi" }] },
+    { name: "Kelompok 3", members: [{ id: "2024203020031", name: "Syawal Fitriyadi" }, { id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020029", name: "Muhammad Rais" }] },
+    { name: "Kelompok 4", members: [{ id: "2024203020020", name: "Nesya Zikriya" }, { id: "2024203020025", name: "Farhan Alfarsiyi" }, { id: "2024203020001", name: "Ilal Ilhamdi" }] },
+    { name: "Kelompok 5", members: [{ id: "2024203020011", name: "Durratul Hikmah" }, { id: "2024203020006", name: "Suheil Maulana" }, { id: "2024203020019", name: "Khairul Fajar Sidiq" }] },
   ],
   mahasiswa: [
     { no: 1, id: "2024203020013", name: "Afriansyah Sinamo" },
@@ -91,12 +92,12 @@ const DATA = {
     { no: 17, id: "2024203020031", name: "Syawal Fitriyadi" },
   ],
   dosen: [
-    { no: 1, nip: "19800510 200501 1 002", nama: "Ipan Suandi, S.T., M.T. (ISD)", mks: ["Prakt. Antena dan Propagasi", "Antena dan Propagasi"] },
-    { no: 2, nip: "-", nama: "Muhammad Syahroni, S.T., M.T. (MSY)", mks: ["Jaringan Komputer Lanjut", "Praktikum Jaringan Komputer Lanjut"] },
-    { no: 3, nip: "-", nama: "Rachmawati, S.T., M.Eng. (RCM)", mks: ["Prakt. Sistem Komunikasi Satelit dan Radar", "Sistem Komunikasi Satelit dan Radar"] },
-    { no: 4, nip: "19720129 199803 2 001", nama: "Anita Fauziah, S.ST., M.T. (ANF)", mks: ["Teknik Instalasi Fiber Optik", "Prakt. Teknik Instalasi Fiber Optik"] },
-    { no: 5, nip: "-", nama: "Yassir, S.T., M.Eng.Sc. (YS)", mks: ["Prakt. Sistem Komunikasi Seluler", "Sistem Komunikasi Seluler"] },
-    { no: 6, nip: "-", nama: "NEL", mks: ["Metodologi Penelitian"] },
+    { no: 1, nip: "198005102005011002", nama: "Ipan Suandi, S.T., M.T.", mks: ["Prakt. Antena dan Propagasi", "Antena dan Propagasi"] },
+    { no: 2, nip: "197210262006041001", nama: "Muhammad Syahroni, S.T., M.T.", mks: ["Jaringan Komputer Lanjut", "Praktikum Jaringan Komputer Lanjut"] },
+    { no: 3, nip: "197908262003122001", nama: "Rachmawati, S.T., M.Eng.", mks: ["Prakt. Sistem Komunikasi Satelit dan Radar", "Sistem Komunikasi Satelit dan Radar"] },
+    { no: 4, nip: "197201291998032001", nama: "Anita Fauziah, SST., M.T.", mks: ["Teknik Instalasi Fiber Optik", "Prakt. Teknik Instalasi Fiber Optik"] },
+    { no: 5, nip: "198004192003121002", nama: "Yassir, S.T., M.Eng.Sc.", mks: ["Prakt. Sistem Komunikasi Seluler", "Sistem Komunikasi Seluler"] },
+    { no: 6, nip: "-", nama: "Dr. Nelly Safitri, SST., M.Eng.Sc.", mks: ["Metodologi Penelitian"] },
   ],
 };
 
@@ -298,10 +299,6 @@ function TabJadwal() {
                     <span className="r-room-badge">
                       <Icon path={Icons.mapPin} size={11} />
                       {item.ruang}
-                    </span>
-                    <span className="r-room-badge">
-                      <Icon path={item.gedung.toUpperCase().startsWith("L") || item.ruang.toLowerCase().includes("lab") ? Icons.mapPin : Icons.building} size={11} />
-                      {item.gedung.toUpperCase().startsWith("L") || item.ruang.toLowerCase().includes("lab") ? item.gedung : `Gedung ${item.gedung}`}
                     </span>
                   </div>
                 </div>

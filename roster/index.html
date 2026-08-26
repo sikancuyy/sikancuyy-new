@@ -6,10 +6,10 @@
     <title>TRJT 3A · Portal Roster & Akademik 2026/2027</title>
     <meta name="description" content="Roster jadwal kuliah, kelompok praktikum, piket, dan data dosen kelas TRJT 3A Semester Ganjil 2026/2027" />
     
-    <!-- Modern Typography & Icons -->
+    <!-- Claymorphic 3D Typography & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
@@ -73,7 +73,7 @@
         <div class="export-bar">
           <div class="export-bar-left">
             <h2>Kelompok Piket</h2>
-            <span class="export-sub">4 regu piket kebersihan & kerapian kelas</span>
+            <span class="export-sub">5 regu piket kebersihan & kerapian kelas</span>
           </div>
           <div class="export-bar-right">
             <button class="btn-export csv" onclick="exportPiketCSV()" title="Unduh CSV">
@@ -254,25 +254,25 @@ const highlight = (text, query) => {
 // ── DATA: JADWAL KULIAH TRJT 3A (ROSTER REV-2) ──
 const jadwal = {
   senin: [
-    {mk:"Prakt. Antena dan Propagasi", dosen:"Ipan Suandi, S.T., M.T. (ISD)", ruang:"L10 – Lab. HF & Propagasi", gedung:"L10", jam:"07:30", sel:"10:00"},
-    {mk:"Jaringan Komputer Lanjut", dosen:"Muhammad Syahroni, S.T., M.T. (MSY)", ruang:"R16 – Gedung III T. Elektro Lt. 2", gedung:"R16", jam:"10:20", sel:"12:00"},
+    {mk:"Prakt. Antena dan Propagasi", dosen:"Ipan Suandi, S.T., M.T.", ruang:"L10 – Lab. HF & Propagasi", gedung:"L10", jam:"07:30", sel:"10:00"},
+    {mk:"Jaringan Komputer Lanjut", dosen:"Muhammad Syahroni, S.T., M.T.", ruang:"R16 – Gedung III T. Elektro Lt. 2", gedung:"R16", jam:"10:20", sel:"12:00"},
   ],
   selasa: [
-    {mk:"Praktikum Jaringan Komputer Lanjut", dosen:"Muhammad Syahroni, S.T., M.T. (MSY)", ruang:"L13 – Lab. Jar. Komputer", gedung:"L13", jam:"07:30", sel:"10:00"},
-    {mk:"Prakt. Sistem Komunikasi Satelit dan Radar", dosen:"Rachmawati, S.T., M.Eng. (RCM)", ruang:"L10 – Lab. HF & Propagasi", gedung:"L10", jam:"10:20", sel:"12:50"},
-    {mk:"Teknik Instalasi Fiber Optik", dosen:"Anita Fauziah, S.ST., M.T. (ANF)", ruang:"R15 – Gedung III T. Elektro Lt. 2", gedung:"R15", jam:"13:30", sel:"15:10"},
+    {mk:"Praktikum Jaringan Komputer Lanjut", dosen:"Muhammad Syahroni, S.T., M.T.", ruang:"L13 – Lab. Jar. Komputer", gedung:"L13", jam:"07:30", sel:"10:00"},
+    {mk:"Prakt. Sistem Komunikasi Satelit dan Radar", dosen:"Rachmawati, S.T., M.Eng.", ruang:"L10 – Lab. HF & Propagasi", gedung:"L10", jam:"10:20", sel:"12:50"},
+    {mk:"Teknik Instalasi Fiber Optik", dosen:"Anita Fauziah, SST., M.T.", ruang:"R15 – Gedung III T. Elektro Lt. 2", gedung:"R15", jam:"13:30", sel:"15:10"},
   ],
   rabu: [
-    {mk:"Prakt. Teknik Instalasi Fiber Optik", dosen:"Anita Fauziah, S.ST., M.T. (ANF)", ruang:"L23 – Lab. Transmisi", gedung:"L23", jam:"07:30", sel:"10:00"},
-    {mk:"Antena dan Propagasi", dosen:"Ipan Suandi, S.T., M.T. (ISD)", ruang:"R17 – Gedung III T. Elektro Lt. 2", gedung:"R17", jam:"10:20", sel:"12:50"},
+    {mk:"Prakt. Teknik Instalasi Fiber Optik", dosen:"Anita Fauziah, SST., M.T.", ruang:"L23 – Lab. Transmisi", gedung:"L23", jam:"07:30", sel:"10:00"},
+    {mk:"Antena dan Propagasi", dosen:"Ipan Suandi, S.T., M.T.", ruang:"R17 – Gedung III T. Elektro Lt. 2", gedung:"R17", jam:"10:20", sel:"12:50"},
   ],
   kamis: [
-    {mk:"Prakt. Sistem Komunikasi Seluler", dosen:"Yassir, S.T., M.Eng.Sc. (YS)", ruang:"L11 – Lab. Jaringan Telekomunikasi", gedung:"L11", jam:"07:30", sel:"10:00"},
-    {mk:"Sistem Komunikasi Satelit dan Radar", dosen:"Rachmawati, S.T., M.Eng. (RCM)", ruang:"R17 – Gedung III T. Elektro Lt. 2", gedung:"R17", jam:"10:20", sel:"12:50"},
+    {mk:"Prakt. Sistem Komunikasi Seluler", dosen:"Yassir, S.T., M.Eng.Sc.", ruang:"L11 – Lab. Jaringan Telekomunikasi", gedung:"L11", jam:"07:30", sel:"10:00"},
+    {mk:"Sistem Komunikasi Satelit dan Radar", dosen:"Rachmawati, S.T., M.Eng.", ruang:"R17 – Gedung III T. Elektro Lt. 2", gedung:"R17", jam:"10:20", sel:"12:50"},
   ],
   jumat: [
-    {mk:"Sistem Komunikasi Seluler", dosen:"Yassir, S.T., M.Eng.Sc. (YS)", ruang:"R18 – Gedung III T. Elektro Lt. 2", gedung:"R18", jam:"07:30", sel:"10:00"},
-    {mk:"Metodologi Penelitian", dosen:"NEL", ruang:"R18 – Gedung III T. Elektro Lt. 2", gedung:"R18", jam:"10:20", sel:"12:00"},
+    {mk:"Sistem Komunikasi Seluler", dosen:"Yassir, S.T., M.Eng.Sc.", ruang:"R18 – Gedung III T. Elektro Lt. 2", gedung:"R18", jam:"07:30", sel:"10:00"},
+    {mk:"Metodologi Penelitian", dosen:"Dr. Nelly Safitri, SST., M.Eng.Sc.", ruang:"R18 – Gedung III T. Elektro Lt. 2", gedung:"R18", jam:"10:20", sel:"12:00"},
   ],
 };
 
@@ -333,10 +333,11 @@ const kData = {
 
 // ── DATA: PIKET ──
 const pData = [
-  {n:"Kelompok Piket I",   a:[{id:"2024203020001",nm:"Ilal Ilhamdi"},{id:"2024203020022",nm:"Muhammad Halfi Al Barizi"},{id:"2024203020003",nm:"Sarah Fonna"},{id:"2024203020020",nm:"Nesya Zikriya"}]},
-  {n:"Kelompok Piket II",  a:[{id:"2024203020009",nm:"Firlita Afianti"},{id:"2024203020013",nm:"Afriansyah Sinamo"},{id:"2024203020011",nm:"Durratul Hikmah"},{id:"2024203020028",nm:"Aqil Ocean Difra"}]},
-  {n:"Kelompok Piket III", a:[{id:"2024203020006",nm:"Suheil Maulana"},{id:"2024203020019",nm:"Khairul Fajar Sidiq"},{id:"2024203020036",nm:"Nazar Al Farabi"},{id:"2024203020016",nm:"Renka Laura"}]},
-  {n:"Kelompok Piket IV",  a:[{id:"2024203020031",nm:"Syawal Fitriyadi"},{id:"2024203020025",nm:"Farhan Alfarsiyi"},{id:"2024203020032",nm:"Lunna Auamara"},{id:"2024203020008",nm:"Rahmat Haikal"},{id:"2024203020029",nm:"Muhammad Rais"}]},
+  {n:"Kelompok 1", a:[{id:"2024203020028",nm:"Aqil Ocean Difra"},{id:"2024203020016",nm:"Renka Laura"},{id:"2024203020009",nm:"Firlita Afianti"},{id:"2024203020013",nm:"Afriansyah Sinamo"}]},
+  {n:"Kelompok 2", a:[{id:"2024203020032",nm:"Lunna Auamara"},{id:"2024203020036",nm:"Nazar Al Farabi"},{id:"2024203020008",nm:"Rahmat Haikal"},{id:"2024203020022",nm:"Muhammad Halfi Al Barizi"}]},
+  {n:"Kelompok 3", a:[{id:"2024203020031",nm:"Syawal Fitriyadi"},{id:"2024203020003",nm:"Sarah Fonna"},{id:"2024203020029",nm:"Muhammad Rais"}]},
+  {n:"Kelompok 4", a:[{id:"2024203020020",nm:"Nesya Zikriya"},{id:"2024203020025",nm:"Farhan Alfarsiyi"},{id:"2024203020001",nm:"Ilal Ilhamdi"}]},
+  {n:"Kelompok 5", a:[{id:"2024203020011",nm:"Durratul Hikmah"},{id:"2024203020006",nm:"Suheil Maulana"},{id:"2024203020019",nm:"Khairul Fajar Sidiq"}]},
 ];
 
 // ── DATA: MAHASISWA ──
@@ -362,17 +363,17 @@ const mhs = [
 
 // ── DATA: DOSEN ──
 const dosenData = [
-  {no:1, nip:'19800510 200501 1 002', mk:'Prakt. Antena dan Propagasi', nama:'Ipan Suandi, S.T., M.T. (ISD)'},
-  {no:2, nip:'19800510 200501 1 002', mk:'Antena dan Propagasi', nama:'Ipan Suandi, S.T., M.T. (ISD)'},
-  {no:3, nip:'-', mk:'Jaringan Komputer Lanjut', nama:'Muhammad Syahroni, S.T., M.T. (MSY)'},
-  {no:4, nip:'-', mk:'Praktikum Jaringan Komputer Lanjut', nama:'Muhammad Syahroni, S.T., M.T. (MSY)'},
-  {no:5, nip:'-', mk:'Prakt. Sistem Komunikasi Satelit dan Radar', nama:'Rachmawati, S.T., M.Eng. (RCM)'},
-  {no:6, nip:'-', mk:'Sistem Komunikasi Satelit dan Radar', nama:'Rachmawati, S.T., M.Eng. (RCM)'},
-  {no:7, nip:'19720129 199803 2 001', mk:'Teknik Instalasi Fiber Optik', nama:'Anita Fauziah, S.ST., M.T. (ANF)'},
-  {no:8, nip:'19720129 199803 2 001', mk:'Prakt. Teknik Instalasi Fiber Optik', nama:'Anita Fauziah, S.ST., M.T. (ANF)'},
-  {no:9, nip:'-', mk:'Prakt. Sistem Komunikasi Seluler', nama:'Yassir, S.T., M.Eng.Sc. (YS)'},
-  {no:10,nip:'-', mk:'Sistem Komunikasi Seluler', nama:'Yassir, S.T., M.Eng.Sc. (YS)'},
-  {no:11,nip:'-', mk:'Metodologi Penelitian', nama:'NEL'},
+  {no:1, nip:'198005102005011002', mk:'Prakt. Antena dan Propagasi', nama:'Ipan Suandi, S.T., M.T.'},
+  {no:2, nip:'198005102005011002', mk:'Antena dan Propagasi', nama:'Ipan Suandi, S.T., M.T.'},
+  {no:3, nip:'197210262006041001', mk:'Jaringan Komputer Lanjut', nama:'Muhammad Syahroni, S.T., M.T.'},
+  {no:4, nip:'197210262006041001', mk:'Praktikum Jaringan Komputer Lanjut', nama:'Muhammad Syahroni, S.T., M.T.'},
+  {no:5, nip:'197908262003122001', mk:'Prakt. Sistem Komunikasi Satelit dan Radar', nama:'Rachmawati, S.T., M.Eng.'},
+  {no:6, nip:'197908262003122001', mk:'Sistem Komunikasi Satelit dan Radar', nama:'Rachmawati, S.T., M.Eng.'},
+  {no:7, nip:'197201291998032001', mk:'Teknik Instalasi Fiber Optik', nama:'Anita Fauziah, SST., M.T.'},
+  {no:8, nip:'197201291998032001', mk:'Prakt. Teknik Instalasi Fiber Optik', nama:'Anita Fauziah, SST., M.T.'},
+  {no:9, nip:'198004192003121002', mk:'Prakt. Sistem Komunikasi Seluler', nama:'Yassir, S.T., M.Eng.Sc.'},
+  {no:10,nip:'198004192003121002', mk:'Sistem Komunikasi Seluler', nama:'Yassir, S.T., M.Eng.Sc.'},
+  {no:11,nip:'-', mk:'Metodologi Penelitian', nama:'Dr. Nelly Safitri, SST., M.Eng.Sc.'},
 ];
 
 // ── LOGIKA JADWAL & STATUS LIVE ──
@@ -425,10 +426,6 @@ function renderJadwal() {
     const untl = isTod ? minUntil(item.jam) : -1;
     const upcm = !live && untl > 0 && untl <= 30;
     
-    const isLab = item.gedung.toUpperCase().startsWith('L') || item.ruang.toLowerCase().includes('lab');
-    const gdText = isLab ? item.gedung : `Gedung ${item.gedung}`;
-    const gdIcon = isLab ? 'fa-flask' : 'fa-building';
-
     const r = document.createElement('article'); 
     r.className = 'row' + (live ? ' live' : '');
     r.style.animationDelay = `${idx * 0.05}s`;
@@ -446,7 +443,6 @@ function renderJadwal() {
         <div class="r-dosen"><i class="fas fa-chalkboard-user"></i> ${item.dosen}</div>
         <div class="r-room-row">
           <span class="r-room-badge"><i class="fas fa-location-dot"></i> ${item.ruang}</span>
-          <span class="r-room-badge"><i class="fas ${gdIcon}"></i> ${gdText}</span>
         </div>
       </div>`;
     rows.appendChild(r);
@@ -939,7 +935,7 @@ function exportPiketPDF() {
   });
   makePDF(
     'Kelompok Piket Kebersihan TRJT 3A',
-    'Jadwal & Pembagian 4 Regu Piket',
+    'Jadwal & Pembagian 5 Regu Piket',
     ['Regu Piket', 'No', 'NIM', 'Nama Mahasiswa'],
     rows,
     'Kelompok_Piket_TRJT3A.pdf'
