@@ -1,7 +1,7 @@
 {
   "name": "Roster TRJT 3A 2026/2027",
   "short_name": "TRJT 3A",
-  "start_url": "/roster/",
+  "start_url": "/roster",
   "display": "browser",
   "background_color": "#f3f6f8",
   "theme_color": "#123b5d",

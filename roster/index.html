@@ -98,7 +98,7 @@
         <div class="export-bar">
           <div class="export-bar-left">
             <h2>Daftar Mahasiswa</h2>
-            <span class="export-sub">17 Mahasiswa Aktif Kelas TRJT 3A</span>
+            <span class="export-sub">16 Mahasiswa Aktif Kelas TRJT 3A</span>
           </div>
           <div class="export-bar-right">
             <button class="btn-export csv" onclick="exportDaftarCSV()" title="Unduh CSV">
@@ -278,62 +278,98 @@ const jadwal = {
 
 // ── DATA: KELOMPOK MK ──
 const kData = {
-  "Komunikasi Data": {
-    dosen: "Fakhrur Razi, S.ST., M.T.",
+  "Teknik Instalasi Fiber Optik": {
+    dosen: "Anita Fauziah, SST., M.T.",
     k: [
-      {n:"Kelompok 1",a:[
-        {id:"2024203020032",nm:"Lunna Auamara"},
-        {id:"2024203020016",nm:"Renka Laura"},
-        {id:"2024203020025",nm:"Farhan Alfarsiyi"},
-        {id:"2024203020029",nm:"Muhammad Rais"},
+      {n:"Kelompok 1", a:[
+        {id:"2024203020001", nm:"Ilal Ilhamdi"},
+        {id:"2024203020031", nm:"Syawal Fitriadi"},
+        {id:"2024203020020", nm:"Nesya Zikriya"},
+        {id:"2024203020022", nm:"Muhammad Halfi"},
       ]},
-      {n:"Kelompok 2",a:[
-        {id:"2024203020019",nm:"Khairul Fajar Sidiq"},
-        {id:"2024203020011",nm:"Durratul Hikmah"},
-        {id:"2024203020020",nm:"Nesya Zikriya"},
-        {id:"2024203020006",nm:"Suheil Maulana"},
+      {n:"Kelompok 2", a:[
+        {id:"2024203020028", nm:"Aqil Ocean Difra"},
+        {id:"2024203020011", nm:"Durratul Hikmah"},
+        {id:"2024203020009", nm:"Firlita Afianti"},
+        {id:"2024203020016", nm:"Renka Laura"},
       ]},
-      {n:"Kelompok 3",a:[
-        {id:"2024203020003",nm:"Sarah Fonna"},
-        {id:"2024203020028",nm:"Aqil Ocean Difra"},
-        {id:"2024203020031",nm:"Syawal Fitriyadi"},
-        {id:"2024203020009",nm:"Firlita Afianti"},
+      {n:"Kelompok 3", a:[
+        {id:"2024203020008", nm:"Rahmat Haikal"},
+        {id:"2024203020025", nm:"Farhan Alfarisyi"},
+        {id:"2024203020003", nm:"Sarah Fonna"},
+        {id:"2024203020036", nm:"Nazar Alfaraby"},
       ]},
-      {n:"Kelompok 4",a:[
-        {id:"2024203020008",nm:"Rahmat Haikal"},
-        {id:"2024203020001",nm:"Ilal Ilhamdi"},
-        {id:"2024203020022",nm:"Muhammad Halfi Al Barizi"},
-        {id:"2024203020036",nm:"Nazar Al Farabi"},
-        {id:"2024203020013",nm:"Afriansyah Sinamo"},
+      {n:"Kelompok 4", a:[
+        {id:"2024203020032", nm:"Lunna Auamara"},
+        {id:"2024203020029", nm:"Muhammad Rais"},
+        {id:"2024203020006", nm:"Suheil Maulana"},
+        {id:"2024203020019", nm:"Khairul Fajar Sidiq"},
       ]},
     ]
   },
-  "Saluran Transmisi": {
-    dosen: "Ipan Suandi, S.T., M.T.",
+  "Sistem Komunikasi Satelit Dan Radar": {
+    dosen: "Rachmawati, S.T., M.Eng.",
     k: [
-      {n:"Kelompok I",  a:[{id:"2024203020013",nm:"Afriansyah Sinamo"},{id:"2024203020019",nm:"Khairul Fajar Sidiq"},{id:"2024203020008",nm:"Rahmat Haikal"}]},
-      {n:"Kelompok II", a:[{id:"2024203020011",nm:"Durratul Hikmah"},{id:"2024203020003",nm:"Sarah Fonna"},{id:"2024203020001",nm:"Ilal Ilhamdi"}]},
-      {n:"Kelompok III",a:[{id:"2024203020016",nm:"Renka Laura"},{id:"2024203020006",nm:"Suheil Maulana"},{id:"2024203020009",nm:"Firlita Afianti"}]},
-      {n:"Kelompok IV", a:[{id:"2024203020022",nm:"Muhammad Halfi Al Barizi"},{id:"2024203020031",nm:"Syawal Fitriyadi"}]},
-      {n:"Kelompok V",  a:[{id:"2024203020025",nm:"Farhan Alfarsiyi"},{id:"2024203020020",nm:"Nesya Zikriya"},{id:"2024203020029",nm:"Muhammad Rais"}]},
-      {n:"Kelompok VI", a:[{id:"2024203020032",nm:"Lunna Auamara"},{id:"2024203020028",nm:"Aqil Ocean Difra"},{id:"2024203020036",nm:"Nazar Al Farabi"}]},
+      {n:"Kelompok 1", a:[
+        {id:"2024203020028", nm:"Aqil Ocean Difra"},
+        {id:"2024203020011", nm:"Durratul Hikmah"},
+        {id:"2024203020009", nm:"Firlita Afianti"},
+        {id:"2024203020006", nm:"Suheil Maulana"},
+      ]},
+      {n:"Kelompok 2", a:[
+        {id:"2024203020019", nm:"Khairul Fajar Sidiq"},
+        {id:"2024203020029", nm:"Muhammad Rais"},
+        {id:"2024203020036", nm:"Nazar Alfaraby"},
+        {id:"2024203020016", nm:"Renka Laura"},
+      ]},
+      {n:"Kelompok 3", a:[
+        {id:"2024203020001", nm:"Ilal Ilhamdi"},
+        {id:"2024203020003", nm:"Sarah Fonna"},
+        {id:"2024203020031", nm:"Syawal Fitriyadi"},
+        {id:"2024203020025", nm:"Farhan Alfarisyi"},
+      ]},
+      {n:"Kelompok 4", a:[
+        {id:"2024203020008", nm:"Rahmat Haikal"},
+        {id:"2024203020020", nm:"Nesya Zikriya"},
+        {id:"2024203020032", nm:"Lunna Auamara"},
+        {id:"2024203020022", nm:"Muhammad Halfi Al Barizi"},
+      ]},
     ]
   },
-  "Teknik Gelombang Mikro": {
-    dosen: "Munawar, S.T., M.T.",
+  "Sistem Komunikasi Seluler": {
+    dosen: "Yassir, S.T., M.Eng.Sc.",
     k: [
-      {n:"Kelompok I",  a:[{id:"2024203020019",nm:"Khairul Fajar Sidiq"},{id:"2024203020003",nm:"Sarah Fonna"},{id:"2024203020006",nm:"Suheil Maulana"},{id:"2024203020025",nm:"Farhan Alfarsiyi"}]},
-      {n:"Kelompok II", a:[{id:"2024203020028",nm:"Aqil Ocean Difra"},{id:"2024203020001",nm:"Ilal Ilhamdi"},{id:"2024203020029",nm:"Muhammad Rais"},{id:"2024203020011",nm:"Durratul Hikmah"}]},
-      {n:"Kelompok III",a:[{id:"2024203020013",nm:"Afriansyah Sinamo"},{id:"2024203020032",nm:"Lunna Auamara"},{id:"2024203020031",nm:"Syawal Fitriyadi"},{id:"2024203020022",nm:"Muhammad Halfi Al Barizi"}]},
-      {n:"Kelompok IV", a:[{id:"2024203020036",nm:"Nazar Al Farabi"},{id:"2024203020009",nm:"Firlita Afianti"},{id:"2024203020008",nm:"Rahmat Haikal"}]},
-      {n:"Kelompok V",  a:[{id:"2024203020020",nm:"Nesya Zikriya"},{id:"2024203020016",nm:"Renka Laura"}]},
+      {n:"Kelompok 1", a:[
+        {id:"2024203020008", nm:"Rahmat Haikal"},
+        {id:"2024203020020", nm:"Nesya Zikriya"},
+        {id:"2024203020003", nm:"Sarah Fonna"},
+        {id:"2024203020022", nm:"Muhammad Halfi Al Barizi"},
+      ]},
+      {n:"Kelompok 2", a:[
+        {id:"2024203020001", nm:"Ilal Ilhamdi"},
+        {id:"2024203020016", nm:"Renka Laura"},
+        {id:"2024203020031", nm:"Syawal Fitriyadi"},
+        {id:"2024203020029", nm:"Muhammad Rais"},
+      ]},
+      {n:"Kelompok 3", a:[
+        {id:"2024203020028", nm:"Aqil Ocean Difra"},
+        {id:"2024203020009", nm:"Firlita Afianti"},
+        {id:"2024203020036", nm:"Nazar Alfaraby"},
+        {id:"2024203020032", nm:"Lunna Auamara"},
+      ]},
+      {n:"Kelompok 4", a:[
+        {id:"2024203020019", nm:"Khairul Fajar Sidiq"},
+        {id:"2024203020006", nm:"Suheil Maulana"},
+        {id:"2024203020011", nm:"Durratul Hikmah"},
+        {id:"2024203020025", nm:"Farhan Alfarisyi"},
+      ]},
     ]
   },
 };
 
 // ── DATA: PIKET ──
 const pData = [
-  {n:"Kelompok 1", a:[{id:"2024203020028",nm:"Aqil Ocean Difra"},{id:"2024203020016",nm:"Renka Laura"},{id:"2024203020009",nm:"Firlita Afianti"},{id:"2024203020013",nm:"Afriansyah Sinamo"}]},
+  {n:"Kelompok 1", a:[{id:"2024203020028",nm:"Aqil Ocean Difra"},{id:"2024203020016",nm:"Renka Laura"},{id:"2024203020009",nm:"Firlita Afianti"}]},
   {n:"Kelompok 2", a:[{id:"2024203020032",nm:"Lunna Auamara"},{id:"2024203020036",nm:"Nazar Al Farabi"},{id:"2024203020008",nm:"Rahmat Haikal"},{id:"2024203020022",nm:"Muhammad Halfi Al Barizi"}]},
   {n:"Kelompok 3", a:[{id:"2024203020031",nm:"Syawal Fitriyadi"},{id:"2024203020003",nm:"Sarah Fonna"},{id:"2024203020029",nm:"Muhammad Rais"}]},
   {n:"Kelompok 4", a:[{id:"2024203020020",nm:"Nesya Zikriya"},{id:"2024203020025",nm:"Farhan Alfarsiyi"},{id:"2024203020001",nm:"Ilal Ilhamdi"}]},
@@ -342,23 +378,22 @@ const pData = [
 
 // ── DATA: MAHASISWA ──
 const mhs = [
-  {no:1, id:"2024203020013",nm:"Afriansyah Sinamo"},
-  {no:2, id:"2024203020028",nm:"Aqil Ocean Difra"},
-  {no:3, id:"2024203020011",nm:"Durratul Hikmah"},
-  {no:4, id:"2024203020025",nm:"Farhan Alfarsiyi"},
-  {no:5, id:"2024203020009",nm:"Firlita Afianti"},
-  {no:6, id:"2024203020001",nm:"Ilal Ilhamdi"},
-  {no:7, id:"2024203020019",nm:"Khairul Fajar Sidiq"},
-  {no:8, id:"2024203020032",nm:"Lunna Auamara"},
-  {no:9, id:"2024203020022",nm:"Muhammad Halfi Al Barizi"},
-  {no:10,id:"2024203020029",nm:"Muhammad Rais"},
-  {no:11,id:"2024203020036",nm:"Nazar Al Farabi"},
-  {no:12,id:"2024203020020",nm:"Nesya Zikriya"},
-  {no:13,id:"2024203020008",nm:"Rahmat Haikal"},
-  {no:14,id:"2024203020016",nm:"Renka Laura"},
-  {no:15,id:"2024203020003",nm:"Sarah Fonna"},
-  {no:16,id:"2024203020006",nm:"Suheil Maulana"},
-  {no:17,id:"2024203020031",nm:"Syawal Fitriyadi"},
+  {no:1, id:"2024203020028",nm:"Aqil Ocean Difra"},
+  {no:2, id:"2024203020011",nm:"Durratul Hikmah"},
+  {no:3, id:"2024203020025",nm:"Farhan Alfarsiyi"},
+  {no:4, id:"2024203020009",nm:"Firlita Afianti"},
+  {no:5, id:"2024203020001",nm:"Ilal Ilhamdi"},
+  {no:6, id:"2024203020019",nm:"Khairul Fajar Sidiq"},
+  {no:7, id:"2024203020032",nm:"Lunna Auamara"},
+  {no:8, id:"2024203020022",nm:"Muhammad Halfi Al Barizi"},
+  {no:9, id:"2024203020029",nm:"Muhammad Rais"},
+  {no:10,id:"2024203020036",nm:"Nazar Al Farabi"},
+  {no:11,id:"2024203020020",nm:"Nesya Zikriya"},
+  {no:12,id:"2024203020008",nm:"Rahmat Haikal"},
+  {no:13,id:"2024203020016",nm:"Renka Laura"},
+  {no:14,id:"2024203020003",nm:"Sarah Fonna"},
+  {no:15,id:"2024203020006",nm:"Suheil Maulana"},
+  {no:16,id:"2024203020031",nm:"Syawal Fitriyadi"},
 ];
 
 // ── DATA: DOSEN ──
@@ -829,7 +864,7 @@ function exportDaftarCSV() {
 function exportDaftarPDF() {
   makePDF(
     'Daftar Mahasiswa Kelas TRJT 3A',
-    'Total 17 Mahasiswa Terdaftar',
+    `Total ${mhs.length} Mahasiswa Terdaftar`,
     ['No', 'NIM', 'Nama Mahasiswa'],
     mhs.map(m => [m.no, m.id, tc(m.nm)]),
     'Daftar_Mahasiswa_TRJT3A.pdf'

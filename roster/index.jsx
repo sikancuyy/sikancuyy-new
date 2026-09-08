@@ -34,62 +34,154 @@ const DATA = {
     ],
   },
   kelompok: {
-    "Komunikasi Data": {
-      dosen: "Fakhrur Razi, S.ST., M.T.",
+    "Teknik Instalasi Fiber Optik": {
+      dosen: "Anita Fauziah, SST., M.T.",
       groups: [
-        { name: "Kelompok 1", members: [{ id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020016", name: "Renka Laura" }, { id: "2024203020025", name: "Farhan Alfarsiyi" }, { id: "2024203020029", name: "Muhammad Rais" }] },
-        { name: "Kelompok 2", members: [{ id: "2024203020019", name: "Khairul Fajar Sidiq" }, { id: "2024203020011", name: "Durratul Hikmah" }, { id: "2024203020020", name: "Nesya Zikriya" }, { id: "2024203020006", name: "Suheil Maulana" }] },
-        { name: "Kelompok 3", members: [{ id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020031", name: "Syawal Fitriyadi" }, { id: "2024203020009", name: "Firlita Afianti" }] },
-        { name: "Kelompok 4", members: [{ id: "2024203020008", name: "Rahmat Haikal" }, { id: "2024203020001", name: "Ilal Ilhamdi" }, { id: "2024203020022", name: "Muhammad Halfi Al Barizi" }, { id: "2024203020036", name: "Nazar Al Farabi" }, { id: "2024203020013", name: "Afriansyah Sinamo" }] },
+        {
+          name: "Kelompok 1",
+          members: [
+            { id: "2024203020001", name: "Ilal Ilhamdi" },
+            { id: "2024203020031", name: "Syawal Fitriadi" },
+            { id: "2024203020020", name: "Nesya Zikriya" },
+            { id: "2024203020022", name: "Muhammad Halfi" },
+          ],
+        },
+        {
+          name: "Kelompok 2",
+          members: [
+            { id: "2024203020028", name: "Aqil Ocean Difra" },
+            { id: "2024203020011", name: "Durratul Hikmah" },
+            { id: "2024203020009", name: "Firlita Afianti" },
+            { id: "2024203020016", name: "Renka Laura" },
+          ],
+        },
+        {
+          name: "Kelompok 3",
+          members: [
+            { id: "2024203020008", name: "Rahmat Haikal" },
+            { id: "2024203020025", name: "Farhan Alfarisyi" },
+            { id: "2024203020003", name: "Sarah Fonna" },
+            { id: "2024203020036", name: "Nazar Alfaraby" },
+          ],
+        },
+        {
+          name: "Kelompok 4",
+          members: [
+            { id: "2024203020032", name: "Lunna Auamara" },
+            { id: "2024203020029", name: "Muhammad Rais" },
+            { id: "2024203020006", name: "Suheil Maulana" },
+            { id: "2024203020019", name: "Khairul Fajar Sidiq" },
+          ],
+        },
       ],
     },
-    "Saluran Transmisi": {
-      dosen: "Ipan Suandi, S.T., M.T.",
+    "Sistem Komunikasi Satelit Dan Radar": {
+      dosen: "Rachmawati, S.T., M.Eng.",
       groups: [
-        { name: "Kelompok I", members: [{ id: "2024203020013", name: "Afriansyah Sinamo" }, { id: "2024203020019", name: "Khairul Fajar Sidiq" }, { id: "2024203020008", name: "Rahmat Haikal" }] },
-        { name: "Kelompok II", members: [{ id: "2024203020011", name: "Durratul Hikmah" }, { id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020001", name: "Ilal Ilhamdi" }] },
-        { name: "Kelompok III", members: [{ id: "2024203020016", name: "Renka Laura" }, { id: "2024203020006", name: "Suheil Maulana" }, { id: "2024203020009", name: "Firlita Afianti" }] },
-        { name: "Kelompok IV", members: [{ id: "2024203020022", name: "Muhammad Halfi Al Barizi" }, { id: "2024203020031", name: "Syawal Fitriyadi" }] },
-        { name: "Kelompok V", members: [{ id: "2024203020025", name: "Farhan Alfarsiyi" }, { id: "2024203020020", name: "Nesya Zikriya" }, { id: "2024203020029", name: "Muhammad Rais" }] },
-        { name: "Kelompok VI", members: [{ id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020036", name: "Nazar Al Farabi" }] },
+        {
+          name: "Kelompok 1",
+          members: [
+            { id: "2024203020028", name: "Aqil Ocean Difra" },
+            { id: "2024203020011", name: "Durratul Hikmah" },
+            { id: "2024203020009", name: "Firlita Afianti" },
+            { id: "2024203020006", name: "Suheil Maulana" },
+          ],
+        },
+        {
+          name: "Kelompok 2",
+          members: [
+            { id: "2024203020019", name: "Khairul Fajar Sidiq" },
+            { id: "2024203020029", name: "Muhammad Rais" },
+            { id: "2024203020036", name: "Nazar Alfaraby" },
+            { id: "2024203020016", name: "Renka Laura" },
+          ],
+        },
+        {
+          name: "Kelompok 3",
+          members: [
+            { id: "2024203020001", name: "Ilal Ilhamdi" },
+            { id: "2024203020003", name: "Sarah Fonna" },
+            { id: "2024203020031", name: "Syawal Fitriyadi" },
+            { id: "2024203020025", name: "Farhan Alfarisyi" },
+          ],
+        },
+        {
+          name: "Kelompok 4",
+          members: [
+            { id: "2024203020008", name: "Rahmat Haikal" },
+            { id: "2024203020020", name: "Nesya Zikriya" },
+            { id: "2024203020032", name: "Lunna Auamara" },
+            { id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
+          ],
+        },
       ],
     },
-    "Teknik Gelombang Mikro": {
-      dosen: "Munawar, S.T., M.T.",
+    "Sistem Komunikasi Seluler": {
+      dosen: "Yassir, S.T., M.Eng.Sc.",
       groups: [
-        { name: "Kelompok I", members: [{ id: "2024203020019", name: "Khairul Fajar Sidiq" }, { id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020006", name: "Suheil Maulana" }, { id: "2024203020025", name: "Farhan Alfarsiyi" }] },
-        { name: "Kelompok II", members: [{ id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020001", name: "Ilal Ilhamdi" }, { id: "2024203020029", name: "Muhammad Rais" }, { id: "2024203020011", name: "Durratul Hikmah" }] },
-        { name: "Kelompok III", members: [{ id: "2024203020013", name: "Afriansyah Sinamo" }, { id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020031", name: "Syawal Fitriyadi" }, { id: "2024203020022", name: "Muhammad Halfi Al Barizi" }] },
-        { name: "Kelompok IV", members: [{ id: "2024203020036", name: "Nazar Al Farabi" }, { id: "2024203020009", name: "Firlita Afianti" }, { id: "2024203020008", name: "Rahmat Haikal" }] },
-        { name: "Kelompok V", members: [{ id: "2024203020020", name: "Nesya Zikriya" }, { id: "2024203020016", name: "Renka Laura" }] },
+        {
+          name: "Kelompok 1",
+          members: [
+            { id: "2024203020008", name: "Rahmat Haikal" },
+            { id: "2024203020020", name: "Nesya Zikriya" },
+            { id: "2024203020003", name: "Sarah Fonna" },
+            { id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
+          ],
+        },
+        {
+          name: "Kelompok 2",
+          members: [
+            { id: "2024203020001", name: "Ilal Ilhamdi" },
+            { id: "2024203020016", name: "Renka Laura" },
+            { id: "2024203020031", name: "Syawal Fitriyadi" },
+            { id: "2024203020029", name: "Muhammad Rais" },
+          ],
+        },
+        {
+          name: "Kelompok 3",
+          members: [
+            { id: "2024203020028", name: "Aqil Ocean Difra" },
+            { id: "2024203020009", name: "Firlita Afianti" },
+            { id: "2024203020036", name: "Nazar Alfaraby" },
+            { id: "2024203020032", name: "Lunna Auamara" },
+          ],
+        },
+        {
+          name: "Kelompok 4",
+          members: [
+            { id: "2024203020019", name: "Khairul Fajar Sidiq" },
+            { id: "2024203020006", name: "Suheil Maulana" },
+            { id: "2024203020011", name: "Durratul Hikmah" },
+            { id: "2024203020025", name: "Farhan Alfarisyi" },
+          ],
+        },
       ],
     },
   },
   piket: [
-    { name: "Kelompok 1", members: [{ id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020016", name: "Renka Laura" }, { id: "2024203020009", name: "Firlita Afianti" }, { id: "2024203020013", name: "Afriansyah Sinamo" }] },
+    { name: "Kelompok 1", members: [{ id: "2024203020028", name: "Aqil Ocean Difra" }, { id: "2024203020016", name: "Renka Laura" }, { id: "2024203020009", name: "Firlita Afianti" }] },
     { name: "Kelompok 2", members: [{ id: "2024203020032", name: "Lunna Auamara" }, { id: "2024203020036", name: "Nazar Al Farabi" }, { id: "2024203020008", name: "Rahmat Haikal" }, { id: "2024203020022", name: "Muhammad Halfi Al Barizi" }] },
     { name: "Kelompok 3", members: [{ id: "2024203020031", name: "Syawal Fitriyadi" }, { id: "2024203020003", name: "Sarah Fonna" }, { id: "2024203020029", name: "Muhammad Rais" }] },
     { name: "Kelompok 4", members: [{ id: "2024203020020", name: "Nesya Zikriya" }, { id: "2024203020025", name: "Farhan Alfarsiyi" }, { id: "2024203020001", name: "Ilal Ilhamdi" }] },
     { name: "Kelompok 5", members: [{ id: "2024203020011", name: "Durratul Hikmah" }, { id: "2024203020006", name: "Suheil Maulana" }, { id: "2024203020019", name: "Khairul Fajar Sidiq" }] },
   ],
   mahasiswa: [
-    { no: 1, id: "2024203020013", name: "Afriansyah Sinamo" },
-    { no: 2, id: "2024203020028", name: "Aqil Ocean Difra" },
-    { no: 3, id: "2024203020011", name: "Durratul Hikmah" },
-    { no: 4, id: "2024203020025", name: "Farhan Alfarsiyi" },
-    { no: 5, id: "2024203020009", name: "Firlita Afianti" },
-    { no: 6, id: "2024203020001", name: "Ilal Ilhamdi" },
-    { no: 7, id: "2024203020019", name: "Khairul Fajar Sidiq" },
-    { no: 8, id: "2024203020032", name: "Lunna Auamara" },
-    { no: 9, id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
-    { no: 10, id: "2024203020029", name: "Muhammad Rais" },
-    { no: 11, id: "2024203020036", name: "Nazar Al Farabi" },
-    { no: 12, id: "2024203020020", name: "Nesya Zikriya" },
-    { no: 13, id: "2024203020008", name: "Rahmat Haikal" },
-    { no: 14, id: "2024203020016", name: "Renka Laura" },
-    { no: 15, id: "2024203020003", name: "Sarah Fonna" },
-    { no: 16, id: "2024203020006", name: "Suheil Maulana" },
-    { no: 17, id: "2024203020031", name: "Syawal Fitriyadi" },
+    { no: 1, id: "2024203020028", name: "Aqil Ocean Difra" },
+    { no: 2, id: "2024203020011", name: "Durratul Hikmah" },
+    { no: 3, id: "2024203020025", name: "Farhan Alfarsiyi" },
+    { no: 4, id: "2024203020009", name: "Firlita Afianti" },
+    { no: 5, id: "2024203020001", name: "Ilal Ilhamdi" },
+    { no: 6, id: "2024203020019", name: "Khairul Fajar Sidiq" },
+    { no: 7, id: "2024203020032", name: "Lunna Auamara" },
+    { no: 8, id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
+    { no: 9, id: "2024203020029", name: "Muhammad Rais" },
+    { no: 10, id: "2024203020036", name: "Nazar Al Farabi" },
+    { no: 11, id: "2024203020020", name: "Nesya Zikriya" },
+    { no: 12, id: "2024203020008", name: "Rahmat Haikal" },
+    { no: 13, id: "2024203020016", name: "Renka Laura" },
+    { no: 14, id: "2024203020003", name: "Sarah Fonna" },
+    { no: 15, id: "2024203020006", name: "Suheil Maulana" },
+    { no: 16, id: "2024203020031", name: "Syawal Fitriyadi" },
   ],
   dosen: [
     { no: 1, nip: "198005102005011002", nama: "Ipan Suandi, S.T., M.T.", mks: ["Prakt. Antena dan Propagasi", "Antena dan Propagasi"] },
@@ -514,7 +606,7 @@ function TabDaftar({ onToast }) {
       <div className="export-bar">
         <div className="export-bar-left">
           <h2>Daftar Mahasiswa</h2>
-          <span className="export-sub">17 Mahasiswa Aktif Kelas TRJT 3A</span>
+          <span className="export-sub">{DATA.mahasiswa.length} Mahasiswa Aktif Kelas TRJT 3A</span>
         </div>
         <div className="export-bar-right">
           <button className="btn-export csv" onClick={handleExportCSV}>
