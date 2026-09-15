@@ -938,30 +938,4 @@ tr:last-child td { border-bottom: none; }
     transform: scale(0.94);
 }
 
-.ptr-indicator {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -50px;
-    width: 42px;
-    height: 42px;
-    background: var(--nav-glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 50%;
-    box-shadow: var(--glass-shadow);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--primary);
-    z-index: 100;
-    transition: top 0s;
-}
-.ptr-indicator.pulling { transition: top 0s; }
-.ptr-indicator.ready i { color: var(--success); }
-.ptr-indicator.loading { transition: top 0.3s ease; }
-.ptr-indicator.loading i { animation: spin 1s linear infinite; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
