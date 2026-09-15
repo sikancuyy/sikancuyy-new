@@ -2,15 +2,18 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>TRJT 3A · Portal Roster & Akademik 2026/2027</title>
     <meta name="description" content="Roster jadwal kuliah, kelompok praktikum, piket, dan data dosen kelas TRJT 3A Semester Ganjil 2026/2027" />
     
-    <!-- Claymorphic 3D Typography & Icons -->
+    <!-- Mobile App Template Libraries & Fonts -->
+    <link rel="preload" href="basic/font/open-sans/OpenSans-Regular.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="basic/font/open-sans/OpenSans-Bold.ttf" as="font" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="manifest" href="manifest.json">
@@ -447,12 +450,17 @@ function buildDays() {
 function renderJadwal() {
   const data = jadwal[DK[AD]] || [];
   const isTod = AD===TOD && TOD>=0;
-  document.getElementById('dname').innerHTML = `<span>${DN[AD]}</span> <span style="font-size:12px;color:var(--text-sub);font-weight:600">${data.length} Mata Kuliah</span>`;
+  document.getElementById('dname').innerHTML = `<span>${DN[AD]}</span> <span class="dname-badge">${data.length} Mata Kuliah</span>`;
   const rows = document.getElementById('rows'); 
   rows.innerHTML = '';
   
   if (!data.length) {
-    rows.innerHTML = '<div class="empty-row"><i class="fas fa-calendar-xmark" style="font-size:24px;margin-bottom:8px;display:block"></i>Tidak ada jadwal perkuliahan hari ini.</div>'; 
+    rows.innerHTML = `
+      <div class="empty-row">
+        <i class="fas fa-calendar-xmark"></i>
+        <div class="empty-title">Tidak ada jadwal kuliah</div>
+        <div class="empty-desc">Tidak ada kegiatan perkuliahan yang terjadwal untuk hari ini.</div>
+      </div>`; 
     return;
   }
   
