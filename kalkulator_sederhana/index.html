@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator - SikanCuyy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../favicon/05_kalkulator.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="container">
+    <a href="../index.html" class="back-btn" title="Kembali ke Beranda">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <header>
+        <div class="logo-badge"><span></span> Tools</div>
+        <h1>Aneka <span class="accent">Kalkulator</span></h1>
+        <p class="subtitle">Perhitungan praktis untuk berbagai kebutuhan</p>
+        <div class="divider"></div>
+    </header>
+
+    <div class="menu-grid">
+        <a href="konversi_jaringan/index.html" class="menu-item">
+            <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;"><i class="fas fa-network-wired"></i></div>
+            <div class="text-group">
+                <div class="label">Konversi Mbps</div>
+                <div class="label-sub">Hitung bandwidth</div>
+            </div>
+        </a>
+
+        <a href="kalkulator_pajak/index.html" class="menu-item">
+            <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #047857); color: white;"><i class="fas fa-calculator"></i></div>
+            <div class="text-group">
+                <div class="label">Hitung Pajak</div>
+                <div class="label-sub">Pajak belanja</div>
+            </div>
+        </a>
+
+        <a href="kalkulator_indihome/index.html" class="menu-item">
+            <div class="icon-wrapper" style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: white;"><i class="fas fa-wifi"></i></div>
+            <div class="text-group">
+                <div class="label">Kalkulator Indihome</div>
+                <div class="label-sub">Harga paket</div>
+            </div>
+        </a>
+    </div>
+
+    <footer style="margin-top: 40px; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.7;">
+        &copy; 2025 Rahmat Haikal · SikanCuyy
+    </footer>
+</div>
+
+<button class="dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">
+    <i class="fas fa-moon" id="toggleIcon"></i>
+</button>
+
+<script>
+    const body = document.body;
+    const icon = document.getElementById('toggleIcon');
+
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark');
+        if (icon) icon.className = 'fas fa-sun';
+    }
+
+    function toggleDark() {
+        body.classList.toggle('dark');
+        const isDark = body.classList.contains('dark');
+        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+</script>
+</body>
+</html>

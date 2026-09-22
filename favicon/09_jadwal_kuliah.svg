@@ -1,0 +1,19 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="40" fill="#FFF0F0"/>
+  <!-- Calendar body -->
+  <rect x="42" y="58" width="116" height="105" rx="12" fill="#FF5C5C"/>
+  <!-- Header -->
+  <rect x="42" y="58" width="116" height="35" rx="12" fill="#FF3838"/>
+  <rect x="42" y="80" width="116" height="13" fill="#FF3838"/>
+  <!-- Hook left -->
+  <rect x="65" y="46" width="10" height="24" rx="5" fill="#FF3838"/>
+  <!-- Hook right -->
+  <rect x="125" y="46" width="10" height="24" rx="5" fill="#FF3838"/>
+  <!-- Grid dots -->
+  <circle cx="68" cy="112" r="6" fill="white"/>
+  <circle cx="100" cy="112" r="6" fill="white"/>
+  <circle cx="132" cy="112" r="6" fill="white"/>
+  <circle cx="68" cy="136" r="6" fill="white"/>
+  <circle cx="100" cy="136" r="6" fill="white"/>
+  <circle cx="132" cy="136" r="6" fill="white"/>
+</svg>

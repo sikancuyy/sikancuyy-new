@@ -1,0 +1,93 @@
+/* style.css */
+
+/* Pengaturan dasar untuk body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Warna latar belakang yang lembut */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 300px; /* Lebar sidebar */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    height: 100vh; /* Tinggi penuh layar */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar-header .nama {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.sidebar-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: #555;
+    padding: 0;
+}
+
+.sidebar-nav {
+    flex-grow: 1; /* Agar nav mengisi sisa ruang yang ada */
+    padding-top: 20px;
+}
+
+.sidebar-nav ul {
+    list-style: none; /* Menghilangkan bullet point */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 15px; /* Jarak antar item menu */
+    text-align: center;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    color: #555;
+    font-size: 1.1em;
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    color: #000;
+}
+
+.sidebar-nav li.active a {
+    font-weight: bold;
+    color: #000;
+    position: relative;
+}
+
+.sidebar-nav li.active a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Jarak dari teks */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px; /* Lebar garis */
+    height: 3px;
+    background-color: #007bff; /* Warna garis biru */
+    border-radius: 2px;
+}

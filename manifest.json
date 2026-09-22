@@ -1,0 +1,22 @@
+{
+  "name": "SikanCuyy",
+  "short_name": "SikanCuyy",
+  "start_url": "https://sikancuyy.netlify.app/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "icons": [
+    {
+      "src": "fav.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "fav.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

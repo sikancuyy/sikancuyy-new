@@ -1,0 +1,995 @@
+/* General Styling */
+:root {
+    /* Light Mode Colors */
+    --light-bg: #f8f8f8;
+    --light-text: #333;
+    --light-accent: #007bff; /* Biru terang */
+    --light-accent-rgb: 0, 123, 255; /* RGB dari #007bff */
+    --light-secondary-bg: #ececec;
+    --light-border: #ddd;
+    --light-btn-secondary-bg: #6c757d; /* Warna abu-abu untuk tombol sekunder */
+    --light-btn-secondary-text: #fff;
+
+    /* Dark Mode Colors */
+    --dark-bg: #1a1a2e;
+    --dark-text: #e0e0e0;
+    --dark-accent: #64ffda; /* Teal color for dark mode */
+    --dark-accent-rgb: 100, 255, 218; /* RGB dari #64ffda */
+    --dark-secondary-bg: #2d2d4e;
+    --dark-border: #444;
+    --dark-btn-secondary-bg: #495057; /* Warna abu-abu gelap untuk dark mode */
+    --dark-btn-secondary-text: #e0e0e0;
+
+    /* General Variables */
+    --navbar-height: 70px;
+    --transition-speed: 0.3s ease;
+    --border-radius-main: 8px; /* Menambahkan ini untuk konsistensi */
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08); /* Tambahan untuk kartu dan elemen lain */
+    --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* --- Dark Mode Toggle Button Styling --- */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--light-accent); /* Default light mode color */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: var(--shadow-light); /* Default light mode shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow var(--transition-speed);
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+    transform: scale(1.05);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background-color: var(--dark-accent); /* Dark mode color */
+    color: var(--dark-bg); /* Text color for dark mode button */
+    box-shadow: var(--shadow-dark); /* Dark mode shadow */
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background-color: #4fe1bd; /* Slightly darker teal for hover */
+}
+
+
+/* --- Light Mode (Default) --- */
+body.light-mode {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+body.light-mode .header,
+body.light-mode .navbar {
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .nav-link {
+    color: var(--light-text);
+}
+
+body.light-mode .nav-link:hover,
+body.light-mode .nav-link.active {
+    color: var(--light-accent);
+}
+
+body.light-mode .alt-background {
+    background-color: var(--light-secondary-bg);
+}
+
+body.light-mode .timeline-item,
+body.light-mode .education-item,
+body.light-mode .card { /* Tambahkan .card ke light-mode */
+    border-color: var(--light-border);
+    background-color: var(--light-bg); /* Pastikan kartu menggunakan bg light */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .theme-toggle { /* Jika tombol toggle di dalam navbar */
+    color: var(--light-text);
+    background: none;
+    border: 1px solid var(--light-text);
+}
+body.light-mode .theme-toggle:hover {
+    background-color: var(--light-secondary-bg);
+}
+
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode .header,
+body.dark-mode .navbar {
+    background-color: var(--dark-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .navbar.scrolled {
+    background-color: rgba(26, 26, 46, 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .nav-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .alt-background {
+    background-color: var(--dark-secondary-bg);
+}
+
+body.dark-mode .timeline-item,
+body.dark-mode .education-item,
+body.dark-mode .card { /* Tambahkan .card ke dark-mode */
+    background-color: var(--dark-secondary-bg);
+    border-color: var(--dark-border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .theme-toggle { /* Jika tombol toggle di dalam navbar */
+    color: var(--dark-text);
+    background: none;
+    border: 1px solid var(--dark-text);
+}
+
+body.dark-mode .theme-toggle:hover {
+    background-color: var(--dark-secondary-bg);
+}
+
+/* --- Utility Classes --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--light-accent);
+    transition: background-color var(--transition-speed);
+}
+
+body.dark-mode .section-title::after {
+    background-color: var(--dark-accent);
+}
+
+/* --- Button Styling --- */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform 0.2s ease, color var(--transition-speed), border-color var(--transition-speed);
+    margin: 10px;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Primary Button (default filled button) */
+body.light-mode .btn:not(.btn-secondary):not(.btn-outline-accent) {
+    background-color: var(--light-accent);
+    color: #fff;
+}
+body.light-mode .btn:not(.btn-secondary):not(.btn-outline-accent):hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .btn:not(.btn-secondary):not(.btn-outline-accent) {
+    background-color: var(--dark-accent);
+    color: var(--dark-bg);
+}
+body.dark-mode .btn:not(.btn-secondary):not(.btn-outline-accent):hover {
+    background-color: #4fe1bd;
+}
+
+/* Outline/Ghost Button (for "Selengkapnya") */
+.btn-outline-accent {
+    background-color: transparent;
+    border: 1px solid;
+}
+
+body.light-mode .btn-outline-accent {
+    border-color: var(--light-accent);
+    color: var(--light-accent);
+}
+
+body.light-mode .btn-outline-accent:hover {
+    background-color: rgba(var(--light-accent-rgb), 0.1);
+    color: var(--light-accent);
+}
+
+body.dark-mode .btn-outline-accent {
+    border-color: var(--dark-accent);
+    color: var(--dark-accent);
+}
+
+body.dark-mode .btn-outline-accent:hover {
+    background-color: rgba(var(--dark-accent-rgb), 0.1);
+    color: var(--dark-accent);
+}
+
+/* Secondary Button (for "Unduh CV") */
+.btn-secondary {
+    border: 1px solid;
+}
+
+body.light-mode .btn-secondary {
+    background-color: var(--light-btn-secondary-bg);
+    color: var(--light-btn-secondary-text);
+    border-color: var(--light-btn-secondary-bg);
+}
+
+body.light-mode .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: var(--dark-btn-secondary-bg);
+    color: var(--dark-btn-secondary-text);
+    border-color: var(--dark-btn-secondary-bg);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: #3e4449;
+    border-color: #3e4449;
+}
+
+.btn-secondary i {
+    margin-right: 8px;
+}
+
+/* --- Header & Navbar --- */
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    height: var(--navbar-height);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.nav-logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--light-text);
+    transition: color var(--transition-speed);
+}
+
+body.dark-mode .nav-logo {
+    color: var(--dark-text);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 30px;
+}
+
+/* Perbaikan untuk tema toggle di desktop, pastikan tidak ada margin kiri yang aneh */
+.nav-menu .nav-item:last-child {
+    margin-left: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 5px 0;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--light-accent);
+    bottom: -5px;
+    left: 0;
+    transition: width var(--transition-speed);
+}
+
+body.dark-mode .nav-link::after {
+    background-color: var(--dark-accent);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+}
+
+.hamburger .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--light-text);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+body.dark-mode .hamburger .bar {
+    background-color: var(--dark-text);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Theme Toggle Button (Jika di dalam nav-menu, bukan floating) */
+.theme-toggle {
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--navbar-height);
+}
+
+.hero-content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* --- Profile Photo Styling --- */
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+    border: 4px solid var(--light-accent); /* Border default untuk light mode */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease; /* Tambahkan transform untuk hover */
+}
+
+body.dark-mode .profile-photo {
+    border-color: var(--dark-accent); /* Border untuk dark mode */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+}
+
+/* --- About Section --- */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+/* --- Experience (Timeline) Section --- */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    display: none; /* Sembunyikan garis tengah */
+}
+body.dark-mode .timeline::before {
+    display: none;
+}
+
+.timeline-item {
+    padding: 20px;
+    position: relative;
+    border-radius: var(--border-radius-main); /* Menggunakan variabel baru */
+    margin-bottom: 20px;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.timeline-item::after {
+    display: none;
+}
+
+.timeline-item h3 {
+    margin-bottom: 5px;
+    color: var(--light-accent);
+    transition: color var(--transition-speed);
+}
+
+body.dark-mode .timeline-item h3 {
+    color: var(--dark-accent);
+}
+
+.timeline-item .date {
+    font-style: italic;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.timeline-item ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.timeline-item li {
+    margin-bottom: 5px;
+}
+
+/* --- Education Section --- */
+.education-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.education-item {
+    border-radius: var(--border-radius-main); /* Menggunakan variabel baru */
+    padding: 30px;
+    flex: 1 1 calc(50% - 60px);
+    max-width: 500px;
+    text-align: left;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.education-item h3 {
+    margin-bottom: 10px;
+    color: var(--light-accent);
+    transition: color var(--transition-speed);
+}
+
+body.dark-mode .education-item h3 {
+    color: var(--dark-accent);
+}
+
+.education-item p {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.education-item ul {
+    list-style: inside disc;
+    padding-left: 20px;
+}
+
+/* --- Contact Section --- */
+.contact-intro {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.contact-info a {
+    color: var(--light-accent);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+body.dark-mode .contact-info a {
+    color: var(--dark-accent);
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--light-accent);
+    transition: color var(--transition-speed);
+}
+
+body.dark-mode .contact-info i {
+    color: var(--dark-accent);
+}
+
+.contact-info .btn-secondary {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.signature {
+    margin-top: 40px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--light-border);
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+}
+
+body.light-mode .footer {
+    background-color: var(--light-secondary-bg);
+    color: var(--light-text);
+    border-color: var(--light-border);
+}
+
+body.dark-mode .footer {
+    background-color: var(--dark-secondary-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+
+/* --- Animations --- */
+@keyframes fadeInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInFromBottom 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-fade-in-up.delay-1 { animation-delay: 0.2s; }
+.animate-fade-in-up.delay-2 { animation-delay: 0.4s; }
+
+.animate-slide-in-right {
+    opacity: 0;
+    animation: slideInRight 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-slide-in-left {
+    opacity: 0;
+    animation: slideInLeft 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Initially hidden elements for scroll-based animation */
+.section-title,
+.about-content p,
+.timeline-item,
+.education-item,
+.contact-intro,
+.contact-info,
+.signature {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section-title.fade-in,
+.about-content p.fade-in,
+.timeline-item.fade-in,
+.education-item.fade-in,
+.contact-intro.fade-in,
+.contact-info.fade-in,
+.signature.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        height: var(--navbar-height);
+        padding: 15px 20px;
+        align-items: center;
+    }
+
+    .nav-logo {
+        margin-bottom: 0;
+    }
+
+    .nav-menu {
+        position: fixed;
+        right: -100%;
+        top: var(--navbar-height);
+        flex-direction: column;
+        background-color: var(--light-bg);
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        align-items: center;
+    }
+
+    body.dark-mode .nav-menu {
+        background-color: var(--dark-bg);
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-item {
+        margin: 20px 0;
+        width: auto;
+    }
+
+    .nav-menu .nav-item:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-link {
+        display: inline-block;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+    }
+
+    .section-title {
+        font-size: 2em;
+    }
+
+    .timeline-item {
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        text-align: center;
+        transform: none !important;
+    }
+
+    .education-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn {
+        width: 80%;
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+
+/* --- Card Styling (from previous dashboard example, adapted to new variables) --- */
+/* This section assumes you're still using the card structure for your dashboard */
+.dashboard-container {
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--light-bg); /* Default light mode background */
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--shadow-light);
+    padding: 30px;
+    box-sizing: border-box;
+    margin: 20px auto; /* Added margin for better positioning */
+}
+
+body.dark-mode .dashboard-container {
+    background-color: var(--dark-secondary-bg); /* Dark mode background for dashboard container */
+    box-shadow: var(--shadow-dark);
+}
+
+.dashboard-container header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-border);
+}
+
+body.dark-mode .dashboard-container header {
+    border-color: var(--dark-border);
+}
+
+.dashboard-container header h1 {
+    color: var(--light-accent); /* Default light mode color */
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 2.5em;
+}
+
+body.dark-mode .dashboard-container header h1 {
+    color: var(--dark-accent); /* Dark mode color */
+}
+
+.dashboard-container header p {
+    color: var(--light-text); /* Default light mode color */
+    font-size: 1.1em;
+}
+
+body.dark-mode .dashboard-container header p {
+    color: var(--dark-text); /* Dark mode color */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--light-secondary-bg); /* Use secondary background for cards */
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+    border: 1px solid var(--light-border);
+}
+
+body.dark-mode .card {
+    background-color: var(--dark-secondary-bg);
+    border-color: var(--dark-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-light); /* Apply consistent shadow hover */
+}
+
+body.dark-mode .card:hover {
+    box-shadow: var(--shadow-dark); /* Apply consistent dark mode shadow hover */
+}
+
+
+.card h2 {
+    color: var(--light-accent); /* Default light mode color */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+body.dark-mode .card h2 {
+    color: var(--dark-accent); /* Dark mode color */
+}
+
+.card p {
+    font-size: 0.95em;
+    color: var(--light-text); /* Default light mode color */
+    margin-bottom: 20px;
+}
+
+body.dark-mode .card p {
+    color: var(--dark-text); /* Dark mode color */
+}
+
+.card .button { /* Styling untuk tombol di dalam card */
+    display: inline-block;
+    background-color: var(--light-accent); /* Default light mode color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+body.dark-mode .card .button {
+    background-color: var(--dark-accent); /* Dark mode color */
+    color: var(--dark-bg); /* Text color for dark mode button */
+}
+
+.card .button:hover {
+    background-color: #0056b3; /* Darker blue for light mode hover */
+    transform: translateY(-1px);
+}
+
+body.dark-mode .card .button:hover {
+    background-color: #4fe1bd; /* Slightly darker teal for dark mode hover */
+}
+
+.dashboard-container footer { /* Footer khusus untuk dashboard container, jika terpisah dari footer utama */
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--light-border);
+    color: var(--light-text);
+    font-size: 0.9em;
+}
+
+body.dark-mode .dashboard-container footer {
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}

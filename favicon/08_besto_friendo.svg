@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="40" fill="#EAF3FF"/>
+  <!-- Handshake -->
+  <!-- Left hand -->
+  <path d="M45 115 L75 90 L90 95 L110 80 L130 88 L155 115 L130 130 L110 118 L90 130 L70 120 Z" fill="#3A86FF" opacity="0.85"/>
+  <!-- Fingers top left -->
+  <path d="M75 90 L68 72 L76 70 L82 88" fill="#3A86FF"/>
+  <path d="M82 88 L78 68 L86 66 L90 86" fill="#3A86FF"/>
+  <path d="M90 86 L88 66 L97 66 L97 85" fill="#3A86FF"/>
+  <!-- Fingers top right -->
+  <path d="M130 88 L135 70 L127 68 L122 87" fill="#3A86FF"/>
+  <path d="M122 87 L124 67 L116 67 L115 86" fill="#3A86FF"/>
+  <path d="M115 86 L113 67 L105 68 L107 86" fill="#3A86FF"/>
+</svg>

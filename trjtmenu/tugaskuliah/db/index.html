@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Tugas Bulan Ini</title>
+
+  <!-- Font: DM Sans (same as form) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome (same as form) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    /* ================================================================
+       CSS VARIABLES — mirrored from style.css
+       ================================================================ */
+    :root {
+      --teal-100: #ccfbf1;
+      --teal-400: #2dd4bf;
+      --teal-500: #0d9488;
+      --teal-600: #0f766e;
+      --teal-700: #115e59;
+
+      --gray-50:  #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+
+      --surface-bg:    #f4f5f7;
+      --surface-card:  #ffffff;
+      --surface-input: #f9fafb;
+
+      --text-heading: var(--gray-900);
+      --text-body:    var(--gray-700);
+      --text-muted:   var(--gray-400);
+      --text-label:   var(--gray-600);
+
+      --border:       var(--gray-200);
+
+      --r-sm:   6px;
+      --r-md:   8px;
+      --r-lg:   12px;
+      --r-full: 9999px;
+
+      --sp-1: 0.25rem;
+      --sp-2: 0.5rem;
+      --sp-3: 0.75rem;
+      --sp-4: 1rem;
+      --sp-5: 1.25rem;
+      --sp-6: 1.5rem;
+      --sp-8: 2rem;
+
+      --t-fast: 0.15s ease;
+    }
+
+    /* ================================================================
+       RESET & BASE
+       ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--surface-bg);
+      color: var(--text-body);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 2.5rem 1rem 4rem;
+    }
+
+    @media (min-width: 768px) {
+      body { padding: 3rem 1.5rem; }
+    }
+
+    /* ================================================================
+       CARD
+       ================================================================ */
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    /* ================================================================
+       CARD HEADER
+       ================================================================ */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      padding: var(--sp-6) var(--sp-8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+
+    .brand-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--teal-500);
+      border-radius: var(--r-md);
+      color: #fff;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .header-text .subtitle {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Buttons ── */
+    .header-actions {
+      display: flex;
+      gap: var(--sp-2);
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: 0.5rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+      border: 1px solid transparent;
+      line-height: 1;
+    }
+
+    .btn-primary {
+      background: var(--teal-500);
+      color: #fff;
+      border-color: var(--teal-500);
+    }
+    .btn-primary:hover  { background: var(--teal-600); border-color: var(--teal-600); }
+    .btn-primary:active { background: var(--teal-700); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal-600);
+      border-color: var(--teal-400);
+    }
+    .btn-outline:hover {
+      background: var(--teal-500);
+      color: #fff;
+      border-color: var(--teal-500);
+    }
+
+    /* ================================================================
+       TABLE
+       ================================================================ */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background: var(--surface-input);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      padding: 0.625rem 1rem;
+      text-align: left;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--text-label);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background var(--t-fast);
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover      { background: var(--gray-50); }
+
+    td {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-body);
+      vertical-align: top;
+    }
+
+    td.col-date {
+      white-space: nowrap;
+      color: var(--gray-600);
+      font-size: 0.8125rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--teal-100);
+      color: var(--teal-700);
+      border-radius: var(--r-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    td.col-mk {
+      font-weight: 500;
+      white-space: nowrap;
+      color: var(--gray-700);
+    }
+
+    td.col-tugas {
+      max-width: 360px;
+      line-height: 1.55;
+    }
+
+    /* Empty / loading / error state */
+    .state-row td {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .state-icon {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-2);
+      color: var(--gray-300);
+    }
+
+    /* ================================================================
+       CARD FOOTER
+       ================================================================ */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-3) var(--sp-8);
+      background: var(--surface-input);
+      border-top: 1px solid var(--border);
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+    }
+
+    .footer-info {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .footer-info strong {
+      color: var(--text-body);
+      font-weight: 600;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--teal-600);
+      text-decoration: none;
+      transition: color var(--t-fast);
+    }
+    .back-link:hover { color: var(--teal-500); }
+
+    /* ================================================================
+       SCROLLBAR
+       ================================================================ */
+    ::-webkit-scrollbar        { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track  { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb  { background: var(--gray-300); border-radius: var(--r-full); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+    /* ================================================================
+       ACCESSIBILITY
+       ================================================================ */
+    :focus-visible {
+      outline: 2px solid var(--teal-500);
+      outline-offset: 2px;
+      border-radius: var(--r-sm);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media (max-width: 575px) {
+      .card-header  { padding: var(--sp-5); }
+      .card-footer  { padding: var(--sp-3) var(--sp-5); }
+      .btn span     { display: none; }
+      .btn          { padding: 0.5rem 0.625rem; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #ddd; border-radius: 0; max-width: 100%; }
+      .header-actions, .card-footer { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="header-left">
+        <div class="brand-icon">
+          <i class="fa-solid fa-table-list"></i>
+        </div>
+        <div class="header-text">
+          <h1>Daftar Tugas &mdash; <span id="month-label">…</span></h1>
+          <div class="subtitle" id="info">Memuat data…</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline" id="refresh">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Refresh</span>
+        </button>
+        
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table id="tasks-table" aria-live="polite">
+        <thead>
+          <tr>
+            <th>Diberikan</th>
+            <th>Dikumpulkan</th>
+            <th>Pertemuan</th>
+            <th>Mata Kuliah</th>
+            <th>Tugas</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr class="state-row">
+            <td colspan="5">
+              <i class="fa-solid fa-circle-notch fa-spin state-icon"></i>
+              Memuat data…
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <span class="footer-info" id="row-count"></span>
+      <a href="https://sikancuyy.netlify.app/tugaskuliah/" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        Kembali ke Form
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    /* ── Helpers ── */
+    function monthLabel(m, y) {
+      const names = ["Januari","Februari","Maret","April","Mei","Juni",
+                     "Juli","Agustus","September","Oktober","November","Desember"];
+      return `${names[m - 1]} ${y}`;
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return "";
+      return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    function toCSV(rows) {
+      if (!rows || !rows.length) return "";
+      const keys = ["TanggalDiberikan","TanggalDikumpulkan","Pertemuan","MataKuliah","Tugas"];
+      const csv  = [keys.join(",")];
+      rows.forEach(r => {
+        const line = keys.map(k => {
+          let v = r[k] ?? r[k.replace(/([A-Z])/g,' $1').trim()] ?? "";
+          v = String(v).replace(/"/g,'""');
+          return v.includes(",") ? `"${v}"` : v;
+        }).join(",");
+        csv.push(line);
+      });
+      return csv.join("\n");
+    }
+
+    /* ── Render ── */
+    function renderTable(rows) {
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+
+      if (!rows || !rows.length) {
+        tbody.innerHTML = `
+          <tr class="state-row">
+            <td colspan="5">
+              <i class="fa-regular fa-folder-open state-icon"></i>
+              Tidak ada tugas untuk bulan ini.
+            </td>
+          </tr>`;
+        document.getElementById("row-count").innerHTML = "Menampilkan <strong>0</strong> tugas";
+        return;
+      }
+
+      rows.forEach(r => {
+        const tgd   = r.TanggalDiberikan   || r.Diberikan       || r["Tanggal Diberikan"]   || "";
+        const tgk   = r.TanggalDikumpulkan || r.Dikumpulkan     || r["Tanggal Dikumpulkan"] || "";
+        const per   = r.Pertemuan          || r["Pertemuan Ke"] || "";
+        const mk    = r.MataKuliah         || r.MK              || "";
+        const tugas = r.Tugas              || r["Tugas Yang Diberikan"] || "";
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="col-date">${escapeHtml(tgd)}</td>
+          <td class="col-date">${escapeHtml(tgk)}</td>
+          <td><span class="badge">${escapeHtml(per)}</span></td>
+          <td class="col-mk">${escapeHtml(mk)}</td>
+          <td class="col-tugas">${escapeHtml(tugas)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("row-count").innerHTML =
+        `Menampilkan <strong>${rows.length}</strong> tugas`;
+    }
+
+    function showError(msg) {
+      document.getElementById("tbody").innerHTML = `
+        <tr class="state-row">
+          <td colspan="5">
+            <i class="fa-solid fa-triangle-exclamation state-icon" style="color:#fca5a5"></i>
+            ${escapeHtml(msg)}
+          </td>
+        </tr>`;
+      document.getElementById("info").textContent = "Gagal memuat data.";
+    }
+
+    /* ── Load ── */
+    function loadThisMonth() {
+      const now = new Date(), m = now.getMonth() + 1, y = now.getFullYear();
+      document.getElementById("month-label").textContent = monthLabel(m, y);
+      document.getElementById("info").textContent = "Sheet: data_input · filter bulan berjalan";
+      document.getElementById("row-count").textContent  = "";
+      document.getElementById("tbody").innerHTML = `
+        <tr class="state-row">
+          <td colspan="5">
+            <i class="fa-solid fa-circle-notch fa-spin state-icon"></i>
+            Memuat data…
+          </td>
+        </tr>`;
+
+      google.script.run
+        .withSuccessHandler(rows => { window._data = rows || []; renderTable(rows || []); })
+        .withFailureHandler(err  => showError(err?.message ?? String(err)))
+        .fetchData(m, y);
+    }
+
+    /* ── Events ── */
+    document.getElementById("refresh").addEventListener("click", loadThisMonth);
+    document.getElementById("export").addEventListener("click", () => {
+      const csv = toCSV(window._data || []);
+      if (!csv) { alert("Tidak ada data untuk diekspor."); return; }
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url  = URL.createObjectURL(blob);
+      const a    = Object.assign(document.createElement("a"), {
+        href: url, download: `tugas_${new Date().toISOString().slice(0,7)}.csv`
+      });
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    /* ── Init ── */
+    loadThisMonth();
+  </script>
+</body>
+</html>

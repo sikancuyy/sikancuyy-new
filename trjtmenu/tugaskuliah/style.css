@@ -1,0 +1,734 @@
+/* ================================================================
+   TUGAS KULIAH — style.css
+   Theme  : iOS 26 · Liquid Glass · Frosted UI
+   Palette: Dynamic blur · White glass · Blue accent
+   Font   : SF Pro / system-ui
+   ================================================================ */
+
+
+/* ================================================================
+   §1  CSS VARIABLES
+   ================================================================ */
+:root {
+  /* iOS 26 Blue accent */
+  --blue-50:  rgba(0, 122, 255, 0.06);
+  --blue-100: rgba(0, 122, 255, 0.12);
+  --blue-200: rgba(0, 122, 255, 0.22);
+  --blue-400: rgba(0, 122, 255, 0.65);
+  --blue-500: #007AFF;
+  --blue-600: #0066d6;
+  --blue-700: #0055b3;
+
+  /* Neutrals */
+  --gray-50:  rgba(255,255,255,0.55);
+  --gray-100: rgba(255,255,255,0.72);
+  --gray-200: rgba(0,0,0,0.06);
+  --gray-300: rgba(0,0,0,0.10);
+  --gray-400: rgba(0,0,0,0.28);
+  --gray-500: rgba(0,0,0,0.45);
+  --gray-600: rgba(0,0,0,0.62);
+  --gray-700: rgba(0,0,0,0.75);
+  --gray-800: rgba(0,0,0,0.88);
+  --gray-900: rgba(0,0,0,0.95);
+
+  /* Success */
+  --green-500: #34C759;
+  --green-600: #28a547;
+
+  /* Surfaces — Liquid Glass */
+  --surface-bg:    #e8eef8;
+  --surface-card:  rgba(255,255,255,0.68);
+  --surface-input: rgba(255,255,255,0.52);
+  --surface-footer: rgba(255,255,255,0.40);
+
+  /* Glass borders */
+  --border:        rgba(255,255,255,0.80);
+  --border-hover:  rgba(255,255,255,0.95);
+  --border-focus:  #007AFF;
+
+  /* Text */
+  --text-heading:  rgba(0,0,0,0.90);
+  --text-body:     rgba(0,0,0,0.72);
+  --text-muted:    rgba(0,0,0,0.36);
+  --text-label:    rgba(0,0,0,0.52);
+
+  /* Shape — iOS 26 super-ellipse */
+  --r-sm:   10px;
+  --r-md:   13px;
+  --r-lg:   22px;
+  --r-xl:   30px;
+  --r-full: 9999px;
+
+  /* Spacing */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+
+  /* Transitions */
+  --t-fast: 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --t-std:  0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --t-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* ================================================================
+   §2  RESET & BASE
+   ================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--surface-bg);
+  /* iOS 26 wallpaper-style gradient mesh */
+  background-image:
+    radial-gradient(ellipse 70% 55% at 18% 15%, rgba(122, 175, 255, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 60% at 85% 10%, rgba(191, 148, 255, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 60% 85%, rgba(100, 210, 255, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 45% at 10% 80%, rgba(160, 230, 160, 0.22) 0%, transparent 60%);
+  color: var(--text-body);
+  font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.5rem 1rem 4rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+  body {
+    align-items: center;
+    padding: 3rem 1.5rem;
+  }
+}
+
+
+/* ================================================================
+   §3  CONTAINER / CARD — Liquid Glass
+   ================================================================ */
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-card);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 -1px 0 rgba(0,0,0,0.06) inset,
+    0 20px 60px rgba(0,0,0,0.12),
+    0 4px 16px rgba(0,0,0,0.08);
+}
+
+
+/* ================================================================
+   §4  CARD HEADER
+   ================================================================ */
+.card-header {
+  padding: var(--sp-8) var(--sp-8) var(--sp-6);
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  background: rgba(255,255,255,0.30);
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--blue-500);
+  border-radius: var(--r-lg);
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: var(--sp-4);
+  box-shadow:
+    0 4px 14px rgba(0, 122, 255, 0.38),
+    0 1px 0 rgba(255,255,255,0.35) inset;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--sp-1);
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+
+/* ================================================================
+   §5  FORM LAYOUT
+   ================================================================ */
+#task-form {
+  padding: var(--sp-6) var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--sp-5);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.field-row .field-group {
+  margin-bottom: 0;
+}
+
+@media (max-width: 400px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .field-row .field-group {
+    margin-bottom: var(--sp-5);
+  }
+}
+
+
+/* ================================================================
+   §6  LABELS
+   ================================================================ */
+label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.field-icon {
+  font-size: 0.7rem;
+  color: var(--blue-500);
+  flex-shrink: 0;
+}
+
+.char-hint {
+  margin-top: var(--sp-2);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+
+/* ================================================================
+   §7  INPUTS / SELECT / TEXTAREA — Glass fields
+   ================================================================ */
+input[type="date"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.625rem 0.9375rem;
+  background: var(--surface-input);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-bottom-color: rgba(0,0,0,0.08);
+  border-radius: var(--r-md);
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.80) inset;
+}
+
+input[type="date"]:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.62);
+}
+
+input[type="date"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--border-focus);
+  background: rgba(255,255,255,0.78);
+  box-shadow:
+    0 0 0 3.5px rgba(0, 122, 255, 0.18),
+    0 1px 0 rgba(255,255,255,0.90) inset;
+  outline: none;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+/* Date picker icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.35;
+  cursor: pointer;
+  transition: opacity var(--t-fast);
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.70;
+}
+
+/* Select wrapper */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(0,0,0,0.30);
+  pointer-events: none;
+  transition: border-top-color var(--t-fast);
+}
+
+.select-wrapper:focus-within::after {
+  border-top-color: var(--blue-500);
+}
+
+.select-wrapper select {
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+select option {
+  background: #fff;
+  color: rgba(0,0,0,0.85);
+}
+
+/* iOS font-size fix */
+@media (max-width: 575px) {
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+
+/* ================================================================
+   §8  FORMAT RADIO BUTTONS — Glass pills
+   ================================================================ */
+.format-buttons {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.format-buttons input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.format-buttons .format-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 60px;
+  padding: var(--sp-3) var(--sp-2);
+  background: var(--surface-input);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: var(--text-body);
+  transition: all var(--t-std);
+  user-select: none;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.80) inset;
+}
+
+.format-buttons .format-label span {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.format-buttons .format-label:hover {
+  border-color: rgba(0, 122, 255, 0.40);
+  color: var(--blue-500);
+  background: rgba(0, 122, 255, 0.08);
+}
+
+.format-buttons input[type="radio"]:checked + .format-label {
+  background: var(--blue-500);
+  border-color: rgba(255,255,255,0.30);
+  color: #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25) inset,
+    0 3px 10px rgba(0, 122, 255, 0.35);
+  transform: scale(1.02);
+}
+
+
+/* ================================================================
+   §9  SUBMIT BUTTON — iOS 26 pill
+   ================================================================ */
+#submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: 0.8125rem var(--sp-6);
+  margin-top: var(--sp-2);
+  background: var(--blue-500);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-full);
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all var(--t-std);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.28) inset,
+    0 4px 14px rgba(0, 122, 255, 0.38);
+}
+
+#submit:hover {
+  background: var(--blue-600);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.28) inset,
+    0 6px 18px rgba(0, 102, 214, 0.44);
+  transform: translateY(-1px);
+}
+
+#submit:active {
+  background: var(--blue-700);
+  transform: scale(0.98) translateY(0px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.20) inset,
+    0 2px 8px rgba(0, 122, 255, 0.28);
+}
+
+#submit i {
+  font-size: 0.875rem;
+}
+
+
+/* ================================================================
+   §10  CARD FOOTER
+   ================================================================ */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4) var(--sp-8) var(--sp-6);
+  background: var(--surface-footer);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.db-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.5625rem 1.25rem;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--blue-500);
+  border: 1px solid rgba(0, 122, 255, 0.28);
+  border-radius: var(--r-full);
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--t-std);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.80) inset;
+}
+
+.db-button:hover {
+  background: var(--blue-500);
+  color: #fff;
+  border-color: transparent;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.22) inset,
+    0 4px 12px rgba(0, 122, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.db-button:active {
+  background: var(--blue-600);
+  border-color: transparent;
+  transform: scale(0.97);
+}
+
+.db-ext-icon {
+  font-size: 0.65rem;
+  opacity: 0.65;
+}
+
+
+/* ================================================================
+   §11  LOADING OVERLAY
+   ================================================================ */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-std), visibility var(--t-std);
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-content {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  padding: 2rem 2.25rem;
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(255,255,255,0.85);
+  text-align: center;
+  min-width: 200px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.90) inset,
+    0 20px 60px rgba(0,0,0,0.14);
+}
+
+.loading-spinner {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto var(--sp-4);
+}
+
+.spinner-ring {
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid rgba(0,0,0,0.10);
+  border-top-color: var(--blue-500);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.spinner-ring--2 {
+  inset: 8px;
+  border-top-color: rgba(0, 122, 255, 0.42);
+  animation-duration: 0.5s;
+  animation-direction: reverse;
+}
+
+.loading-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+
+.loading-text {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ================================================================
+   §12  SUCCESS POPUP
+   ================================================================ */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--sp-6);
+}
+
+.popup-box {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(40px) saturate(1.9);
+  -webkit-backdrop-filter: blur(40px) saturate(1.9);
+  padding: 2.25rem 1.75rem;
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(255,255,255,0.88);
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+  animation: fadeUp 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.95) inset,
+    0 24px 60px rgba(0,0,0,0.15);
+}
+
+.popup-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(52, 199, 89, 0.14);
+  color: var(--green-500);
+  font-size: 1.625rem;
+  margin-bottom: var(--sp-4);
+}
+
+.popup-box h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-3);
+}
+
+.popup-box p {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: var(--sp-6);
+}
+
+.popup-box button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--green-500);
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.625rem;
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all var(--t-std);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.28) inset,
+    0 4px 12px rgba(52, 199, 89, 0.35);
+}
+
+.popup-box button:hover {
+  background: var(--green-600);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* ================================================================
+   §13  ACCESSIBILITY
+   ================================================================ */
+:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ================================================================
+   §14  SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.04); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.16); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.26); }
+
+
+/* ================================================================
+   §15  PRINT
+   ================================================================ */
+@media print {
+  body { background: white; padding: 0; }
+  .container { border: 1px solid #ddd; max-width: 100%; backdrop-filter: none; }
+  .card-footer,
+  .loading-overlay,
+  .popup-overlay { display: none !important; }
+  #submit { display: none; }
+}

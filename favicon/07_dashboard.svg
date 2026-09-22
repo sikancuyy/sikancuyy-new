@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="40" fill="#E8F8EE"/>
+  <!-- 2x2 grid -->
+  <rect x="52" y="52" width="42" height="42" rx="10" fill="#22C55E"/>
+  <rect x="106" y="52" width="42" height="42" rx="10" fill="#22C55E"/>
+  <rect x="52" y="106" width="42" height="42" rx="10" fill="#22C55E"/>
+  <rect x="106" y="106" width="42" height="42" rx="10" fill="#22C55E"/>
+</svg>

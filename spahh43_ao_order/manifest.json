@@ -1,0 +1,15 @@
+{
+  "name": "SPAHH43 AO",
+  "short_name": "SPAHH43",
+  "start_url": "https://rahmathaikal05.github.io/studyfin/spahh43_ao_order",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "48x48 72x72 96x96 144x144 192x192 256x256",
+      "type": "image/x-icon"
+    }
+  ]
+}
