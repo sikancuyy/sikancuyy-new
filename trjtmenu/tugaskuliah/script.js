@@ -15,6 +15,12 @@ const scriptURL       = 'https://script.google.com/macros/s/AKfycbx5JvuMzCuZKFcG
 const telegramBotToken = '8217981437:AAEXx2Tdv_fMN-QuId4xkBoUQwAZIQpj8XA';
 const telegramChatId   = '@fyi24a_bot';
 
+// --- Konfigurasi WhatsApp SikanBot ---
+const sikanBotUrl = 'https://bot.sikancuyy.my.id/api/send-group'; 
+// (Catatan: jika sedang tes offline tanpa cloudflare, ganti dengan: 'http://localhost:3000/api/send-group')
+const waGroupId   = '120363412565156974@g.us';
+
+
 // --- Referensi textarea & radio ---
 const tugasDiberikan = document.getElementById('TugasDiberikan');
 const formatRadios   = document.querySelectorAll('input[name="text-format"]');
@@ -127,6 +133,34 @@ ${tugasText}
         parse_mode: 'HTML'
       })
     });
+
+    // ── Susun Format Pesan WhatsApp ──
+    const waCaption = `*🔔 TUGAS KULIAH BARU*
+
+📅 *Diberikan*   : ${data['Diberikan']}
+📅 *Dikumpulkan* : ${data['Dikumpulkan']}
+📚 *Pertemuan*   : ${data['Pertemuan']}
+📝 *MK*          : ${data['MK']}
+
+📋 *Deskripsi Tugas:*
+${tugasText}
+
+_Pesan otomatis dari Web Tugas Kuliah_`;
+
+    // ── Kirim ke WhatsApp Grup via SikanBot ──
+    try {
+      await fetch(sikanBotUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          groupId: waGroupId,
+          message: waCaption
+        })
+      });
+      console.log('[WhatsApp] Notifikasi tugas berhasil dikirim ke grup!');
+    } catch (waErr) {
+      console.warn('[WhatsApp Error] Gagal mengirim pesan ke SikanBot:', waErr);
+    }
 
     // ── Sukses ──
     loadingOverlay.classList.remove('active');
