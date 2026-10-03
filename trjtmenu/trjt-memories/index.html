@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Galery TRJT 24 - SikanCuyy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +14,56 @@
     <link rel="stylesheet" href="../../style.css">
     <link rel="shortcut icon" href="../../favicon/08_besto_friendo.svg" type="image/svg+xml">
     <style>
+        /* KUNCI LAYOUT TOTAL: TIDAK BISA DIGESER KE KIRI/KANAN & KUNCI ZOOM */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            position: relative !important;
+            touch-action: pan-y !important; /* HANYA BISA SCROLL VERTIKAL (ATAS-BAWAH), BLOKIR GESER HORIZONTAL */
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
+            overscroll-behavior-x: none !important;
+            scrollbar-width: none !important; /* Hilangkan scrollbar di Firefox, Android, & Chrome */
+            -ms-overflow-style: none !important; /* Hilangkan scrollbar di IE/Edge */
+        }
+
+        /* HILANGKAN SCROLLBAR & GARIS VERTIKAL SEBELAH KANAN LAYAR */
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+            -webkit-appearance: none !important;
+        }
+
+        html::-webkit-scrollbar-track,
+        body::-webkit-scrollbar-track,
+        *::-webkit-scrollbar-track {
+            display: none !important;
+            background: transparent !important;
+        }
+
+        html::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-thumb,
+        *::-webkit-scrollbar-thumb {
+            display: none !important;
+            background: transparent !important;
+        }
+
+        .container {
+            width: 100% !important;
+            max-width: 900px !important;
+            overflow-x: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        img, video, iframe {
+            max-width: 100% !important;
+        }
+
         /* HERO SLIDESHOW BANNER */
         .hero-slider-wrap {
             position: relative;
@@ -49,6 +99,84 @@
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
+        }
+
+        /* Cegah icon gambar rusak / alt text muncul sebelum foto dimuat */
+        .hero-slide-img[src=""],
+        .hero-slide-img:not([src]) {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        /* Hero Loading Skeleton & Transition */
+        .hero-slider-wrap.skeleton .hero-overlay,
+        .hero-slider-wrap.skeleton .hero-arrow-btn,
+        .hero-slider-wrap.skeleton .hero-progress-track,
+        .hero-slider-wrap.skeleton .hero-dots {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        .hero-overlay,
+        .hero-arrow-btn,
+        .hero-progress-track,
+        .hero-dots {
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-skeleton-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            z-index: 4;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .hero-skeleton-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 9px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-md);
+            color: var(--text-primary);
+            font-size: 0.86rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-skeleton-badge .spinner {
+            width: 1.35rem;
+            height: 1.35rem;
+            border-width: 2px;
+            border-top-color: var(--accent);
+            border-left-color: var(--accent);
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        body.dark .hero-skeleton-badge {
+            background: rgba(15, 23, 42, 0.88);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
+        }
+
+        body.dark .hero-skeleton-badge .spinner {
+            border-top-color: #818cf8;
+            border-left-color: #818cf8;
+        }
+
+        .hero-slider-wrap:not(.skeleton) .hero-skeleton-center {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Hero Progress Bar */
@@ -453,6 +581,20 @@
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
         }
 
+        .lb-btn-original {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.45);
+            color: #ffffff;
+        }
+
+        .lb-btn-original:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(99, 102, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
         .lb-btn-close {
             width: 38px;
             padding: 0;
@@ -515,6 +657,21 @@
         .lb-nav-btn.next { right: 20px; }
 
         @media (max-width: 600px) {
+            .lightbox-toolbar {
+                padding: 12px 14px;
+            }
+            .lb-actions {
+                gap: 6px;
+            }
+            .lb-btn {
+                height: 36px;
+                padding: 0 10px;
+                font-size: 0.85rem;
+            }
+            .lb-btn-close {
+                width: 36px;
+                padding: 0;
+            }
             .lb-nav-btn {
                 width: 38px;
                 height: 38px;
@@ -591,6 +748,7 @@
         }
 
         /* TOOLBAR & FILTER CARD */
+        /* TOOLBAR & FILTER CARD */
         .gallery-toolbar-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -600,9 +758,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
             box-shadow: var(--shadow-sm);
             flex-wrap: wrap;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
         }
 
         .search-input-wrap {
@@ -610,7 +771,7 @@
             align-items: center;
             gap: 10px;
             flex: 1;
-            min-width: 180px;
+            min-width: 160px;
         }
 
         .search-input-wrap input {
@@ -626,8 +787,10 @@
         .toolbar-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
+            gap: 6px;
+            flex-wrap: wrap;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .photo-count-badge {
@@ -641,6 +804,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
 
         .photo-count-badge i {
@@ -651,7 +817,7 @@
             background: var(--surface-2);
             border: 1px solid var(--border);
             color: var(--text-primary);
-            padding: 7px 12px;
+            padding: 6px 11px;
             border-radius: 20px;
             font-size: 0.82rem;
             font-weight: 500;
@@ -660,6 +826,10 @@
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            text-decoration: none;
         }
 
         .btn-tool:hover {
@@ -673,6 +843,46 @@
             background: rgba(99, 102, 241, 0.2);
             color: #818cf8;
             border-color: #818cf8;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-toolbar-card {
+                padding: 8px 10px;
+                gap: 8px;
+            }
+            .search-input-wrap {
+                min-width: 100%;
+                flex: 1 1 100%;
+            }
+            .toolbar-actions {
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+                flex-wrap: nowrap;
+                overflow: hidden;
+            }
+            .photo-count-badge {
+                padding: 5px 8px;
+                font-size: 0.74rem;
+                gap: 4px;
+            }
+            .btn-tool {
+                padding: 5px 8px;
+                font-size: 0.76rem;
+                gap: 4px;
+            }
+            .btn-icon-reload {
+                width: 30px !important;
+                height: 30px !important;
+                min-width: 30px !important;
+                font-size: 0.78rem;
+            }
+            .btn-tool-admin.logged-in::after {
+                width: 6px;
+                height: 6px;
+                top: 2px;
+                right: 2px;
+            }
         }
 
         /* Drive Loading Box */
@@ -1093,6 +1303,462 @@
                 font-size: 0.72rem;
             }
         }
+    
+        /* ===== ADMIN UI & UPLOAD MODAL (COMPATIBLE ACROSS DESKTOP & MOBILE) ===== */
+        .btn-tool-admin {
+            position: relative;
+            background: var(--surface-2);
+            border-color: rgba(99, 102, 241, 0.35);
+        }
+        .btn-tool-admin.logged-in::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+
+        /* Modal Overlay */
+        .admin-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2500;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            box-sizing: border-box;
+        }
+        .admin-modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Login Card */
+        .admin-modal-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 26px 24px;
+            width: 100%;
+            max-width: 390px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-sizing: border-box;
+        }
+        .admin-modal-overlay.open .admin-modal-card {
+            transform: scale(1);
+        }
+
+        .admin-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .admin-modal-close:hover {
+            color: #ef4444;
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .admin-modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .admin-icon-badge {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            color: #ffffff;
+            font-size: 1.35rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+        }
+        .admin-modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 6px 0;
+        }
+        .admin-modal-header p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .admin-form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .admin-form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .admin-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 9px 12px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .admin-input-wrap:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+        .admin-input-wrap i {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .admin-input-wrap input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            outline: none;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+        .btn-toggle-pwd {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-toggle-pwd:hover {
+            color: var(--accent);
+        }
+
+        .btn-admin-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            padding: 11px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-admin-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+        }
+        .btn-admin-primary:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .admin-alert {
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.35;
+        }
+        .admin-alert.error {
+            background: rgba(239, 68, 68, 0.12);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+        .admin-alert.success {
+            background: rgba(16, 185, 129, 0.12);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        /* Upload Modal App Card */
+        .admin-dashboard-app {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.96);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-sizing: border-box;
+        }
+        .admin-modal-overlay.open .admin-dashboard-app {
+            transform: scale(1);
+        }
+
+        .android-app-bar {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .app-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .app-bar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+        .app-bar-title-wrap h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.2;
+        }
+        .app-bar-status {
+            font-size: 0.72rem;
+            color: #10b981;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+        .app-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .app-bar-btn {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .app-bar-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+        .app-bar-btn.btn-logout:hover {
+            color: #ef4444;
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.08);
+        }
+        .app-bar-btn.btn-close-app {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .admin-tab-content {
+            padding: 18px 20px 22px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* File Upload Dropzone */
+        .upload-dropzone {
+            border: 2px dashed rgba(99, 102, 241, 0.4);
+            border-radius: 18px;
+            background: rgba(99, 102, 241, 0.03);
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-dropzone:hover, .upload-dropzone.dragover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.08);
+            transform: scale(0.99);
+        }
+        .dropzone-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .dropzone-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+        body.dark .dropzone-icon {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+        .dropzone-main-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        .dropzone-sub-text {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .dropzone-preview-state {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .dropzone-preview-state img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: var(--shadow-md);
+        }
+        .preview-overlay-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            background: var(--surface);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .btn-change-photo {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-change-photo:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Progress Bar */
+        .upload-progress-box {
+            margin-top: 14px;
+            padding: 10px 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .progress-info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .progress-track {
+            height: 6px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+        }
+        body.dark .progress-track {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6, #ec4899);
+            transition: width 0.3s ease;
+        }
+
     </style>
 </head>
 
@@ -1110,8 +1776,16 @@
         <!-- Hero Slideshow Banner -->
         <div id="heroBox" class="hero-slider-wrap skeleton">
             <div class="hero-slides-viewport" id="heroViewport" onclick="openCurrentHeroInLightbox()">
-                <img id="heroSlideA" class="hero-slide-img active" src="" alt="Hero Slide" />
-                <img id="heroSlideB" class="hero-slide-img" src="" alt="Hero Slide" />
+                <img id="heroSlideA" class="hero-slide-img active" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="" />
+                <img id="heroSlideB" class="hero-slide-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="" />
+            </div>
+
+            <!-- Hero Skeleton Loading State -->
+            <div class="hero-skeleton-center" id="heroSkeletonCenter">
+                <div class="hero-skeleton-badge">
+                    <div class="spinner"></div>
+                    <span>Memuat Momen TRJT 24...</span>
+                </div>
             </div>
 
             <!-- Slide Progress Bar -->
@@ -1168,6 +1842,9 @@
                 <button id="btnReload" class="btn-icon-reload" title="Muat ulang dari Google Drive" onclick="loadDrivePhotos(true)">
                     <i class="fas fa-rotate-right" id="reloadIcon"></i>
                 </button>
+                <button id="btnOpenAdmin" class="btn-tool btn-tool-admin" onclick="openAdminModal()" title="Upload Foto (Admin)">
+                    <i class="fas fa-cloud-arrow-up"></i> <span>Upload</span>
+                </button>
             </div>
         </div>
 
@@ -1183,9 +1860,6 @@
                 </div>
             </div>
             <div class="sound-controls-group">
-                <button class="btn-track-nav active" id="btnShuffle" onclick="toggleShuffle()" title="Mode Acak (Aktif)" aria-label="Mode Acak">
-                    <i class="fas fa-shuffle"></i>
-                </button>
                 <button class="btn-track-nav" onclick="prevTrack()" title="Lagu Sebelumnya" aria-label="Lagu Sebelumnya">
                     <i class="fas fa-backward-step"></i>
                 </button>
@@ -1254,7 +1928,7 @@
         <i class="fas fa-moon" id="toggleIcon"></i>
     </button>
 
-    <audio id="bgMusic" src="musik1.mp4" loop preload="auto"></audio>
+    <audio id="bgMusic" preload="auto"></audio>
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <!-- Top Toolbar -->
@@ -1264,6 +1938,9 @@
                 <button class="lb-btn" id="btnLbSlide" onclick="toggleLbSlideshow()" title="Mulai / Jeda Slide Otomatis">
                     <i class="fas fa-play" id="lbSlideIcon"></i> <span class="lb-btn-text">Slide</span>
                 </button>
+                <a id="btnLbOriginal" class="lb-btn lb-btn-original" href="#" target="_blank" rel="noopener" onclick="openLbOriginal(event)" title="Lihat Foto Ukuran Asli">
+                    <i class="fas fa-arrow-up-right-from-square"></i> <span class="lb-btn-text">Ukuran Asli</span>
+                </a>
                 <a id="btnLbDownload" class="lb-btn" href="#" target="_blank" download title="Unduh Foto">
                     <i class="fas fa-download"></i>
                 </a>
@@ -1350,7 +2027,7 @@
                 card.className = 'gallery-card';
                 card.onclick = () => openLightbox(index);
                 card.innerHTML = `
-                <img src="${item.src}" alt="${item.caption}" loading="lazy">
+                <img src="${item.src}" alt="${item.caption}" loading="lazy" decoding="async">
                 <div class="caption">${item.caption}</div>
             `;
                 galleryEl.appendChild(card);
@@ -1520,6 +2197,17 @@
         let lbSlideshowInterval = null;
         const LB_SLIDE_DURATION = 3500;
 
+        function openLbOriginal(e) {
+            if (!currentDisplayItems || currentDisplayItems.length === 0) return;
+            const item = currentDisplayItems[currentLbIndex];
+            if (!item) return;
+            const original = item.originalUrl || item.fullSrc || item.src;
+            const lbImg = document.getElementById('lbImage');
+            if (lbImg && lbImg.src !== original) {
+                lbImg.src = original;
+            }
+        }
+
         function openLightbox(itemOrIndex) {
             if (!currentDisplayItems || currentDisplayItems.length === 0) {
                 currentDisplayItems = items;
@@ -1546,14 +2234,19 @@
             const lbCaption = document.getElementById('lbCaption');
             const lbCounter = document.getElementById('lbCounter');
             const btnLbDownload = document.getElementById('btnLbDownload');
+            const btnLbOriginal = document.getElementById('btnLbOriginal');
 
             if (lbCounter) {
                 lbCounter.textContent = `${currentLbIndex + 1} / ${currentDisplayItems.length}`;
             }
 
             if (btnLbDownload) {
-                btnLbDownload.href = item.fullSrc || item.src;
+                btnLbDownload.href = item.originalUrl || item.fullSrc || item.src;
                 btnLbDownload.download = `${item.caption || 'TRJT24-Memories'}.jpg`;
+            }
+
+            if (btnLbOriginal) {
+                btnLbOriginal.href = item.originalUrl || item.fullSrc || item.src;
             }
 
             if (lbCaption) lbCaption.textContent = item.caption;
@@ -1806,19 +2499,32 @@
 
                 items = list.map((item, index) => {
                     const cleanName = item.name ? item.name.replace(/\.[^/.]+$/, '') : `Foto ${index + 1}`;
+                    const displayCaption = (item.caption && item.caption.trim())
+                        ? item.caption.trim()
+                        : cleanName;
 
-                    // Gunakan thumbnail Google Drive (karena link uc?export=view diblokir/403 oleh Google)
-                    const cardThumb = item.thumbnail || (item.id ? `https://drive.google.com/thumbnail?id=${item.id}&sz=w800` : item.url);
-                    // Resolusi tinggi untuk Lightbox (sz=w1600)
+                    // 1. Kompresi Thumbnail Cepat untuk Galeri (sz=w360):
+                    // Kompresi ~80% lebih hemat kuota (~25-75KB vs ~370KB), memuat 5-10x lebih cepat dan instan!
+                    const cardThumb = item.id
+                        ? `https://drive.google.com/thumbnail?id=${item.id}&sz=w360`
+                        : (item.thumbnail ? item.thumbnail.replace(/sz=w\d+/, 'sz=w360') : item.url);
+
+                    // 2. Resolusi Sedang-Tinggi untuk Pratinjau Cepat Lightbox (sz=w1200):
                     const fullRes = item.id
-                        ? `https://drive.google.com/thumbnail?id=${item.id}&sz=w1600`
-                        : (item.thumbnail ? item.thumbnail.replace(/sz=w\d+/, 'sz=w1600') : cardThumb);
+                        ? `https://drive.google.com/thumbnail?id=${item.id}&sz=w1200`
+                        : (item.thumbnail ? item.thumbnail.replace(/sz=w\d+/, 'sz=w1200') : cardThumb);
+
+                    // 3. Resolusi Asli Tanpa Kompresi untuk Tombol "Ukuran Asli" (sz=w3000):
+                    const originalUrl = item.id
+                        ? `https://drive.google.com/thumbnail?id=${item.id}&sz=w3000`
+                        : (item.original || fullRes);
 
                     return {
                         id: item.id || String(index + 1),
-                        caption: cleanName,
+                        caption: displayCaption,
                         src: cardThumb,
-                        fullSrc: fullRes
+                        fullSrc: fullRes,
+                        originalUrl: originalUrl
                     };
                 });
 
@@ -1862,7 +2568,6 @@
         ];
 
         let currentTrackIndex = 0;
-        let isShuffle = true; // Mode musik acak aktif secara default saat memulai
         const bgMusic = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = document.getElementById('musicIcon');
@@ -1870,34 +2575,15 @@
         const soundTrackLabel = document.getElementById('soundTrackLabel');
         let isUserManuallyPaused = false;
 
-        function getRandomTrackIndex(excludeIndex = -1) {
-            if (playlist.length <= 1) return 0;
-            let nextIdx;
-            let attempts = 0;
-            do {
-                nextIdx = Math.floor(Math.random() * playlist.length);
-                attempts++;
-            } while (nextIdx === excludeIndex && attempts < 20);
-            return nextIdx;
-        }
-
-        function toggleShuffle() {
-            isShuffle = !isShuffle;
-            const btn = document.getElementById('btnShuffle');
-            if (btn) {
-                btn.classList.toggle('active', isShuffle);
-                btn.title = isShuffle ? 'Mode Acak: Aktif' : 'Mode Acak: Nonaktif';
-            }
-            const soundStatus = document.getElementById('soundStatus');
-            if (soundStatus && bgMusic && !bgMusic.paused) {
-                soundStatus.innerHTML = isShuffle ? '<i class="fas fa-shuffle" style="font-size:0.68rem; margin-right:3px;"></i> Acak' : 'Diputar';
-            }
-        }
-
         function loadTrack(index, autoPlay = true) {
             if (index < 0) index = playlist.length - 1;
             if (index >= playlist.length) index = 0;
             currentTrackIndex = index;
+
+            // Simpan indeks lagu terakhir agar saat refresh bergantian ke lagu berikutnya
+            try {
+                localStorage.setItem('trjt_last_track_index', String(currentTrackIndex));
+            } catch(e) {}
 
             const track = playlist[currentTrackIndex];
             if (bgMusic) {
@@ -1921,22 +2607,12 @@
 
         function nextTrack() {
             isUserManuallyPaused = false;
-            if (isShuffle) {
-                const nextIdx = getRandomTrackIndex(currentTrackIndex);
-                loadTrack(nextIdx, true);
-            } else {
-                loadTrack(currentTrackIndex + 1, true);
-            }
+            loadTrack((currentTrackIndex + 1) % playlist.length, true);
         }
 
         function prevTrack() {
             isUserManuallyPaused = false;
-            if (isShuffle) {
-                const prevIdx = getRandomTrackIndex(currentTrackIndex);
-                loadTrack(prevIdx, true);
-            } else {
-                loadTrack(currentTrackIndex - 1, true);
-            }
+            loadTrack((currentTrackIndex - 1 + playlist.length) % playlist.length, true);
         }
 
         if (bgMusic) {
@@ -1969,7 +2645,7 @@
                 if (musicToggle) musicToggle.title = 'Matikan Musik';
                 if (musicBtnText) musicBtnText.textContent = 'Matikan';
                 if (soundStatus) {
-                    soundStatus.innerHTML = isShuffle ? '<i class="fas fa-shuffle" style="font-size:0.68rem; margin-right:3px;"></i> Acak' : 'Diputar';
+                    soundStatus.textContent = 'Diputar';
                     soundStatus.classList.remove('paused');
                 }
                 if (soundEqualizer) soundEqualizer.classList.remove('paused');
@@ -1986,6 +2662,45 @@
             }
         }
 
+        let interactionListenersAttached = false;
+        function setupInteractionAutoplay() {
+            if (interactionListenersAttached) return;
+            interactionListenersAttached = true;
+
+            const gestureEvents = ['click', 'touchstart', 'touchend', 'pointerdown', 'mousedown', 'scroll', 'keydown'];
+
+            const onUserGesture = () => {
+                if (isUserManuallyPaused) {
+                    removeGestureListeners();
+                    return;
+                }
+                if (bgMusic && bgMusic.paused) {
+                    const promise = bgMusic.play();
+                    if (promise !== undefined) {
+                        promise.then(() => {
+                            updateMusicUI(true);
+                            removeGestureListeners();
+                        }).catch(() => {});
+                    }
+                } else {
+                    removeGestureListeners();
+                }
+            };
+
+            function removeGestureListeners() {
+                gestureEvents.forEach(evt => {
+                    window.removeEventListener(evt, onUserGesture, true);
+                    document.removeEventListener(evt, onUserGesture, true);
+                });
+                interactionListenersAttached = false;
+            }
+
+            gestureEvents.forEach(evt => {
+                window.addEventListener(evt, onUserGesture, { capture: true, passive: true });
+                document.addEventListener(evt, onUserGesture, { capture: true, passive: true });
+            });
+        }
+
         function playMusic() {
             if (isUserManuallyPaused || !bgMusic) return;
 
@@ -1995,27 +2710,7 @@
                     updateMusicUI(true);
                 }).catch(() => {
                     updateMusicUI(false);
-
-                    const enableAudioOnInteraction = () => {
-                        if (!isUserManuallyPaused && bgMusic.paused) {
-                            bgMusic.play().then(() => {
-                                updateMusicUI(true);
-                            }).catch(() => {});
-                        }
-                        cleanupListeners();
-                    };
-
-                    function cleanupListeners() {
-                        window.removeEventListener('click', enableAudioOnInteraction);
-                        window.removeEventListener('touchstart', enableAudioOnInteraction);
-                        window.removeEventListener('keydown', enableAudioOnInteraction);
-                        window.removeEventListener('scroll', enableAudioOnInteraction);
-                    }
-
-                    window.addEventListener('click', enableAudioOnInteraction, { once: true });
-                    window.addEventListener('touchstart', enableAudioOnInteraction, { once: true });
-                    window.addEventListener('keydown', enableAudioOnInteraction, { once: true });
-                    window.addEventListener('scroll', enableAudioOnInteraction, { once: true });
+                    setupInteractionAutoplay();
                 });
             }
         }
@@ -2029,6 +2724,7 @@
                     updateMusicUI(true);
                 }).catch(err => {
                     console.error('Gagal memutar musik:', err);
+                    setupInteractionAutoplay();
                 });
             } else {
                 isUserManuallyPaused = true;
@@ -2037,10 +2733,27 @@
             }
         }
 
-        // Putar musik acak otomatis saat halaman masuk
+        // Putar musik selalu saat refresh / reload / masuk halaman & BERGANTIAN SETIAP REFRESH
         function initMusic() {
-            const initialTrack = isShuffle ? getRandomTrackIndex(-1) : 0;
-            loadTrack(initialTrack, true);
+            isUserManuallyPaused = false;
+
+            // Bergantian lagu setiap refresh secara berurutan (0 -> 1 -> 2 -> 3 -> 4 -> 0...)
+            let nextIndex = 0;
+            try {
+                const stored = localStorage.getItem('trjt_last_track_index');
+                if (stored !== null && !isNaN(parseInt(stored, 10))) {
+                    const prevIndex = parseInt(stored, 10);
+                    nextIndex = (prevIndex + 1) % playlist.length;
+                } else {
+                    nextIndex = 0;
+                }
+            } catch(e) {
+                nextIndex = 0;
+            }
+
+            loadTrack(nextIndex, true);
+            playMusic();
+            setupInteractionAutoplay();
         }
 
         if (document.readyState === 'loading') {
@@ -2048,7 +2761,512 @@
         } else {
             initMusic();
         }
+
+        window.addEventListener('load', () => {
+            if (!isUserManuallyPaused) playMusic();
+        });
+
+        window.addEventListener('pageshow', () => {
+            isUserManuallyPaused = false;
+            if (bgMusic && bgMusic.paused) playMusic();
+        });
+
+        // ===== KUNCI ZOOM IN & ZOOM OUT DI HP =====
+        (function lockMobileZoom() {
+            // Cegah gesture pinch zoom (Safari iOS)
+            document.addEventListener('gesturestart', function (e) {
+                e.preventDefault();
+            }, { passive: false });
+            document.addEventListener('gesturechange', function (e) {
+                e.preventDefault();
+            }, { passive: false });
+            document.addEventListener('gestureend', function (e) {
+                e.preventDefault();
+            }, { passive: false });
+
+            // Kunci total posisi scroll horizontal agar selalu terkunci di 0 (tidak bisa geser kiri-kanan)
+            window.addEventListener('scroll', function () {
+                if (window.scrollX !== 0 || window.pageXOffset !== 0) {
+                    window.scrollTo({ left: 0, top: window.scrollY });
+                }
+            }, { passive: true });
+
+            // Cegah pergeseran mendatar saat sentuh layar di luar lightbox
+            let touchStartPos = { x: 0, y: 0 };
+            document.addEventListener('touchstart', function (e) {
+                if (e.touches && e.touches.length > 1) {
+                    e.preventDefault();
+                } else if (e.touches && e.touches.length === 1) {
+                    touchStartPos.x = e.touches[0].clientX;
+                    touchStartPos.y = e.touches[0].clientY;
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', function (e) {
+                if (e.touches && e.touches.length > 1) {
+                    e.preventDefault();
+                    return;
+                }
+                const lb = document.getElementById('lightbox');
+                const isInsideLightbox = lb && lb.classList.contains('open');
+                if (!isInsideLightbox && e.touches && e.touches.length === 1) {
+                    const diffX = Math.abs(e.touches[0].clientX - touchStartPos.x);
+                    const diffY = Math.abs(e.touches[0].clientY - touchStartPos.y);
+                    if (diffX > diffY && diffX > 8) {
+                        e.preventDefault();
+                    }
+                }
+            }, { passive: false });
+
+            // Cegah double-tap to zoom (ketukan cepat berturut-turut)
+            let lastTouchEndTime = 0;
+            document.addEventListener('touchend', function (e) {
+                const now = Date.now();
+                if (now - lastTouchEndTime <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEndTime = now;
+            }, { passive: false });
+
+            // Cegah Ctrl + Scroll / Wheel zoom di desktop
+            document.addEventListener('wheel', function (e) {
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        })();
+    
+        // =========================================================================
+        // ===== FITUR ADMIN TRJT (LOGIN LANGSUNG DI JS, UPLOAD FOTO KE DRIVE) =====
+        // =========================================================================
+
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "trjt24admin";
+        const ADMIN_AUTH_KEY = "trjt_admin_authenticated";
+
+        let currentAdminFile = null;
+
+        function isUserAdminLoggedIn() {
+            return sessionStorage.getItem(ADMIN_AUTH_KEY) === 'true';
+        }
+
+        function setAdminLoggedIn(status) {
+            if (status) {
+                sessionStorage.setItem(ADMIN_AUTH_KEY, 'true');
+            } else {
+                sessionStorage.removeItem(ADMIN_AUTH_KEY);
+            }
+            updateAdminButtonUI();
+        }
+
+        function updateAdminButtonUI() {
+            const btn = document.getElementById('btnOpenAdmin');
+            if (btn) btn.classList.toggle('logged-in', isUserAdminLoggedIn());
+        }
+
+        async function sendGasRequest(payload) {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                throw new Error('Gagal terhubung ke Google Apps Script: ' + response.status);
+            }
+            return await response.json();
+        }
+
+        function openAdminModal() {
+            if (isUserAdminLoggedIn()) {
+                openAdminDashboard();
+            } else {
+                openAdminLoginModal();
+            }
+        }
+
+        function openAdminLoginModal() {
+            const modal = document.getElementById('adminLoginModal');
+            const alertBox = document.getElementById('adminLoginAlert');
+            if (alertBox) {
+                alertBox.style.display = 'none';
+                alertBox.className = 'admin-alert';
+                alertBox.textContent = '';
+            }
+            if (modal) modal.classList.add('open');
+        }
+
+        function closeAdminLoginModal(e) {
+            if (e && e.target && e.target !== e.currentTarget) return;
+            const modal = document.getElementById('adminLoginModal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            if (btn) {
+                btn.innerHTML = isPassword ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            }
+        }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('adminUsername');
+            const passwordInput = document.getElementById('adminPassword');
+            const alertBox = document.getElementById('adminLoginAlert');
+
+            const username = usernameInput ? usernameInput.value.trim() : '';
+            const password = passwordInput ? passwordInput.value.trim() : '';
+
+            if (!username || !password) return;
+
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                setAdminLoggedIn(true);
+                if (usernameInput) usernameInput.value = '';
+                if (passwordInput) passwordInput.value = '';
+                if (alertBox) alertBox.style.display = 'none';
+                closeAdminLoginModal();
+                openAdminDashboard();
+            } else {
+                if (alertBox) {
+                    alertBox.className = 'admin-alert error';
+                    alertBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> <span>Username atau password salah!</span>';
+                    alertBox.style.display = 'flex';
+                }
+            }
+        }
+
+        function openAdminDashboard() {
+            const modal = document.getElementById('adminDashboardModal');
+            if (modal) {
+                modal.classList.add('open');
+            }
+        }
+
+        function closeAdminDashboard(e) {
+            if (e && e.target && e.target !== e.currentTarget) return;
+            const modal = document.getElementById('adminDashboardModal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        function handleAdminLogout() {
+            setAdminLoggedIn(false);
+            closeAdminDashboard();
+            const alertBox = document.getElementById('adminLoginAlert');
+            if (alertBox) alertBox.style.display = 'none';
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Silakan pilih file gambar (JPG, PNG, WEBP).');
+                return;
+            }
+
+            currentAdminFile = file;
+
+            const emptyState = document.getElementById('dropzoneEmpty');
+            const previewState = document.getElementById('dropzonePreview');
+            const previewImg = document.getElementById('uploadPreviewImg');
+            const fileNameEl = document.getElementById('previewFileName');
+            const fileSizeEl = document.getElementById('previewFileSize');
+            const btnSubmit = document.getElementById('btnUploadSubmit');
+            const alertBox = document.getElementById('uploadAlert');
+
+            if (alertBox) alertBox.style.display = 'none';
+
+            if (fileNameEl) fileNameEl.textContent = file.name;
+            if (fileSizeEl) {
+                const sizeKb = (file.size / 1024).toFixed(1);
+                fileSizeEl.textContent = sizeKb > 1024 ? (sizeKb / 1024).toFixed(1) + ' MB' : sizeKb + ' KB';
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (previewImg) previewImg.src = e.target.result;
+                if (emptyState) emptyState.style.display = 'none';
+                if (previewState) previewState.style.display = 'flex';
+                if (btnSubmit) btnSubmit.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function compressImageClientSide(file, maxDimension = 1280, quality = 0.80) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxDimension || height > maxDimension) {
+                            if (width > height) {
+                                height = Math.round((height * maxDimension) / width);
+                                width = maxDimension;
+                            } else {
+                                width = Math.round((width * maxDimension) / height);
+                                height = maxDimension;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        const base64 = dataUrl.split(',')[1];
+                        resolve({ base64: base64, mimeType: 'image/jpeg' });
+                    };
+                    img.onerror = () => reject(new Error('Gagal memuat gambar untuk dikompresi.'));
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => reject(new Error('Gagal membaca file gambar.'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleAdminUpload(event) {
+            event.preventDefault();
+            if (!currentAdminFile) return;
+
+            if (!isUserAdminLoggedIn()) {
+                alert('Sesi admin berakhir. Silakan login kembali.');
+                closeAdminDashboard();
+                openAdminLoginModal();
+                return;
+            }
+
+            const captionInput = document.getElementById('adminCaptionInput');
+            let caption = captionInput ? captionInput.value.trim() : '';
+
+            // Jika keterangan kosong, gunakan nama file asli dari perangkat
+            if (!caption && currentAdminFile && currentAdminFile.name) {
+                caption = currentAdminFile.name.replace(/\.[^/.]+$/, '').trim();
+            }
+
+            // Bersihkan nama file agar valid di Google Drive
+            const safeName = caption.replace(/[\\/:*?"<>|]/g, '').trim() || 'TRJT24_Foto';
+
+            const btnSubmit = document.getElementById('btnUploadSubmit');
+            const btnText = document.getElementById('uploadBtnText');
+            const spinner = document.getElementById('uploadSpinner');
+            const alertBox = document.getElementById('uploadAlert');
+            const progressBox = document.getElementById('uploadProgressBox');
+            const progressFill = document.getElementById('uploadProgressFill');
+            const statusText = document.getElementById('uploadStatusText');
+            const percentText = document.getElementById('uploadPercentText');
+
+            if (btnSubmit) btnSubmit.disabled = true;
+            if (btnText) btnText.style.display = 'none';
+            if (spinner) spinner.style.display = 'inline-block';
+            if (alertBox) alertBox.style.display = 'none';
+            if (progressBox) progressBox.style.display = 'block';
+
+            if (progressFill) progressFill.style.width = '35%';
+            if (statusText) statusText.textContent = 'Memproses foto...';
+            if (percentText) percentText.textContent = '35%';
+
+            try {
+                // Kompresi cepat dengan resolusi 1280px agar upload instan
+                const compressed = await compressImageClientSide(currentAdminFile, 1280, 0.80);
+
+                // Progress mencapai 70%
+                if (progressFill) progressFill.style.width = '70%';
+                if (statusText) statusText.textContent = 'Mengunggah ke Google Drive...';
+                if (percentText) percentText.textContent = '70%';
+
+                // Kirim request ke Google Apps Script di latar belakang dengan nama sesuai keterangan
+                sendGasRequest({
+                    action: 'upload',
+                    base64: compressed.base64,
+                    mimeType: compressed.mimeType,
+                    caption: caption,
+                    name: safeName,
+                    fileName: safeName + '.jpg'
+                }).then(() => {
+                    // Segarkan galeri saat respons Drive selesai
+                    loadDrivePhotos(true);
+                }).catch((err) => {
+                    console.warn('Background upload status:', err);
+                    loadDrivePhotos(true);
+                });
+
+                // Walaupun 70% ter-upload, langsung kirim notifikasi selesai!
+                setTimeout(() => {
+                    if (progressFill) progressFill.style.width = '100%';
+                    if (percentText) percentText.textContent = '100%';
+                    if (statusText) statusText.textContent = 'Selesai diunggah!';
+
+                    if (alertBox) {
+                        alertBox.className = 'admin-alert success';
+                        alertBox.innerHTML = '<i class="fas fa-circle-check"></i> <span>Foto berhasil diunggah ke Google Drive!</span>';
+                        alertBox.style.display = 'flex';
+                    }
+
+                    // Reset form input langsung
+                    currentAdminFile = null;
+                    const fileInput = document.getElementById('adminFileInput');
+                    if (fileInput) fileInput.value = '';
+                    if (captionInput) captionInput.value = '';
+                    const emptyState = document.getElementById('dropzoneEmpty');
+                    const previewState = document.getElementById('dropzonePreview');
+                    if (emptyState) emptyState.style.display = 'flex';
+                    if (previewState) previewState.style.display = 'none';
+
+                    // Tutup dashboard dan segarkan foto di galeri
+                    setTimeout(() => {
+                        if (progressBox) progressBox.style.display = 'none';
+                        closeAdminDashboard();
+                        loadDrivePhotos(true);
+                        // Refresh cadangan setelah 3 detik
+                        setTimeout(() => loadDrivePhotos(true), 3000);
+                    }, 800);
+                }, 200);
+
+            } catch (err) {
+                if (alertBox) {
+                    alertBox.className = 'admin-alert error';
+                    alertBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> <span>${err.message || 'Upload gagal.'}</span>`;
+                    alertBox.style.display = 'flex';
+                }
+                if (progressBox) progressBox.style.display = 'none';
+            } finally {
+                if (btnSubmit) btnSubmit.disabled = false;
+                if (btnText) btnText.style.display = 'inline-flex';
+                if (spinner) spinner.style.display = 'none';
+            }
+        }
+
+        updateAdminButtonUI();
+
     </script>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="adminLoginModal" class="admin-modal-overlay" onclick="closeAdminLoginModal(event)">
+        <div class="admin-modal-card" onclick="event.stopPropagation()">
+            <button class="admin-modal-close" onclick="closeAdminLoginModal()" title="Tutup">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <div class="admin-modal-header">
+                <div class="admin-icon-badge">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Masuk Admin TRJT</h3>
+                <p>Masukkan username dan password admin untuk mengunggah foto ke Google Drive.</p>
+            </div>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="admin-form-group">
+                    <label for="adminUsername">Username</label>
+                    <div class="admin-input-wrap">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="adminUsername" placeholder="Username admin..." required autocomplete="username" />
+                    </div>
+                </div>
+                <div class="admin-form-group">
+                    <label for="adminPassword">Password</label>
+                    <div class="admin-input-wrap">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="adminPassword" placeholder="Password admin..." required autocomplete="current-password" />
+                        <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('adminPassword', this)" title="Lihat password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="adminLoginAlert" class="admin-alert" style="display: none;"></div>
+                <button type="submit" id="btnAdminSubmit" class="btn-admin-primary">
+                    <span id="adminLoginBtnText"><i class="fas fa-arrow-right-to-bracket"></i> Masuk</span>
+                    <span id="adminLoginSpinner" class="spinner" style="display:none; width: 1.1rem; height: 1.1rem; border-width: 2px;"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DASHBOARD ADMIN (Upload Foto Saja) -->
+    <div id="adminDashboardModal" class="admin-modal-overlay" onclick="closeAdminDashboard(event)">
+        <div class="admin-dashboard-app" onclick="event.stopPropagation()">
+            <!-- Top App Bar -->
+            <div class="android-app-bar">
+                <div class="app-bar-brand">
+                    <div class="app-bar-avatar">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                    </div>
+                    <div class="app-bar-title-wrap">
+                        <h4>Upload Foto TRJT</h4>
+                        <span class="app-bar-status"><span class="status-dot"></span> Sesi Admin Aktif</span>
+                    </div>
+                </div>
+                <div class="app-bar-actions">
+                    <button class="app-bar-btn btn-logout" onclick="handleAdminLogout()" title="Keluar / Logout">
+                        <i class="fas fa-right-from-bracket"></i>
+                        <span class="hide-mobile">Keluar</span>
+                    </button>
+                    <button class="app-bar-btn btn-close-app" onclick="closeAdminDashboard()" title="Tutup">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Foto Content -->
+            <div id="adminTabUpload" class="admin-tab-content active">
+                <form id="adminUploadForm" onsubmit="handleAdminUpload(event)">
+                    <div class="upload-dropzone" id="uploadDropzone" onclick="document.getElementById('adminFileInput').click()">
+                        <input type="file" id="adminFileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)" />
+                        <div id="dropzoneEmpty" class="dropzone-empty-state">
+                            <div class="dropzone-icon">
+                                <i class="fas fa-cloud-arrow-up"></i>
+                            </div>
+                            <p class="dropzone-main-text">Klik atau ketuk untuk pilih foto</p>
+                            <p class="dropzone-sub-text">Mendukung kamera HP atau file galeri (JPG, PNG, WEBP)</p>
+                        </div>
+                        <div id="dropzonePreview" class="dropzone-preview-state" style="display: none;">
+                            <img id="uploadPreviewImg" src="" alt="Pratinjau" />
+                            <div class="preview-overlay-info">
+                                <span id="previewFileName">foto.jpg</span>
+                                <span id="previewFileSize">0 KB</span>
+                            </div>
+                            <button type="button" class="btn-change-photo" onclick="event.stopPropagation(); document.getElementById('adminFileInput').click();">
+                                <i class="fas fa-rotate"></i> Ganti Foto
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="admin-form-group" style="margin-top: 14px;">
+                        <label for="adminCaptionInput">Keterangan / Momen Foto</label>
+                        <div class="admin-input-wrap">
+                            <i class="fas fa-tag"></i>
+                            <input type="text" id="adminCaptionInput" placeholder="Contoh: Momen Makrab TRJT 2024..." />
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar Upload -->
+                    <div id="uploadProgressBox" class="upload-progress-box" style="display: none;">
+                        <div class="progress-info-row">
+                            <span id="uploadStatusText">Mengunggah ke Google Drive...</span>
+                            <span id="uploadPercentText">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="uploadProgressFill"></div>
+                        </div>
+                    </div>
+
+                    <div id="uploadAlert" class="admin-alert" style="display: none;"></div>
+
+                    <button type="submit" id="btnUploadSubmit" class="btn-admin-primary" disabled>
+                        <span id="uploadBtnText"><i class="fas fa-cloud-arrow-up"></i> Unggah ke Google Drive</span>
+                        <span id="uploadSpinner" class="spinner" style="display:none; width: 1.1rem; height: 1.1rem; border-width: 2px;"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
