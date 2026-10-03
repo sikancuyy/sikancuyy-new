@@ -413,6 +413,76 @@
             animation: spinner 0.7s linear infinite;
             color: var(--accent);
         }
+
+        /* Music Toggle Button */
+        .music-toggle {
+            position: fixed;
+            top: 14px;
+            right: 68px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .music-toggle.playing {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        body.dark .music-toggle.playing {
+            background: rgba(99, 102, 241, 0.18);
+            color: #818cf8;
+            border-color: #818cf8;
+        }
+
+        .music-pulse {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            animation: musicPulseRing 2s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+            pointer-events: none;
+        }
+
+        @keyframes musicPulseRing {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            70% { transform: scale(1.22); opacity: 0; }
+            100% { transform: scale(1.22); opacity: 0; }
+        }
+
+        .music-toggle.playing i {
+            animation: musicWave 1.4s ease-in-out infinite alternate;
+        }
+
+        @keyframes musicWave {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1.1); }
+        }
     </style>
 </head>
 
@@ -487,9 +557,16 @@
         <i class="fas fa-arrow-left"></i>
     </a>
 
+    <button class="music-toggle playing" id="musicToggle" onclick="toggleMusic()" title="Matikan Musik" aria-label="Putar / Matikan Musik">
+        <span class="music-pulse" id="musicPulse"></span>
+        <i class="fas fa-volume-high" id="musicIcon"></i>
+    </button>
+
     <button class="dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">
         <i class="fas fa-moon" id="toggleIcon"></i>
     </button>
+
+    <audio id="bgMusic" src="musik1.mp4" loop preload="auto"></audio>
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
@@ -713,6 +790,87 @@
         }
 
         loadDrivePhotos();
+
+        // ===== AUDIO / MUSIK LATAR & KONTROL =====
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicPulse = document.getElementById('musicPulse');
+        let isUserManuallyPaused = false;
+
+        function updateMusicUI(isPlaying) {
+            if (isPlaying) {
+                musicToggle.classList.add('playing');
+                musicIcon.className = 'fas fa-volume-high';
+                if (musicPulse) musicPulse.style.display = 'block';
+                musicToggle.title = 'Matikan Musik';
+            } else {
+                musicToggle.classList.remove('playing');
+                musicIcon.className = 'fas fa-volume-xmark';
+                if (musicPulse) musicPulse.style.display = 'none';
+                musicToggle.title = 'Putar Musik';
+            }
+        }
+
+        function playMusic() {
+            if (isUserManuallyPaused || !bgMusic) return;
+
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    updateMusicUI(true);
+                }).catch(() => {
+                    // Jika kebijakan browser memblokir autoplay tanpa interaksi (Autoplay Policy),
+                    // putar otomatis saat pengguna pertama kali berinteraksi (klik, tap, scroll, keyboard)
+                    updateMusicUI(false);
+
+                    const enableAudioOnInteraction = () => {
+                        if (!isUserManuallyPaused && bgMusic.paused) {
+                            bgMusic.play().then(() => {
+                                updateMusicUI(true);
+                            }).catch(() => {});
+                        }
+                        cleanupListeners();
+                    };
+
+                    function cleanupListeners() {
+                        window.removeEventListener('click', enableAudioOnInteraction);
+                        window.removeEventListener('touchstart', enableAudioOnInteraction);
+                        window.removeEventListener('keydown', enableAudioOnInteraction);
+                        window.removeEventListener('scroll', enableAudioOnInteraction);
+                    }
+
+                    window.addEventListener('click', enableAudioOnInteraction, { once: true });
+                    window.addEventListener('touchstart', enableAudioOnInteraction, { once: true });
+                    window.addEventListener('keydown', enableAudioOnInteraction, { once: true });
+                    window.addEventListener('scroll', enableAudioOnInteraction, { once: true });
+                });
+            }
+        }
+
+        function toggleMusic() {
+            if (!bgMusic) return;
+
+            if (bgMusic.paused) {
+                isUserManuallyPaused = false;
+                bgMusic.play().then(() => {
+                    updateMusicUI(true);
+                }).catch(err => {
+                    console.error('Gagal memutar musik:', err);
+                });
+            } else {
+                isUserManuallyPaused = true;
+                bgMusic.pause();
+                updateMusicUI(false);
+            }
+        }
+
+        // Putar musik saat halaman masuk
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', playMusic);
+        } else {
+            playMusic();
+        }
     </script>
 </body>
 
