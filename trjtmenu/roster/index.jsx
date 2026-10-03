@@ -34,6 +34,48 @@ const DATA = {
     ],
   },
   kelompok: {
+    "Antena dan Propagasi": {
+      dosen: "Ipan Suandi, S.T., M.T.",
+      groups: [
+        {
+          name: "Kelompok 1",
+          members: [
+            { id: "2024203020028", name: "Aqil Ocean Difra" },
+            { id: "2024203020016", name: "Renka Laura" },
+            { id: "2024203020009", name: "Firlita Afianti" },
+            { id: "2024203020011", name: "Durratul Hikmah" },
+            { id: "-", name: "Muhammad Haikal" },
+          ],
+        },
+        {
+          name: "Kelompok 2",
+          members: [
+            { id: "2024203020032", name: "Lunna Auamara" },
+            { id: "2024203020036", name: "Nazar Alfarabi" },
+            { id: "2024203020008", name: "Rahmat Haikal" },
+            { id: "2024203020022", name: "Muhammad Halfi" },
+          ],
+        },
+        {
+          name: "Kelompok 3",
+          members: [
+            { id: "2024203020031", name: "Syawal Fitriadi" },
+            { id: "2024203020003", name: "Sarah Fonna" },
+            { id: "2024203020029", name: "Muhammad Rais" },
+            { id: "2024203020006", name: "Suheil Maulana" },
+          ],
+        },
+        {
+          name: "Kelompok 4",
+          members: [
+            { id: "2024203020020", name: "Nesya Zikriya" },
+            { id: "2024203020025", name: "Farhan Alfarisyi" },
+            { id: "2024203020001", name: "Ilal Ilhamdi" },
+            { id: "2024203020019", name: "Khairul Fajar Sidiq" },
+          ],
+        },
+      ],
+    },
     "Teknik Instalasi Fiber Optik": {
       dosen: "Anita Fauziah, SST., M.T.",
       groups: [
@@ -173,15 +215,16 @@ const DATA = {
     { no: 5, id: "2024203020001", name: "Ilal Ilhamdi" },
     { no: 6, id: "2024203020019", name: "Khairul Fajar Sidiq" },
     { no: 7, id: "2024203020032", name: "Lunna Auamara" },
-    { no: 8, id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
-    { no: 9, id: "2024203020029", name: "Muhammad Rais" },
-    { no: 10, id: "2024203020036", name: "Nazar Al Farabi" },
-    { no: 11, id: "2024203020020", name: "Nesya Zikriya" },
-    { no: 12, id: "2024203020008", name: "Rahmat Haikal" },
-    { no: 13, id: "2024203020016", name: "Renka Laura" },
-    { no: 14, id: "2024203020003", name: "Sarah Fonna" },
-    { no: 15, id: "2024203020006", name: "Suheil Maulana" },
-    { no: 16, id: "2024203020031", name: "Syawal Fitriyadi" },
+    { no: 8, id: "-", name: "Muhammad Haikal" },
+    { no: 9, id: "2024203020022", name: "Muhammad Halfi Al Barizi" },
+    { no: 10, id: "2024203020029", name: "Muhammad Rais" },
+    { no: 11, id: "2024203020036", name: "Nazar Al Farabi" },
+    { no: 12, id: "2024203020020", name: "Nesya Zikriya" },
+    { no: 13, id: "2024203020008", name: "Rahmat Haikal" },
+    { no: 14, id: "2024203020016", name: "Renka Laura" },
+    { no: 15, id: "2024203020003", name: "Sarah Fonna" },
+    { no: 16, id: "2024203020006", name: "Suheil Maulana" },
+    { no: 17, id: "2024203020031", name: "Syawal Fitriyadi" },
   ],
   dosen: [
     { no: 1, nip: "198005102005011002", nama: "Ipan Suandi, S.T., M.T.", mks: ["Prakt. Antena dan Propagasi", "Antena dan Propagasi"] },
@@ -417,6 +460,9 @@ function TabKelompok({ onToast }) {
   const filteredGroups = useMemo(() => {
     if (!search.trim()) return mkData.groups;
     const q = search.toLowerCase();
+    const isDosenMatch = mkData.dosen.toLowerCase().includes(q);
+    const isMkMatch = activeMK.toLowerCase().includes(q);
+    if (isDosenMatch || isMkMatch) return mkData.groups;
     return mkData.groups
       .map((g) => ({
         ...g,
@@ -424,8 +470,8 @@ function TabKelompok({ onToast }) {
           (m) => m.name.toLowerCase().includes(q) || m.id.includes(q)
         ),
       }))
-      .filter((g) => g.members.length > 0);
-  }, [search, mkData]);
+      .filter((g) => g.members.length > 0 || g.name.toLowerCase().includes(q));
+  }, [search, mkData, activeMK]);
 
   const handleExportCSV = () => {
     const rows = [["Mata Kuliah", "Dosen", "Kelompok", "No", "NIM", "Nama Mahasiswa"]];
@@ -457,7 +503,7 @@ function TabKelompok({ onToast }) {
         <input
           ref={searchRef}
           type="text"
-          placeholder="Cari nama atau kelompok..."
+          placeholder="Cari nama, kelompok, atau dosen..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -469,15 +515,17 @@ function TabKelompok({ onToast }) {
             key={mk}
             className={`mkt${mk === activeMK ? " sel" : ""}`}
             onClick={() => { setActiveMK(mk); setSearch(""); }}
+            title={`Mata Kuliah: ${mk}`}
           >
-            {mk}
+            <Icon path={Icons.userTie} size={13} style={{ marginRight: 6 }} />
+            {DATA.kelompok[mk].dosen}
           </button>
         ))}
       </div>
 
       <div className="mk-note">
-        <Icon path={Icons.userTie} size={13} />
-        <span>Dosen Pengampu: <b>{mkData.dosen}</b></span>
+        <Icon path={Icons.file} size={13} />
+        <span>Mata Kuliah: <b>{activeMK}</b></span>
       </div>
 
       <div className="gg">
