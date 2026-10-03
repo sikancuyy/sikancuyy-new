@@ -266,9 +266,17 @@ button { border: none; outline: none; background: transparent; cursor: pointer; 
 /* --- 8. KELOMPOK PRAKTIKUM & PIKET --- */
 .mktabs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
-  margin-bottom: 20px;
+  overflow-x: auto;
+  padding: 10px 6px;
+  margin: -6px -6px 15px -6px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mktabs::-webkit-scrollbar {
+  display: none;
 }
 
 .mkt {
@@ -280,6 +288,8 @@ button { border: none; outline: none; background: transparent; cursor: pointer; 
   font-weight: 700;
   font-size: 0.85rem;
   transition: 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .mkt.sel {

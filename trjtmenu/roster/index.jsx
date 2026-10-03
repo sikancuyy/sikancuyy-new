@@ -525,7 +525,7 @@ function TabKelompok({ onToast }) {
 
       <div className="mk-note">
         <Icon path={Icons.file} size={13} />
-        <span>Mata Kuliah: <b>{activeMK}</b></span>
+        <b>{activeMK}</b>
       </div>
 
       <div className="gg">
