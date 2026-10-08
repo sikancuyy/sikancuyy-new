@@ -6,11 +6,331 @@
     <title>Input Tugas - SikanCuyy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../../style.css">
     <link rel="shortcut icon" href="../../favicon/04_input_tugas.svg" type="image/svg+xml">
     <style>
+        /* ── Container constraint for compact form card ── */
+        .container {
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header Adjustments ── */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-top: 4px;
+            animation: fadeUp 0.5s ease both;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+        }
+
+        /* ── Card Polish ── */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 26px 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: var(--text-primary);
+        }
+
+        /* ── Form Controls ── */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+
+        /* Date Grid: Responsive 2 col desktop, 1 col mobile */
+        .date-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .date-grid .form-group {
+            margin-bottom: 0;
+            min-width: 0;
+        }
+        @media (max-width: 480px) {
+            .date-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        input[type="date"], 
+        select, 
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            min-width: 0;
+            padding: 10px 13px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+            background: var(--surface);
+        }
+
+        /* Date picker icon styling */
+        input[type="date"] {
+            cursor: pointer;
+        }
+        body.dark input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.85);
+            cursor: pointer;
+        }
+
+        /* Custom Dropdown Chevron */
+        select {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 14px;
+            padding-right: 38px;
+        }
+        body.dark select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        }
+
+        /* Textarea styling */
+        textarea {
+            resize: vertical;
+            min-height: 95px;
+            line-height: 1.5;
+        }
+
+        /* ── Format Radio Pills (4 equal columns) ── */
+        .format-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        @media (max-width: 440px) {
+            .format-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .format-group input[type="radio"] { display: none; }
+        .format-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 6px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        .format-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .format-group input[type="radio"]:checked + .format-pill {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+        }
+
+        /* ── Switch Toggle ── */
+        .switch-toggle {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            margin: 0;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .switch-toggle input { opacity: 0; width: 0; height: 0; }
+        .slider-round {
+            position: absolute; inset: 0;
+            background-color: var(--border);
+            border-radius: 24px;
+            transition: 0.25s ease;
+        }
+        .slider-round:before {
+            position: absolute; content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.25s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+        .switch-toggle input:checked + .slider-round {
+            background-color: #25D366;
+        }
+        .switch-toggle input:checked + .slider-round:before {
+            transform: translateX(20px);
+        }
+
+        /* ── WA Notification Card ── */
+        .wa-notify-box {
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-top: 16px;
+            margin-bottom: 20px;
+            transition: all 0.25s ease;
+        }
+        .wa-notify-box.active-wa {
+            border-color: rgba(37, 211, 102, 0.45);
+            background: rgba(37, 211, 102, 0.04);
+            box-shadow: 0 2px 12px rgba(37, 211, 102, 0.06);
+        }
+        body.dark .wa-notify-box.active-wa {
+            border-color: rgba(37, 211, 102, 0.35);
+            background: rgba(37, 211, 102, 0.06);
+        }
+        .wa-select-row {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+        .wa-select-row select {
+            flex: 1;
+            min-width: 0;
+            height: 44px;
+        }
+        .wa-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            width: 44px;
+            min-width: 44px;
+            padding: 0;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .wa-action-btn:hover {
+            background: var(--surface-2);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        body.dark .wa-action-btn {
+            background: var(--surface-2);
+        }
+        .wa-badge-online {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #ecfdf5; color: #059669;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-online { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .wa-badge-offline {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #fef2f2; color: #dc2626;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-offline { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .wa-badge-loading {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #eff6ff; color: #2563eb;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-loading { background: rgba(37, 99, 235, 0.2); color: #60a5fa; }
+
+        /* ── Submit & Action Buttons ── */
+        .btn-submit {
+            width: 100%;
+            height: 46px;
+            margin-top: 4px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        .btn-database {
+            width: 100%;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-database:hover {
+            background: var(--surface-2);
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+        }
+
         /* ── Loading Overlay ── */
         .loading-overlay {
             position: fixed; inset: 0;
@@ -80,97 +400,6 @@
         }
         #close-popup:hover { background: #059669; transform: translateY(-1px); }
 
-        /* ── Format Radio Pills ── */
-        .format-group {
-            display: flex; gap: 8px; flex-wrap: wrap;
-        }
-        .format-group input[type="radio"] { display: none; }
-        .format-pill {
-            padding: 6px 16px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
-            background: var(--surface-2);
-            color: var(--text-secondary);
-            font-size: 0.82rem; font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .format-group input[type="radio"]:checked + .format-pill {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* ── Switch Toggle ── */
-        .switch-toggle {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 24px;
-            margin: 0;
-            cursor: pointer;
-        }
-        .switch-toggle input { opacity: 0; width: 0; height: 0; }
-        .slider-round {
-            position: absolute; inset: 0;
-            background-color: var(--border);
-            border-radius: 24px;
-            transition: 0.25s ease;
-        }
-        .slider-round:before {
-            position: absolute; content: "";
-            height: 18px; width: 18px;
-            left: 3px; bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
-            transition: 0.25s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        }
-        .switch-toggle input:checked + .slider-round {
-            background-color: #25D366;
-        }
-        .switch-toggle input:checked + .slider-round:before {
-            transform: translateX(20px);
-        }
-
-        /* ── WA Notification Card ── */
-        .wa-notify-box {
-            background: var(--surface-2);
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            transition: all 0.2s ease;
-        }
-        .wa-notify-box.active-wa {
-            border-color: rgba(37, 211, 102, 0.4);
-            background: rgba(37, 211, 102, 0.03);
-        }
-        body.dark .wa-notify-box.active-wa {
-            border-color: rgba(37, 211, 102, 0.35);
-            background: rgba(37, 211, 102, 0.06);
-        }
-        .wa-badge-online {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 3px 9px; background: #ecfdf5; color: #059669;
-            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
-        }
-        body.dark .wa-badge-online { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-        .wa-badge-offline {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 3px 9px; background: #fef2f2; color: #dc2626;
-            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
-        }
-        body.dark .wa-badge-offline { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-        .wa-badge-loading {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 3px 9px; background: #eff6ff; color: #2563eb;
-            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
-        }
-        body.dark .wa-badge-loading { background: rgba(37, 99, 235, 0.2); color: #60a5fa; }
-
         /* ── Settings Modal ── */
         .modal-overlay {
             position: fixed; inset: 0;
@@ -184,14 +413,14 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
-            max-width: 460px; width: 100%;
+            padding: 26px;
+            max-width: 440px; width: 100%;
             box-shadow: var(--shadow-lg);
             animation: fadeUp 0.25s ease both;
         }
         .modal-header {
             display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 18px; padding-bottom: 12px;
+            margin-bottom: 16px; padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
         }
         .modal-header h3 {
@@ -200,11 +429,32 @@
             display: flex; align-items: center; gap: 8px;
         }
         .btn-close-modal {
-            background: transparent; border: none; font-size: 1.1rem;
+            background: transparent; border: none; font-size: 1.2rem;
             color: var(--text-muted); cursor: pointer; padding: 4px;
+            line-height: 1;
             transition: color 0.2s ease;
         }
         .btn-close-modal:hover { color: var(--text-primary); }
+
+        /* Mobile Layout Polish */
+        @media (max-width: 480px) {
+            body {
+                padding: 56px 14px 40px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .back-btn {
+                top: 12px; left: 12px;
+                width: 36px; height: 36px;
+                font-size: 0.85rem;
+            }
+            .dark-toggle {
+                top: 12px; right: 12px;
+                width: 36px; height: 36px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -222,20 +472,20 @@
         <h3 class="section-title">Form Input Tugas</h3>
         <form id="task-form" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 0;">
           <!-- Date Row -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+          <div class="date-grid">
             <div class="form-group">
-              <label for="TanggalDiberikan">Tanggal Diberikan</label>
+              <label for="TanggalDiberikan"><i class="fa-regular fa-calendar-plus" style="color: var(--accent);"></i> Tanggal Diberikan</label>
               <input type="date" id="TanggalDiberikan" name="Diberikan" required />
             </div>
             <div class="form-group">
-              <label for="TanggalDikumpulkan">Tanggal Dikumpulkan</label>
+              <label for="TanggalDikumpulkan"><i class="fa-regular fa-calendar-check" style="color: #10b981;"></i> Tanggal Dikumpulkan</label>
               <input type="date" id="TanggalDikumpulkan" name="Dikumpulkan" required />
             </div>
           </div>
 
           <!-- Pertemuan -->
           <div class="form-group">
-            <label for="PertemuanKe">Pertemuan Ke</label>
+            <label for="PertemuanKe"><i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i> Pertemuan Ke</label>
             <select id="PertemuanKe" name="Pertemuan" required>
                 <option value="">Pilih Pertemuan</option>
                 <script>
@@ -248,7 +498,7 @@
 
           <!-- Mata Kuliah -->
           <div class="form-group">
-            <label for="MataKuliah">Mata Kuliah</label>
+            <label for="MataKuliah"><i class="fa-solid fa-book-open" style="color: var(--accent);"></i> Mata Kuliah</label>
             <select id="MataKuliah" name="MK" required>
                 <option value="">Pilih Mata Kuliah</option>
                 <option value="Prakt. Antena dan Propagasi">Prakt. Antena dan Propagasi</option>
@@ -267,7 +517,7 @@
 
           <!-- Format Teks -->
           <div class="form-group">
-            <label>Format Penulisan</label>
+            <label><i class="fa-solid fa-font" style="color: var(--accent);"></i> Format Penulisan</label>
             <div class="format-group">
                 <input type="radio" id="format-default" name="text-format" value="default" checked>
                 <label for="format-default" class="format-pill">Normal</label>
@@ -285,15 +535,15 @@
 
           <!-- Tugas Diberikan -->
           <div class="form-group">
-            <label for="TugasDiberikan">Tugas Yang Diberikan</label>
+            <label for="TugasDiberikan"><i class="fa-solid fa-pen-to-square" style="color: var(--accent);"></i> Tugas Yang Diberikan</label>
             <textarea id="TugasDiberikan" name="Tugas Yang Diberikan" rows="4" placeholder="Tulis deskripsi tugas di sini..." required></textarea>
           </div>
 
           <!-- Opsi Notifikasi WhatsApp SikanBot -->
           <div class="wa-notify-box active-wa" id="wa-notify-card">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-              <label for="sendToWa" style="display: flex; align-items: center; gap: 8px; margin: 0; cursor: pointer; font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
-                <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.3rem;"></i>
+              <label for="sendToWa" style="display: flex; align-items: center; gap: 8px; margin: 0; cursor: pointer; font-weight: 700; color: var(--text-primary); font-size: 0.92rem;">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.25rem;"></i>
                 <span>Kirim Notifikasi ke Grup WhatsApp</span>
               </label>
               <label class="switch-toggle" title="Aktifkan/nonaktifkan pengiriman ke WhatsApp">
@@ -304,7 +554,7 @@
 
             <div id="wa-group-wrapper" style="transition: all 0.25s ease;">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-                <label for="waGroupSelect" style="margin: 0; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary);">
+                <label for="waGroupSelect" style="margin: 0; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">
                   Pilih Grup WhatsApp Tujuan:
                 </label>
                 <span id="wa-bot-status-badge" class="wa-badge-loading">
@@ -312,45 +562,43 @@
                 </span>
               </div>
 
-              <div style="display: flex; gap: 8px;">
-                <div style="position: relative; flex: 1;">
-                  <select id="waGroupSelect" name="wa_group_id" style="width: 100%; cursor: pointer;">
-                    <option value="">Memuat daftar grup...</option>
-                  </select>
-                </div>
-                <button type="button" id="btn-refresh-groups" title="Muat Ulang Daftar Grup dari VPS" class="btn btn-secondary" style="padding: 0 14px; min-width: 44px; height: 46px;">
+              <div class="wa-select-row">
+                <select id="waGroupSelect" name="wa_group_id">
+                  <option value="">Memuat daftar grup...</option>
+                </select>
+                <button type="button" id="btn-refresh-groups" title="Muat Ulang Daftar Grup dari VPS" class="wa-action-btn">
                   <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
                 </button>
-                <button type="button" id="btn-wa-settings" title="Pengaturan Endpoint Bot WA" class="btn btn-secondary" style="padding: 0 12px; min-width: 44px; height: 46px; color: var(--text-secondary);">
+                <button type="button" id="btn-wa-settings" title="Pengaturan Endpoint Bot WA" class="wa-action-btn">
                   <i class="fa-solid fa-gear"></i>
                 </button>
               </div>
 
-              <!-- Input Manual JID (muncul jika pilih opsi Input Manual) -->
+              <!-- Input Manual JID -->
               <div id="manual-group-wrap" style="display: none; margin-top: 10px;">
                 <label for="manualGroupId" style="font-size: 0.8rem; margin-bottom: 4px;">ID Grup WhatsApp (JID):</label>
-                <input type="text" id="manualGroupId" placeholder="Contoh: 120363412565156974@g.us" style="font-size: 0.88rem;" />
+                <input type="text" id="manualGroupId" placeholder="Contoh: 120363412565156974@g.us" style="font-size: 0.85rem;" />
               </div>
 
-              <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 8px; margin-bottom: 0; line-height: 1.45;">
+              <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; margin-bottom: 0; line-height: 1.45;">
                 <i class="fa-solid fa-circle-info" style="color: #25D366; margin-right: 4px;"></i>
-                Saat tombol <b>Kirim Tugas</b> ditekan, tugas akan diteruskan otomatis oleh WhatsApp Bot ke grup yang Anda pilih.
+                Saat form dikirim, tugas akan diteruskan otomatis oleh WhatsApp Bot ke grup yang dipilih.
               </p>
             </div>
           </div>
 
-          <button type="submit" id="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          <button type="submit" id="submit" class="btn-submit">
             <i class="fa-solid fa-paper-plane"></i> Kirim Tugas
           </button>
         </form>
     </div>
 
     <!-- Database Link -->
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 16px;">
       <a href="https://sites.google.com/view/tugas-trjt-3a"
-         class="btn btn-secondary"
+         class="btn-database"
          target="_blank"
-         rel="noopener noreferrer" style="width: 100%;">
+         rel="noopener noreferrer">
         <i class="fa-solid fa-database"></i> Lihat Database
       </a>
     </div>
@@ -409,10 +657,10 @@
       </div>
 
       <div style="display: flex; gap: 8px; align-items: center;">
-        <button type="button" id="btn-test-bot-conn" class="btn btn-secondary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px;">
+        <button type="button" id="btn-test-bot-conn" class="btn btn-secondary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);">
           <i class="fa-solid fa-satellite-dish"></i> Tes Koneksi
         </button>
-        <button type="button" id="btn-save-bot-cfg" class="btn btn-primary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px;">
+        <button type="button" id="btn-save-bot-cfg" class="btn btn-primary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px; border-radius: var(--radius-sm); border: none;">
           <i class="fa-solid fa-floppy-disk"></i> Simpan
         </button>
       </div>
