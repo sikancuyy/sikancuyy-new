@@ -101,6 +101,110 @@
             border-color: var(--accent);
             box-shadow: var(--shadow-sm);
         }
+
+        /* ── Switch Toggle ── */
+        .switch-toggle {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .switch-toggle input { opacity: 0; width: 0; height: 0; }
+        .slider-round {
+            position: absolute; inset: 0;
+            background-color: var(--border);
+            border-radius: 24px;
+            transition: 0.25s ease;
+        }
+        .slider-round:before {
+            position: absolute; content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.25s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+        .switch-toggle input:checked + .slider-round {
+            background-color: #25D366;
+        }
+        .switch-toggle input:checked + .slider-round:before {
+            transform: translateX(20px);
+        }
+
+        /* ── WA Notification Card ── */
+        .wa-notify-box {
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
+        }
+        .wa-notify-box.active-wa {
+            border-color: rgba(37, 211, 102, 0.4);
+            background: rgba(37, 211, 102, 0.03);
+        }
+        body.dark .wa-notify-box.active-wa {
+            border-color: rgba(37, 211, 102, 0.35);
+            background: rgba(37, 211, 102, 0.06);
+        }
+        .wa-badge-online {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #ecfdf5; color: #059669;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-online { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .wa-badge-offline {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #fef2f2; color: #dc2626;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-offline { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .wa-badge-loading {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 9px; background: #eff6ff; color: #2563eb;
+            border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+        }
+        body.dark .wa-badge-loading { background: rgba(37, 99, 235, 0.2); color: #60a5fa; }
+
+        /* ── Settings Modal ── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 10001; padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            max-width: 460px; width: 100%;
+            box-shadow: var(--shadow-lg);
+            animation: fadeUp 0.25s ease both;
+        }
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 18px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-header h3 {
+            font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 700;
+            margin: 0; color: var(--text-primary);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .btn-close-modal {
+            background: transparent; border: none; font-size: 1.1rem;
+            color: var(--text-muted); cursor: pointer; padding: 4px;
+            transition: color 0.2s ease;
+        }
+        .btn-close-modal:hover { color: var(--text-primary); }
     </style>
 </head>
 <body>
@@ -185,6 +289,56 @@
             <textarea id="TugasDiberikan" name="Tugas Yang Diberikan" rows="4" placeholder="Tulis deskripsi tugas di sini..." required></textarea>
           </div>
 
+          <!-- Opsi Notifikasi WhatsApp SikanBot -->
+          <div class="wa-notify-box active-wa" id="wa-notify-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <label for="sendToWa" style="display: flex; align-items: center; gap: 8px; margin: 0; cursor: pointer; font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.3rem;"></i>
+                <span>Kirim Notifikasi ke Grup WhatsApp</span>
+              </label>
+              <label class="switch-toggle" title="Aktifkan/nonaktifkan pengiriman ke WhatsApp">
+                <input type="checkbox" id="sendToWa" name="send_wa" checked>
+                <span class="slider-round"></span>
+              </label>
+            </div>
+
+            <div id="wa-group-wrapper" style="transition: all 0.25s ease;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                <label for="waGroupSelect" style="margin: 0; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary);">
+                  Pilih Grup WhatsApp Tujuan:
+                </label>
+                <span id="wa-bot-status-badge" class="wa-badge-loading">
+                  <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 0.65rem;"></i> Memeriksa SikanBot...
+                </span>
+              </div>
+
+              <div style="display: flex; gap: 8px;">
+                <div style="position: relative; flex: 1;">
+                  <select id="waGroupSelect" name="wa_group_id" style="width: 100%; cursor: pointer;">
+                    <option value="">Memuat daftar grup...</option>
+                  </select>
+                </div>
+                <button type="button" id="btn-refresh-groups" title="Muat Ulang Daftar Grup dari VPS" class="btn btn-secondary" style="padding: 0 14px; min-width: 44px; height: 46px;">
+                  <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
+                </button>
+                <button type="button" id="btn-wa-settings" title="Pengaturan Endpoint Bot WA" class="btn btn-secondary" style="padding: 0 12px; min-width: 44px; height: 46px; color: var(--text-secondary);">
+                  <i class="fa-solid fa-gear"></i>
+                </button>
+              </div>
+
+              <!-- Input Manual JID (muncul jika pilih opsi Input Manual) -->
+              <div id="manual-group-wrap" style="display: none; margin-top: 10px;">
+                <label for="manualGroupId" style="font-size: 0.8rem; margin-bottom: 4px;">ID Grup WhatsApp (JID):</label>
+                <input type="text" id="manualGroupId" placeholder="Contoh: 120363412565156974@g.us" style="font-size: 0.88rem;" />
+              </div>
+
+              <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 8px; margin-bottom: 0; line-height: 1.45;">
+                <i class="fa-solid fa-circle-info" style="color: #25D366; margin-right: 4px;"></i>
+                Saat tombol <b>Kirim Tugas</b> ditekan, tugas akan diteruskan otomatis oleh WhatsApp Bot ke grup yang Anda pilih.
+              </p>
+            </div>
+          </div>
+
           <button type="submit" id="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
             <i class="fa-solid fa-paper-plane"></i> Kirim Tugas
           </button>
@@ -231,10 +385,40 @@
       <i class="fa-solid fa-circle-check"></i>
     </div>
     <h2>Berhasil Dikirim!</h2>
-    <p>Data tugas berhasil diinput dan dikirimkan ke Google Sheets &amp; Telegram.</p>
+    <p id="popup-success-desc">Data tugas berhasil diinput dan dikirimkan ke Google Sheets, Telegram, &amp; WhatsApp Grup.</p>
     <button id="close-popup">
       <i class="fa-solid fa-check"></i> Tutup
     </button>
+  </div>
+</div>
+
+<!-- Modal Pengaturan SikanBot WA -->
+<div id="modal-bot-settings" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> Pengaturan Bot WA</h3>
+      <button type="button" class="btn-close-modal" id="btn-close-settings-modal">&times;</button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div>
+        <label for="cfg-bot-url" style="font-weight: 600; font-size: 0.85rem; margin-bottom: 6px;">URL Endpoint SikanBot (VPS):</label>
+        <input type="text" id="cfg-bot-url" placeholder="https://..." style="font-size: 0.88rem;" />
+        <small style="color: var(--text-muted); font-size: 0.74rem; display: block; margin-top: 4px;">
+          Default Cloudflare Tunnel atau IP VPS (port 3000)
+        </small>
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button type="button" id="btn-test-bot-conn" class="btn btn-secondary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px;">
+          <i class="fa-solid fa-satellite-dish"></i> Tes Koneksi
+        </button>
+        <button type="button" id="btn-save-bot-cfg" class="btn btn-primary" style="flex: 1; font-size: 0.85rem; padding: 9px 14px;">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan
+        </button>
+      </div>
+
+      <div id="test-bot-result" style="display: none; padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.8rem; line-height: 1.4;"></div>
+    </div>
   </div>
 </div>
 
