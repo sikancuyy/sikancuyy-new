@@ -140,21 +140,44 @@ async function handleFetchTranscript(requestedLang = '') {
 
     try {
         let data = null;
+        let isPhpHost = true;
         
         // 1. First attempt: call local api.php
         try {
             const apiUrl = `api.php?videoId=${encodeURIComponent(videoId)}${requestedLang ? '&lang=' + encodeURIComponent(requestedLang) : ''}`;
             const res = await fetch(apiUrl);
             if (res.ok) {
-                data = await res.json();
+                const text = await res.text();
+                // Check if server returned raw PHP file (static hosting like GitHub Pages)
+                if (text.trim().startsWith('<?php')) {
+                    isPhpHost = false;
+                    console.warn('Server hosting tidak mengeksekusi PHP (hosting statis / GitHub Pages).');
+                } else {
+                    data = JSON.parse(text);
+                }
+            } else {
+                isPhpHost = false;
             }
         } catch (phpErr) {
-            console.warn('Local api.php failed or not available, trying client-side fallback...', phpErr);
+            isPhpHost = false;
+            console.warn('Local api.php gagal atau tidak tersedia:', phpErr);
         }
 
-        // 2. Client-side fallback if api.php failed
+        // 2. Client-side fallback if api.php not executed or failed
         if (!data || !data.success) {
-            data = await fetchClientFallback(videoId, requestedLang);
+            try {
+                data = await fetchClientFallback(videoId, requestedLang);
+            } catch (fallbackErr) {
+                console.warn('Fallback error:', fallbackErr);
+                if (!isPhpHost) {
+                    showError(
+                        'Hosting ini (misal: GitHub Pages / Statis) tidak mendukung eksekusi PHP (api.php), dan proxy publik diblokir oleh anti-bot YouTube. ' +
+                        'Untuk hasil 100% lancar, jalankan web ini di Laragon/Localhost atau deploy ke web hosting yang mendukung PHP (seperti cPanel, InfinityFree gratis, atau VPS).'
+                    );
+                    return;
+                }
+                throw fallbackErr;
+            }
         }
 
         if (!data || !data.success) {
@@ -178,34 +201,45 @@ async function handleFetchTranscript(requestedLang = '') {
     }
 }
 
-// Client-side fallback using public CORS proxy and YouTube Innertube
+// Client-side fallback using GET proxies to scrape watch page HTML
 async function fetchClientFallback(videoId, requestedLang) {
-    const innertubeUrl = 'https://www.youtube.com/youtubei/v1/player';
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(innertubeUrl)}`;
+    const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    const proxies = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(watchUrl)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(watchUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(watchUrl)}`
+    ];
 
-    const payload = {
-        context: {
-            client: {
-                clientName: 'ANDROID',
-                clientVersion: '20.10.38',
-                hl: 'id',
-                gl: 'ID'
+    let html = '';
+    for (const pUrl of proxies) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            const res = await fetch(pUrl, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            if (res.ok) {
+                html = await res.text();
+                if (html && html.includes('ytInitialPlayerResponse')) {
+                    break;
+                }
             }
-        },
-        videoId: videoId
-    };
+        } catch (e) {
+            // try next proxy
+        }
+    }
 
-    const res = await fetch(proxyUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
-
-    if (!res.ok) {
+    if (!html || !html.includes('ytInitialPlayerResponse')) {
         throw new Error('Gagal mengambil data dari server YouTube.');
     }
 
-    const json = await res.json();
+    // Extract ytInitialPlayerResponse
+    const match = html.match(/ytInitialPlayerResponse\s*=\s*({.+?})\s*;\s*(?:var\s+(?:meta|head)|<\/script|\n)/s) ||
+                  html.match(/ytInitialPlayerResponse\s*=\s*({.+?});/s);
+    if (!match) {
+        throw new Error('Gagal membaca data player YouTube.');
+    }
+
+    const json = JSON.parse(match[1]);
     const title = json.videoDetails?.title || 'YouTube Video';
     const author = json.videoDetails?.author || '';
     const lengthSeconds = parseInt(json.videoDetails?.lengthSeconds || 0);
@@ -234,10 +268,34 @@ async function fetchClientFallback(videoId, requestedLang) {
         if (idTrack) selectedTrack = idTrack;
     }
 
-    // Fetch the caption track XML through proxy
-    const capProxyUrl = `https://corsproxy.io/?${encodeURIComponent(selectedTrack.baseUrl)}`;
-    const capRes = await fetch(capProxyUrl);
-    const xmlText = await capRes.text();
+    // Fetch the caption track XML
+    const capProxies = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(selectedTrack.baseUrl)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(selectedTrack.baseUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(selectedTrack.baseUrl)}`
+    ];
+
+    let xmlText = '';
+    for (const cpUrl of capProxies) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            const capRes = await fetch(cpUrl, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            if (capRes.ok) {
+                xmlText = await capRes.text();
+                if (xmlText && (xmlText.includes('<timedtext') || xmlText.includes('<transcript') || xmlText.includes('<p '))) {
+                    break;
+                }
+            }
+        } catch (e) {
+            // try next
+        }
+    }
+
+    if (!xmlText) {
+        throw new Error('Gagal mengunduh teks transkrip.');
+    }
 
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
