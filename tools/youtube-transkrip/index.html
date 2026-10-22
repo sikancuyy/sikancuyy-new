@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Transkrip - SikanCuyy Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="shortcut icon" href="../../fav.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../fav.png">
+</head>
+<body>
+
+<div class="container">
+    <a href="../index.html" class="back-btn" title="Kembali ke Menu Tools">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <header>
+        <div class="logo-badge"><span></span> YouTube Transcriber</div>
+        <h1>YouTube <span class="accent">Transkrip</span></h1>
+        <p class="subtitle">Tempel tautan video YouTube untuk mengekstrak transkrip teks dan subtitle secara instan</p>
+        <div class="divider"></div>
+    </header>
+
+    <!-- INPUT BOX -->
+    <div class="transkrip-box">
+        <div class="input-form">
+            <div class="input-field-wrap">
+                <i class="fab fa-youtube input-icon"></i>
+                <input 
+                    type="text" 
+                    id="youtubeUrl" 
+                    class="url-input" 
+                    placeholder="Tempel tautan video YouTube di sini..."
+                    autocomplete="off"
+                />
+                <button type="button" class="btn-paste" onclick="pasteFromClipboard()" title="Tempel dari Clipboard">
+                    <i class="fas fa-paste"></i> Tempel
+                </button>
+            </div>
+            <button class="btn-submit" id="submitBtn" onclick="handleFetchTranscript()">
+                <i class="fas fa-magic"></i> Ambil Transkrip
+            </button>
+        </div>
+
+        <div class="example-chips">
+            <span>Contoh cepat:</span>
+            <span class="chip" onclick="loadExample('https://www.youtube.com/watch?v=jNQXAC9IVRw')">
+                <i class="fas fa-play"></i> Me at the zoo
+            </span>
+            <span class="chip" onclick="loadExample('https://www.youtube.com/watch?v=dQw4w9WgXcQ')">
+                <i class="fas fa-music"></i> Never Gonna Give You Up
+            </span>
+        </div>
+
+        <!-- ERROR BANNER -->
+        <div class="error-banner" id="errorBanner">
+            <i class="fas fa-exclamation-circle" style="font-size: 1.2rem; margin-top: 2px;"></i>
+            <div id="errorText">Terjadi kesalahan saat memproses URL.</div>
+        </div>
+
+        <!-- LOADING STATE -->
+        <div class="loading-box" id="loadingBox">
+            <div class="spinner"></div>
+            <div>Sedang mengambil dan mengekstrak transkrip video...</div>
+        </div>
+    </div>
+
+    <!-- VIDEO INFO & EMBEDDED PLAYER -->
+    <div class="transkrip-box video-section" id="videoSection" style="display: none;">
+        <div class="player-wrapper">
+            <iframe id="playerIframe" src="" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <div class="video-info-box">
+            <div>
+                <h2 class="video-title" id="videoTitle">Judul Video YouTube</h2>
+                <div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;" id="videoAuthor">Channel</div>
+            </div>
+
+            <div class="video-meta">
+                <span class="video-meta-item" id="segmentCount"><i class="fas fa-list-ol"></i> 0 baris</span>
+                <span class="video-meta-item" id="wordCount"><i class="fas fa-file-alt"></i> ~0 kata</span>
+            </div>
+
+            <div class="lang-selector-group" id="langGroup" style="display: none;">
+                <label for="langSelect"><i class="fas fa-language"></i> Bahasa Subtitle:</label>
+                <select id="langSelect" class="lang-select"></select>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRANSCRIPT RESULT CARD -->
+    <div class="transcript-card" id="transcriptCard">
+        <div class="transcript-header">
+            <div class="transcript-header-title">
+                <i class="fas fa-align-left" style="color: #ef4444;"></i> Isi Transkrip
+            </div>
+            <div class="transcript-actions">
+                <button class="btn-action" onclick="copyCleanText()" title="Salin seluruh teks tanpa timestamp">
+                    <i class="far fa-copy"></i> Salin Bersih
+                </button>
+                <button class="btn-action" onclick="copyWithTimestamps()" title="Salin dengan waktu segmen">
+                    <i class="fas fa-clock"></i> Salin dg Waktu
+                </button>
+                <button class="btn-action btn-ai" onclick="copyAiPrompt()" title="Salin teks dengan template prompt ringkasan AI">
+                    <i class="fas fa-robot"></i> Ringkasan AI
+                </button>
+                <button class="btn-action" onclick="downloadTxt()" title="Unduh sebagai file .TXT">
+                    <i class="fas fa-download"></i> .TXT
+                </button>
+                <button class="btn-action" onclick="downloadSrt()" title="Unduh subtitle standar .SRT">
+                    <i class="fas fa-file-download"></i> .SRT
+                </button>
+            </div>
+        </div>
+
+        <div class="search-bar-wrap">
+            <i class="fas fa-search" style="color: var(--text-muted); font-size: 0.9rem;"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari kata atau topik di dalam transkrip..." />
+            <span class="search-count" id="searchCount"></span>
+        </div>
+
+        <div class="transcript-list" id="transcriptList">
+            <!-- Transcript rows inserted via script.js -->
+        </div>
+    </div>
+
+    <footer>
+        Dibuat oleh <a href="../../portofolio/index.html">SikanCuyy</a> &mdash; 2025
+    </footer>
+</div>
+
+<div class="toast-msg" id="toastMsg">
+    <i class="fas fa-check-circle"></i> Berhasil disalin!
+</div>
+
+<button class="dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">
+    <i class="fas fa-moon" id="toggleIcon"></i>
+</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

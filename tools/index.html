@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalkulator - SikanCuyy</title>
+    <title>Menu Tools - SikanCuyy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../style.css">
-    <link rel="shortcut icon" href="../favicon/05_kalkulator.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="../fav.png" type="image/png">
+    <link rel="apple-touch-icon" href="../fav.png">
 </head>
 <body>
 
@@ -19,40 +20,50 @@
     </a>
 
     <header>
-        <div class="logo-badge"><span></span> Tools</div>
-        <h1>Aneka <span class="accent">Kalkulator</span></h1>
-        <p class="subtitle">Perhitungan praktis untuk berbagai kebutuhan</p>
+        <div class="logo-badge"><span></span> Utilitas & Alat Digital</div>
+        <h1>Menu <span class="accent">Tools</span></h1>
+        <p class="subtitle">Kumpulan kalkulator dan alat bantu praktis untuk aktivitas harian</p>
         <div class="divider"></div>
     </header>
 
     <div class="menu-grid">
+
+        <a href="kalkulator_sederhana/index.html" class="menu-item">
+            <div class="icon-wrapper c4"><i class="fas fa-calculator"></i></div>
+            <div class="text-group">
+                <div class="label">Aneka Kalkulator</div>
+                <div class="label-sub">Pajak, Indihome & Konversi</div>
+            </div>
+        </a>
+
+        <a href="gps/index.html" class="menu-item">
+            <div class="icon-wrapper c2"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="text-group">
+                <div class="label">Koordinat GPS</div>
+                <div class="label-sub">Deteksi lokasi & alamat</div>
+            </div>
+        </a>
+
         <a href="konversi_jaringan/index.html" class="menu-item">
-            <div class="icon-wrapper" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;"><i class="fas fa-network-wired"></i></div>
+            <div class="icon-wrapper c1"><i class="fas fa-network-wired"></i></div>
             <div class="text-group">
                 <div class="label">Konversi Mbps</div>
-                <div class="label-sub">Hitung bandwidth</div>
+                <div class="label-sub">Hitung bandwidth Mbps ke MB/s</div>
             </div>
         </a>
 
-        <a href="kalkulator_pajak/index.html" class="menu-item">
-            <div class="icon-wrapper" style="background: linear-gradient(135deg, #10b981, #047857); color: white;"><i class="fas fa-calculator"></i></div>
+        <a href="youtube-transkrip/index.html" class="menu-item">
+            <div class="icon-wrapper c6"><i class="fab fa-youtube"></i></div>
             <div class="text-group">
-                <div class="label">Hitung Pajak</div>
-                <div class="label-sub">Pajak belanja</div>
+                <div class="label">YouTube Transkrip</div>
+                <div class="label-sub">Ekstrak subtitle & teks video</div>
             </div>
         </a>
 
-        <a href="kalkulator_indihome/index.html" class="menu-item">
-            <div class="icon-wrapper" style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: white;"><i class="fas fa-wifi"></i></div>
-            <div class="text-group">
-                <div class="label">Kalkulator Indihome</div>
-                <div class="label-sub">Harga paket</div>
-            </div>
-        </a>
     </div>
 
-    <footer style="margin-top: 40px; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.7;">
-        &copy; 2025 Rahmat Haikal · SikanCuyy
+    <footer>
+        Dibuat oleh <a href="../portofolio/index.html">SikanCuyy</a> &mdash; 2025
     </footer>
 </div>
 
@@ -64,6 +75,7 @@
     const body = document.body;
     const icon = document.getElementById('toggleIcon');
 
+    // Restore preference
     if (localStorage.getItem('theme') === 'dark') {
         body.classList.add('dark');
         if (icon) icon.className = 'fas fa-sun';
@@ -76,5 +88,6 @@
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 </script>
+
 </body>
 </html>
