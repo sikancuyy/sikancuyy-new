@@ -120,6 +120,50 @@ function seekTo(seconds) {
     }), '*');
 }
 
+// Vercel Serverless Function Config
+const DEFAULT_VERCEL_DOMAIN = 'https://sikancuyy-new.vercel.app';
+
+function getVercelBaseUrl() {
+    return localStorage.getItem('custom_vercel_domain') || DEFAULT_VERCEL_DOMAIN;
+}
+
+function promptVercelUrl() {
+    const current = getVercelBaseUrl();
+    const input = prompt(
+        'Masukkan URL deploy Vercel Anda (contoh: https://sikancuyy-new.vercel.app):\n\n' +
+        'Jika repositori ini sudah di-import ke Vercel, salin URL domain proyek Vercel Anda di sini.',
+        current
+    );
+    if (input !== null) {
+        let clean = input.trim().replace(/\/+$/, '');
+        if (clean && !clean.startsWith('http')) {
+            clean = 'https://' + clean;
+        }
+        if (clean) {
+            localStorage.setItem('custom_vercel_domain', clean);
+            updateVercelStatusLabel();
+            showToast('URL Vercel berhasil disimpan!');
+        }
+    }
+}
+
+function updateVercelStatusLabel() {
+    const el = document.getElementById('vercelStatusLabel');
+    if (!el) return;
+    const domain = getVercelBaseUrl();
+    if (domain) {
+        try {
+            const host = new URL(domain).hostname;
+            el.textContent = host.replace('.vercel.app', '');
+        } catch {
+            el.textContent = 'API Vercel';
+        }
+    }
+}
+
+// Inisialisasi label Vercel saat halaman dimuat
+document.addEventListener('DOMContentLoaded', updateVercelStatusLabel);
+
 // Main fetch function
 async function handleFetchTranscript(requestedLang = '') {
     hideError();
@@ -140,43 +184,67 @@ async function handleFetchTranscript(requestedLang = '') {
 
     try {
         let data = null;
-        let isPhpHost = true;
-        
-        // 1. First attempt: call local api.php
-        try {
-            const apiUrl = `api.php?videoId=${encodeURIComponent(videoId)}${requestedLang ? '&lang=' + encodeURIComponent(requestedLang) : ''}`;
-            const res = await fetch(apiUrl);
-            if (res.ok) {
-                const text = await res.text();
-                // Check if server returned raw PHP file (static hosting like GitHub Pages)
-                if (text.trim().startsWith('<?php')) {
-                    isPhpHost = false;
-                    console.warn('Server hosting tidak mengeksekusi PHP (hosting statis / GitHub Pages).');
-                } else {
-                    data = JSON.parse(text);
+        const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname) ||
+                            window.location.hostname.endsWith('.test') ||
+                            window.location.hostname.endsWith('.local');
+
+        // 1. Jika di localhost / Laragon -> coba backend lokal api.php
+        if (isLocalHost) {
+            try {
+                const apiUrl = `api.php?videoId=${encodeURIComponent(videoId)}${requestedLang ? '&lang=' + encodeURIComponent(requestedLang) : ''}`;
+                const res = await fetch(apiUrl);
+                if (res.ok) {
+                    const text = await res.text();
+                    if (!text.trim().startsWith('<?php')) {
+                        data = JSON.parse(text);
+                    }
                 }
-            } else {
-                isPhpHost = false;
+            } catch (phpErr) {
+                console.warn('Local api.php gagal:', phpErr);
             }
-        } catch (phpErr) {
-            isPhpHost = false;
-            console.warn('Local api.php gagal atau tidak tersedia:', phpErr);
         }
 
-        // 2. Client-side fallback if api.php not executed or failed
+        // 2. Jika di-deploy langsung di Vercel (same-origin /api/transcript)
+        if (!data || !data.success) {
+            try {
+                const relativeUrl = `/api/transcript?videoId=${encodeURIComponent(videoId)}${requestedLang ? '&lang=' + encodeURIComponent(requestedLang) : ''}`;
+                const res = await fetch(relativeUrl);
+                if (res.ok) {
+                    data = await res.json();
+                }
+            } catch (relErr) {
+                // Ignore if not same origin
+            }
+        }
+
+        // 3. Hubungkan ke Vercel Serverless Function (dari GitHub Pages / external origin)
+        if (!data || !data.success) {
+            const vercelBase = getVercelBaseUrl();
+            if (vercelBase) {
+                try {
+                    const vercelUrl = `${vercelBase}/api/transcript?videoId=${encodeURIComponent(videoId)}${requestedLang ? '&lang=' + encodeURIComponent(requestedLang) : ''}`;
+                    const res = await fetch(vercelUrl);
+                    if (res.ok) {
+                        data = await res.json();
+                    }
+                } catch (vercelErr) {
+                    console.warn('Gagal menghubungi Vercel endpoint:', vercelErr);
+                }
+            }
+        }
+
+        // 4. Fallback client-side proxies jika Vercel belum dikonfigurasi
         if (!data || !data.success) {
             try {
                 data = await fetchClientFallback(videoId, requestedLang);
             } catch (fallbackErr) {
-                console.warn('Fallback error:', fallbackErr);
-                if (!isPhpHost) {
-                    showError(
-                        'Hosting ini (misal: GitHub Pages / Statis) tidak mendukung eksekusi PHP (api.php), dan proxy publik diblokir oleh anti-bot YouTube. ' +
-                        'Untuk hasil 100% lancar, jalankan web ini di Laragon/Localhost atau deploy ke web hosting yang mendukung PHP (seperti cPanel, InfinityFree gratis, atau VPS).'
-                    );
-                    return;
-                }
-                throw fallbackErr;
+                console.warn('Fallback proxies gagal:', fallbackErr);
+                showError(
+                    'Gagal mengambil transkrip. Jika Anda membuka web ini dari GitHub Pages:\n' +
+                    '1. Pastikan repositori ini sudah Anda import ke Vercel (vercel.com).\n' +
+                    '2. Klik tombol "API Vercel" di atas untuk memasukkan URL domain Vercel Anda.'
+                );
+                return;
             }
         }
 

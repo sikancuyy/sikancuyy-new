@@ -55,6 +55,9 @@
             <span class="chip" onclick="loadExample('https://www.youtube.com/watch?v=dQw4w9WgXcQ')">
                 <i class="fas fa-music"></i> Never Gonna Give You Up
             </span>
+            <span class="chip" style="margin-left: auto; color: var(--accent); border-color: rgba(99,102,241,0.3);" onclick="promptVercelUrl()" title="Hubungkan ke Vercel Serverless Function">
+                <i class="fas fa-plug"></i> <span id="vercelStatusLabel">API Vercel</span>
+            </span>
         </div>
 
         <!-- ERROR BANNER -->
@@ -142,7 +145,7 @@
     <i class="fas fa-moon" id="toggleIcon"></i>
 </button>
 
-<script src="script.js?v=2.2"></script>
+<script src="script.js?v=2.3"></script>
 
 </body>
 </html>
